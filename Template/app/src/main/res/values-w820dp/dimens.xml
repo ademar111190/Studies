@@ -1,0 +1,5 @@
+<resources>
+
+    <dimen name="app_horizontal_margin">64dp</dimen>
+
+</resources>
