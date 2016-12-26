@@ -3,9 +3,9 @@ package ademar.study.template.view.base
 import ademar.study.template.App
 import ademar.study.template.R
 import ademar.study.template.core.model.Error
-import ademar.study.template.injection.component.ActivityComponent
-import ademar.study.template.injection.component.DaggerActivityComponent
-import ademar.study.template.injection.module.ActivityModule
+import ademar.study.template.injection.DaggerLifeCycleComponent
+import ademar.study.template.injection.LifeCycleComponent
+import ademar.study.template.injection.LifeCycleModule
 import ademar.study.template.presenter.LoadDataView
 import android.app.ActivityManager
 import android.graphics.Bitmap
@@ -16,15 +16,15 @@ import android.support.v7.app.AppCompatActivity
 
 abstract class BaseActivity : AppCompatActivity(), LoadDataView {
 
-    protected val component: ActivityComponent by lazy {
-        DaggerActivityComponent.builder()
+    protected val component: LifeCycleComponent by lazy {
+        DaggerLifeCycleComponent.builder()
                 .coreComponent(getApp().coreComponent)
-                .activityModule(makeActivityModule())
+                .lifeCycleModule(makeLifeCycleModule())
                 .build()
     }
 
-    protected open fun makeActivityModule(): ActivityModule {
-        return ActivityModule(this)
+    protected open fun makeLifeCycleModule(): LifeCycleModule {
+        return LifeCycleModule(this)
     }
 
     protected fun prepareTaskDescription(

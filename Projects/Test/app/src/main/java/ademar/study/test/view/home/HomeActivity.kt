@@ -2,7 +2,7 @@ package ademar.study.test.view.home
 
 import ademar.study.test.R
 import ademar.study.test.core.model.HelloWorld
-import ademar.study.test.injection.module.ActivityModule
+import ademar.study.test.injection.LifeCycleModule
 import ademar.study.test.presenter.home.HomePresenter
 import ademar.study.test.presenter.home.HomeView
 import ademar.study.test.view.base.BaseActivity
@@ -18,8 +18,8 @@ class HomeActivity : BaseActivity(), HomeView {
 
     @Inject lateinit var presenter: HomePresenter
 
-    override fun makeActivityModule(): ActivityModule {
-        return ActivityModule(getBaseActivity())
+    override fun makeLifeCycleModule(): LifeCycleModule {
+        return LifeCycleModule(getBaseActivity())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

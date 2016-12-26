@@ -7,6 +7,7 @@ import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import okhttp3.mockwebserver.MockWebServer
+import org.assertj.core.api.Assertions
 import org.junit.After
 import org.junit.Before
 import org.mockito.Mock
@@ -19,15 +20,22 @@ abstract class BaseTest {
 
     @Mock lateinit var mockContext: Context
 
+    private var rxError: Throwable? = null
+
     @Before
     open fun setUp() {
         MockitoAnnotations.initMocks(this)
 
+        RxAndroidPlugins.setMainThreadSchedulerHandler {
+            Schedulers.trampoline()
+        }
         RxJavaPlugins.setIoSchedulerHandler {
             Schedulers.trampoline()
         }
-        RxAndroidPlugins.setMainThreadSchedulerHandler {
-            Schedulers.trampoline()
+        RxJavaPlugins.setErrorHandler { error ->
+            println("Received error $error stacktrace:")
+            error.printStackTrace()
+            rxError = error
         }
 
         mockWebServer = MockWebServer()
@@ -39,8 +47,11 @@ abstract class BaseTest {
 
     @After
     open fun tearDown() {
-        RxJavaPlugins.reset()
+        if (rxError != null) {
+            Assertions.fail("Error on rx: $rxError")
+        }
         RxAndroidPlugins.reset()
+        RxJavaPlugins.reset()
     }
 
 }

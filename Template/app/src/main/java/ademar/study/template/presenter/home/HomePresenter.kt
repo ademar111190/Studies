@@ -2,13 +2,13 @@ package ademar.study.template.presenter.home
 
 import ademar.study.template.core.ext.asError
 import ademar.study.template.core.interactor.GetHelloWorldUseCase
-import ademar.study.template.injection.scope.ActivityScope
+import ademar.study.template.injection.LifeCycleScope
 import ademar.study.template.presenter.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-@ActivityScope
+@LifeCycleScope
 class HomePresenter @Inject constructor(
 
         private val getHelloWorldUseCase: GetHelloWorldUseCase

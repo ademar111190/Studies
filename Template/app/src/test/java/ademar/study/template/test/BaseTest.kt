@@ -2,12 +2,8 @@ package ademar.study.template.test
 
 import ademar.study.template.core.injection.CoreModule
 import ademar.study.template.core.injection.DaggerCoreComponent
-import ademar.study.template.injection.component.DaggerActivityMockComponent
-import ademar.study.template.injection.component.DaggerFragmentMockComponent
-import ademar.study.template.injection.component.DaggerViewHolderMockComponent
-import ademar.study.template.injection.module.ActivityMockModule
-import ademar.study.template.injection.module.FragmentMockModule
-import ademar.study.template.injection.module.ViewHolderMockModule
+import ademar.study.template.injection.DaggerLifeCycleMockComponent
+import ademar.study.template.injection.LifeCycleMockModule
 import android.content.Context
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
@@ -20,9 +16,7 @@ import org.mockito.MockitoAnnotations
 
 abstract class BaseTest {
 
-    lateinit var activityMockModule: ActivityMockModule
-    lateinit var fragmentMockModule: FragmentMockModule
-    lateinit var viewHolderMockModule: ViewHolderMockModule
+    lateinit var lifeCycleMockModule: LifeCycleMockModule
 
     @Mock lateinit var mockContext: Context
     @Mock lateinit var mockCoreModule: CoreModule
@@ -34,32 +28,24 @@ abstract class BaseTest {
         MockitoAnnotations.initMocks(this)
         rxError = null
 
-        RxJavaPlugins.setIoSchedulerHandler {
-            Schedulers.trampoline()
-        }
         RxAndroidPlugins.setInitMainThreadSchedulerHandler {
             Schedulers.trampoline()
         }
+        RxJavaPlugins.setIoSchedulerHandler {
+            Schedulers.trampoline()
+        }
         RxJavaPlugins.setErrorHandler { error ->
+            println("Received error $error stacktrace:")
+            error.printStackTrace()
             rxError = error
         }
 
-        activityMockModule = ActivityMockModule()
-        fragmentMockModule = FragmentMockModule()
-        viewHolderMockModule = ViewHolderMockModule()
+        lifeCycleMockModule = LifeCycleMockModule()
         val coreComponent = DaggerCoreComponent.builder()
                 .coreModule(mockCoreModule)
                 .build()
-        DaggerActivityMockComponent.builder()
-                .activityMockModule(activityMockModule)
-                .coreComponent(coreComponent)
-                .build()
-        DaggerFragmentMockComponent.builder()
-                .fragmentMockModule(fragmentMockModule)
-                .coreComponent(coreComponent)
-                .build()
-        DaggerViewHolderMockComponent.builder()
-                .viewHolderMockModule(viewHolderMockModule)
+        DaggerLifeCycleMockComponent.builder()
+                .lifeCycleMockModule(lifeCycleMockModule)
                 .coreComponent(coreComponent)
                 .build()
     }
@@ -69,8 +55,8 @@ abstract class BaseTest {
         if (rxError != null) {
             fail("Error on rx: $rxError")
         }
-        RxJavaPlugins.reset()
         RxAndroidPlugins.reset()
+        RxJavaPlugins.reset()
     }
 
 }

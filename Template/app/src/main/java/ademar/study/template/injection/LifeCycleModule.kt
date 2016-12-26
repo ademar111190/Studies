@@ -1,19 +1,18 @@
-package ademar.study.template.injection.module
+package ademar.study.template.injection
 
-import ademar.study.template.injection.scope.ViewHolderScope
 import ademar.study.template.view.base.BaseActivity
 import dagger.Module
 import dagger.Provides
 
 @Module
-class ViewHolderModule(
+class LifeCycleModule(
 
         private val baseActivity: BaseActivity
 
 ) {
 
     @Provides
-    @ViewHolderScope
+    @LifeCycleScope
     fun provideBaseActivity(): BaseActivity {
         return baseActivity
     }

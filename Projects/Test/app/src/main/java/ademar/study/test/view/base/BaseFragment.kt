@@ -2,23 +2,23 @@ package ademar.study.test.view.base
 
 import ademar.study.test.App
 import ademar.study.test.core.model.Error
-import ademar.study.test.injection.component.DaggerFragmentComponent
-import ademar.study.test.injection.component.FragmentComponent
-import ademar.study.test.injection.module.FragmentModule
+import ademar.study.test.injection.DaggerLifeCycleComponent
+import ademar.study.test.injection.LifeCycleComponent
+import ademar.study.test.injection.LifeCycleModule
 import ademar.study.test.presenter.LoadDataView
 import android.support.v4.app.Fragment
 
 open class BaseFragment : Fragment(), LoadDataView {
 
-    val component: FragmentComponent by lazy {
-        DaggerFragmentComponent.builder()
+    val component: LifeCycleComponent by lazy {
+        DaggerLifeCycleComponent.builder()
                 .coreComponent(getApp().coreComponent)
-                .fragmentModule(makeFragmentModule())
+                .lifeCycleModule(makeLifeCycleModule())
                 .build()
     }
 
-    protected open fun makeFragmentModule(): FragmentModule {
-        return FragmentModule(getBaseFragment())
+    protected open fun makeLifeCycleModule(): LifeCycleModule {
+        return LifeCycleModule(getBaseActivity()!!)
     }
 
     fun getApp(): App {
@@ -27,10 +27,6 @@ open class BaseFragment : Fragment(), LoadDataView {
 
     override fun getBaseActivity(): BaseActivity? {
         return activity as BaseActivity?
-    }
-
-    fun getBaseFragment(): BaseFragment {
-        return this
     }
 
     override fun showLoading() {

@@ -1,7 +1,7 @@
-package ademar.study.test.injection.scope
+package ademar.study.template.injection
 
 import javax.inject.Scope
 
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
-annotation class FragmentScope
+annotation class LifeCycleScope
