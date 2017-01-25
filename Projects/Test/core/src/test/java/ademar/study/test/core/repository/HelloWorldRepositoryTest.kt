@@ -29,7 +29,7 @@ class HelloWorldRepositoryTest : BaseTest() {
         mockContext = coreMockModule.provideContext()
         val mockHttpLoggingInterceptor = coreMockModule.provideHttpLoggingInterceptor()
         val mockOkHttpClient = coreMockModule.provideOkHttpClient(mockHttpLoggingInterceptor)
-        mockRetrofit = coreMockModule.provideRetrofit(mockOkHttpClient)
+        mockRetrofit = coreMockModule.provideRetrofit(mockOkHttpClient, mockStandardErrors)
         mockHelloWorldCloudRepository = coreMockModule.provideHelloWorldCloudRepository(mockRetrofit)
     }
 

@@ -64,7 +64,9 @@ for file_path in [
     "/core/src/main/java/ademar/study/template/core/injection/CoreModule.kt",
     "/core/src/main/java/ademar/study/template/core/interactor/GetHelloWorldUseCase.kt",
     "/core/src/main/java/ademar/study/template/core/model/Error.kt",
+    "/core/src/main/java/ademar/study/template/core/model/FieldProperty.kt",
     "/core/src/main/java/ademar/study/template/core/model/HelloWorld.kt",
+    "/core/src/main/java/ademar/study/template/core/model/StandardErrors.kt",
     "/core/src/main/java/ademar/study/template/core/repository/HelloWorldRepository.kt",
     "/core/src/main/java/ademar/study/template/core/repository/datasource/HelloWorldCloudRepository.kt",
     "/core/src/main/java/ademar/study/template/core/repository/datasource/HelloWorldLocalRepository.kt",
@@ -76,7 +78,9 @@ for file_path in [
     "/core/src/test/java/ademar/study/template/core/injection/CoreMockModule.kt",
     "/core/src/test/java/ademar/study/template/core/interactor/GetHelloWorldUseCaseTest.kt",
     "/core/src/test/java/ademar/study/template/core/model/ErrorTest.kt",
+    "/core/src/test/java/ademar/study/template/core/model/FieldPropertyTest.kt",
     "/core/src/test/java/ademar/study/template/core/model/HelloWorldTest.kt",
+    "/core/src/test/java/ademar/study/template/core/model/StandardErrorsTest.kt",
     "/core/src/test/java/ademar/study/template/core/repository/HelloWorldRepositoryTest.kt",
     "/core/src/test/java/ademar/study/template/core/test/BaseTest.kt",
     "/core/src/test/java/ademar/study/template/core/test/Fixture.kt",
@@ -90,6 +94,7 @@ for file_path in [
 edit(name + "/app/src/main/AndroidManifest.xml", "ademar.study.template", package)
 edit(name + "/app/src/main/res/values/strings.xml", "Template", name)
 edit(name + "/app/src/main/res/values-pt/strings.xml", "Modelo", name)
+edit(name + "/core/src/main/AndroidManifest.xml", "ademar.study.template", package)
 
 shutil.rmtree(name + "/.idea")
 shutil.rmtree(name + "/.gradle")

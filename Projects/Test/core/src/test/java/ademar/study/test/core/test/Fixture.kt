@@ -2,6 +2,7 @@ package ademar.study.test.core.test
 
 import ademar.study.test.core.model.Error
 import ademar.study.test.core.model.HelloWorld
+import org.mockito.Mockito.`when` as whenever
 
 object Fixture {
 

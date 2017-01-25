@@ -1,5 +1,7 @@
 package ademar.study.test.core.injection
 
+import ademar.study.test.core.ext.standardErrors
+import ademar.study.test.core.model.StandardErrors
 import ademar.study.test.core.repository.datasource.HelloWorldCloudRepository
 import android.content.Context
 import com.github.aurae.retrofit2.LoganSquareConverterFactory
@@ -41,13 +43,15 @@ class CoreMockModule(
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
+    fun provideRetrofit(okHttpClient: OkHttpClient, standardErrors: StandardErrors): Retrofit {
+        val retrofit = Retrofit.Builder()
                 .baseUrl(mockWebServer.url(""))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(LoganSquareConverterFactory.create())
                 .client(okHttpClient)
                 .build()
+        retrofit.standardErrors = standardErrors
+        return retrofit
     }
 
     @Provides

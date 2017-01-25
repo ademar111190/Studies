@@ -2,7 +2,7 @@ package ademar.study.template.presenter
 
 import ademar.study.template.core.model.Error
 import ademar.study.template.view.base.BaseActivity
-import junit.framework.Assert.fail
+import org.assertj.core.api.Assertions.fail
 import org.mockito.Mockito
 
 open class StubLoadDataView : LoadDataView {

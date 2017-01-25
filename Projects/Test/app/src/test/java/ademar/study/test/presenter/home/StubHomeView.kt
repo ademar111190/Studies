@@ -2,7 +2,7 @@ package ademar.study.test.presenter.home
 
 import ademar.study.test.core.model.HelloWorld
 import ademar.study.test.presenter.StubLoadDataView
-import junit.framework.Assert.fail
+import org.assertj.core.api.Assertions.fail
 
 open class StubHomeView : StubLoadDataView(), HomeView {
 

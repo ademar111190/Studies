@@ -4,6 +4,7 @@ import ademar.study.test.core.model.Error
 import ademar.study.test.core.test.BaseTest
 import ademar.study.test.core.test.Fixture
 import okhttp3.ResponseBody
+import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.*
@@ -21,6 +22,12 @@ class RetrofitTest : BaseTest() {
     @Mock lateinit var mockOnNext: (String) -> Unit
     @Mock lateinit var mockOnError: (Throwable) -> Unit
     @Mock lateinit var mockOnSuccess: () -> Unit
+
+    @Before
+    override fun setUp() {
+        super.setUp()
+        mockRetrofit.standardErrors = mockStandardErrors
+    }
 
     @Test
     fun testObserveBody_200() {
@@ -51,7 +58,7 @@ class RetrofitTest : BaseTest() {
         verify(mockResponse).code()
         verifyNoMoreInteractions(mockResponse)
         verifyZeroInteractions(mockOnNext)
-        verify(mockOnError).invoke(Error.UNAUTHORIZED)
+        verify(mockOnError).invoke(mockErrorUnauthorized)
         verifyZeroInteractions(mockOnSuccess)
     }
 

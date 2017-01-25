@@ -16,11 +16,22 @@ class Error : Throwable() {
         println(this)
     }
 
-    companion object {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other?.javaClass != javaClass) return false
 
-        val UNKNOWN = Error().apply { code = 10000 }
-        val UNAUTHORIZED = Error().apply { code = 10001 }
+        other as Error
 
+        if (code != other.code) return false
+        if (message != other.message) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = code
+        result = 31 * result + message.hashCode()
+        return result
     }
 
 }

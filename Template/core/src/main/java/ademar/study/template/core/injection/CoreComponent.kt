@@ -1,5 +1,6 @@
 package ademar.study.template.core.injection
 
+import ademar.study.template.core.model.StandardErrors
 import ademar.study.template.core.repository.datasource.HelloWorldCloudRepository
 import ademar.study.template.core.repository.datasource.HelloWorldLocalRepository
 import android.content.Context
@@ -14,6 +15,7 @@ import javax.inject.Singleton
 interface CoreComponent {
 
     val context: Context
+    val standardErrors: StandardErrors
     val httpLoggingInterceptor: HttpLoggingInterceptor
     val okHttpClient: OkHttpClient
     val retrofit: Retrofit

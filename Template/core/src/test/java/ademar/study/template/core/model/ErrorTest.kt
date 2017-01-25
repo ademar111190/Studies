@@ -28,20 +28,4 @@ class ErrorTest : BaseTest() {
         error.report()
     }
 
-    @Test
-    fun testDefaults() {
-        val errors = arrayListOf(
-                Error.UNKNOWN,
-                Error.UNAUTHORIZED
-        )
-        val errorsSet = hashSetOf(
-                Error.UNKNOWN,
-                Error.UNAUTHORIZED
-        )
-        assertThat(errors.size).isEqualTo(errorsSet.size)
-
-        assertThat(Error.UNKNOWN).isEqualTo(Error.UNKNOWN)
-        assertThat(Error.UNAUTHORIZED).isEqualTo(Error.UNAUTHORIZED)
-    }
-
 }
