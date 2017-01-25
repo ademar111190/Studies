@@ -1,6 +1,6 @@
 package ademar.study.template.presenter
 
-import ademar.study.template.core.model.Error
+import ademar.study.template.model.ErrorViewModel
 import ademar.study.template.view.base.BaseActivity
 
 interface LoadDataView {
@@ -13,6 +13,6 @@ interface LoadDataView {
 
     fun showContent()
 
-    fun showError(error: Error)
+    fun showError(viewModel: ErrorViewModel)
 
 }

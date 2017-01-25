@@ -2,10 +2,10 @@ package ademar.study.test.view.base
 
 import ademar.study.test.App
 import ademar.study.test.R
-import ademar.study.test.core.model.Error
 import ademar.study.test.injection.DaggerLifeCycleComponent
 import ademar.study.test.injection.LifeCycleComponent
 import ademar.study.test.injection.LifeCycleModule
+import ademar.study.test.model.ErrorViewModel
 import ademar.study.test.presenter.LoadDataView
 import android.app.ActivityManager
 import android.graphics.Bitmap
@@ -57,9 +57,9 @@ abstract class BaseActivity : AppCompatActivity(), LoadDataView {
     override fun showContent() {
     }
 
-    override fun showError(error: Error) {
+    override fun showError(viewModel: ErrorViewModel) {
         AlertDialog.Builder(this, R.style.AppAlertDialog)
-                .setMessage(error.message)
+                .setMessage(viewModel.message)
                 .setPositiveButton(R.string.app_ok, null)
                 .create()
                 .show()

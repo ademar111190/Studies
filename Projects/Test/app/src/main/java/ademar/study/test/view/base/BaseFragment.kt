@@ -1,10 +1,10 @@
 package ademar.study.test.view.base
 
 import ademar.study.test.App
-import ademar.study.test.core.model.Error
 import ademar.study.test.injection.DaggerLifeCycleComponent
 import ademar.study.test.injection.LifeCycleComponent
 import ademar.study.test.injection.LifeCycleModule
+import ademar.study.test.model.ErrorViewModel
 import ademar.study.test.presenter.LoadDataView
 import android.support.v4.app.Fragment
 
@@ -35,8 +35,8 @@ open class BaseFragment : Fragment(), LoadDataView {
     override fun showRetry() {
     }
 
-    override fun showError(error: Error) {
-        getBaseActivity()?.showError(error)
+    override fun showError(viewModel: ErrorViewModel) {
+        getBaseActivity()?.showError(viewModel)
     }
 
     override fun showContent() {

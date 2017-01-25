@@ -2,6 +2,8 @@ package ademar.study.template.test
 
 import ademar.study.template.core.model.Error
 import ademar.study.template.core.model.HelloWorld
+import ademar.study.template.model.ErrorViewModel
+import ademar.study.template.model.home.HelloWorldViewModel
 
 object Fixture {
 
@@ -19,6 +21,17 @@ object Fixture {
 
     }
 
+    object errorViewModel {
+
+        val CODE = 1
+        val MESSAGE = "Some error"
+
+        fun makeModel(): ErrorViewModel {
+            return ErrorViewModel(CODE, MESSAGE)
+        }
+
+    }
+
     object helloWorld {
 
         val MESSAGE = "Hello World!"
@@ -27,6 +40,16 @@ object Fixture {
             val model = HelloWorld()
             model.message = MESSAGE
             return model
+        }
+
+    }
+
+    object helloWorldViewModel {
+
+        val MESSAGE = "Hello World!"
+
+        fun makeModel(): HelloWorldViewModel {
+            return HelloWorldViewModel(MESSAGE)
         }
 
     }

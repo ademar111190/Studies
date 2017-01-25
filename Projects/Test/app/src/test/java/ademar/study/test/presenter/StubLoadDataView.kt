@@ -1,6 +1,6 @@
 package ademar.study.test.presenter
 
-import ademar.study.test.core.model.Error
+import ademar.study.test.model.ErrorViewModel
 import ademar.study.test.view.base.BaseActivity
 import org.assertj.core.api.Assertions.fail
 import org.mockito.Mockito
@@ -23,8 +23,8 @@ open class StubLoadDataView : LoadDataView {
         fail("Shouldn't call showRetry")
     }
 
-    override fun showError(error: Error) {
-        fail("Shouldn't call showError, error: $error")
+    override fun showError(viewModel: ErrorViewModel) {
+        fail("Shouldn't call showError, viewModel: $viewModel")
     }
 
     override fun showContent() {

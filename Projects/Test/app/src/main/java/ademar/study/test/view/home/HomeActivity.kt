@@ -1,8 +1,8 @@
 package ademar.study.test.view.home
 
 import ademar.study.test.R
-import ademar.study.test.core.model.HelloWorld
 import ademar.study.test.injection.LifeCycleModule
+import ademar.study.test.model.home.HelloWorldViewModel
 import ademar.study.test.presenter.home.HomePresenter
 import ademar.study.test.presenter.home.HomeView
 import ademar.study.test.view.base.BaseActivity
@@ -59,8 +59,8 @@ class HomeActivity : BaseActivity(), HomeView {
         reload.visibility = GONE
     }
 
-    override fun bindHelloWorld(helloWorld: HelloWorld) {
-        text.text = helloWorld.message
+    override fun bindHelloWorld(viewModel: HelloWorldViewModel) {
+        text.text = viewModel.message
     }
 
     companion object {

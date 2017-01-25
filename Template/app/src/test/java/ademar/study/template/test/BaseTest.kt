@@ -1,7 +1,10 @@
 package ademar.study.template.test
 
+import ademar.study.template.core.R
 import ademar.study.template.core.injection.CoreModule
 import ademar.study.template.core.injection.DaggerCoreComponent
+import ademar.study.template.core.model.Error
+import ademar.study.template.core.model.StandardErrors
 import ademar.study.template.injection.DaggerLifeCycleMockComponent
 import ademar.study.template.injection.LifeCycleMockModule
 import android.content.Context
@@ -13,13 +16,17 @@ import org.junit.After
 import org.junit.Before
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.mockito.Mockito.`when` as whenever
 
 abstract class BaseTest {
 
     lateinit var lifeCycleMockModule: LifeCycleMockModule
+    lateinit var mockErrorUnknown: Error
+    lateinit var mockErrorUnauthorized: Error
 
     @Mock lateinit var mockContext: Context
     @Mock lateinit var mockCoreModule: CoreModule
+    @Mock lateinit var mockStandardErrors: StandardErrors
 
     private var rxError: Throwable? = null
 
@@ -48,6 +55,21 @@ abstract class BaseTest {
                 .lifeCycleMockModule(lifeCycleMockModule)
                 .coreComponent(coreComponent)
                 .build()
+
+        mockErrorUnknown = Error().apply {
+            code = 1
+            message = "Mock Error Unknown"
+        }
+        mockErrorUnauthorized = Error().apply {
+            code = 2
+            message = "Mock Error Unauthorized"
+        }
+
+        whenever(mockContext.getString(R.string.error_message_unknown)).thenReturn("UNKNOWN")
+        whenever(mockContext.getString(R.string.error_message_unauthorized)).thenReturn("UNAUTHORIZED")
+
+        whenever(mockStandardErrors.UNKNOWN).thenReturn(mockErrorUnknown)
+        whenever(mockStandardErrors.UNAUTHORIZED).thenReturn(mockErrorUnauthorized)
     }
 
     @After
