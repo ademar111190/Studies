@@ -19,7 +19,7 @@ android {
         release {
             keyAlias System.getenv("KEY_ALIAS")
             keyPassword System.getenv("KEY_PASSWORD")
-            storeFile file("../../ GooglePlay / Keystore ")
+            storeFile file("../../Assets/keystore")
             storePassword System.getenv("STORE_PASSWORD")
         }
     }

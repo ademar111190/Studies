@@ -19,6 +19,16 @@ core:testDebugUnitTest \
 app:testDevelopmentDebugUnitTest
 ```
 
+To create a signed build do as follow:
+
+```
+[Projects/Test] $ KEY_ALIAS=anAlias \
+KEY_PASSWORD=aKeyPass \
+STORE_PASSWORD=aPass6 \
+./gradlew assembleProductionRelease && \
+ls -alh app/build/outputs/apk/
+```
+
 ## Some points
 
 - The project is write with clean architecture in mind, but it does not means that all clean rules are follow so do not use it as a clean guide.
