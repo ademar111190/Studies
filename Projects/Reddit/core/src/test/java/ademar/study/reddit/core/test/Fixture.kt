@@ -15,13 +15,13 @@ object Fixture {
         val JSON = """
         {
             "kind": "t3",
-            "data": ${submission.JSON}
+            "data": ${post.JSON}
         }
         """
 
         fun makeModel(): Child {
             val model = Child()
-            model.post = submission.makeModel()
+            model.post = post.makeModel()
             return model
         }
 
@@ -85,24 +85,7 @@ object Fixture {
 
     }
 
-    object postResponse {
-
-        val JSON = """
-        {
-            "kind": "Listing",
-            "data": ${data.JSON}
-        }
-        """
-
-        fun makeModel(): PostResponse {
-            val model = PostResponse()
-            model.data = data.makeModel()
-            return model
-        }
-
-    }
-
-    object submission {
+    object post {
 
         val TITLE = "Galaxy S8 press render leak"
         val AUTHOR = "Idb996"
@@ -222,6 +205,23 @@ object Fixture {
             model.comments = COMMENTS
             model.downs = DOWNS
             model.ups = UPS
+            return model
+        }
+
+    }
+
+    object postResponse {
+
+        val JSON = """
+        {
+            "kind": "Listing",
+            "data": ${data.JSON}
+        }
+        """
+
+        fun makeModel(): PostResponse {
+            val model = PostResponse()
+            model.data = data.makeModel()
             return model
         }
 
