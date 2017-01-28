@@ -2,7 +2,7 @@ package ademar.study.reddit.core.test
 
 import ademar.study.reddit.core.model.Error
 import ademar.study.reddit.core.model.HelloWorld
-import ademar.study.reddit.core.model.Submission
+import ademar.study.reddit.core.model.Post
 import ademar.study.reddit.core.model.internal.Child
 import ademar.study.reddit.core.model.internal.Data
 import ademar.study.reddit.core.model.internal.Response
@@ -21,7 +21,7 @@ object Fixture {
 
         fun makeModel(): Child {
             val model = Child()
-            model.submission = submission.makeModel()
+            model.post = submission.makeModel()
             return model
         }
 
@@ -213,8 +213,8 @@ object Fixture {
         }
         """
 
-        fun makeModel(): Submission {
-            val model = Submission()
+        fun makeModel(): Post {
+            val model = Post()
             model.title = TITLE
             model.author = AUTHOR
             model.thumbnail = THUMBNAIL

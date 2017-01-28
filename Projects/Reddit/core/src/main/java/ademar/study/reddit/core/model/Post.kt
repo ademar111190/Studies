@@ -6,7 +6,7 @@ import nz.bradcampbell.paperparcel.PaperParcel
 
 @JsonObject
 @PaperParcel
-class Submission {
+class Post {
 
     @JsonField(name = arrayOf("title"))
     lateinit var title: String

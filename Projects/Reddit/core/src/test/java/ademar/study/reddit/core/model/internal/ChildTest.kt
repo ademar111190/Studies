@@ -11,7 +11,7 @@ class ChildTest : BaseTest() {
     @Test
     fun testParse() {
         val child = LoganSquare.parse(Fixture.child.JSON, Child::class.java)
-        assertThat(child.submission).isNotNull()
+        assertThat(child.post).isNotNull()
     }
 
     @Test

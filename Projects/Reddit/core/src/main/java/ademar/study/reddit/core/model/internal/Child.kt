@@ -1,6 +1,6 @@
 package ademar.study.reddit.core.model.internal
 
-import ademar.study.reddit.core.model.Submission
+import ademar.study.reddit.core.model.Post
 import com.bluelinelabs.logansquare.annotation.JsonField
 import com.bluelinelabs.logansquare.annotation.JsonObject
 import nz.bradcampbell.paperparcel.PaperParcel
@@ -10,6 +10,6 @@ import nz.bradcampbell.paperparcel.PaperParcel
 class Child {
 
     @JsonField(name = arrayOf("data"))
-    lateinit var submission: Submission
+    lateinit var post: Post
 
 }

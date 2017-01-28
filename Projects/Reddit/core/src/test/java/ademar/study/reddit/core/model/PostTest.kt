@@ -6,11 +6,11 @@ import com.bluelinelabs.logansquare.LoganSquare
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class SubmissionTest : BaseTest() {
+class PostTest : BaseTest() {
 
     @Test
     fun testParse() {
-        val submission = LoganSquare.parse(Fixture.submission.JSON, Submission::class.java)
+        val submission = LoganSquare.parse(Fixture.submission.JSON, Post::class.java)
         assertThat(submission.title).isEqualTo(Fixture.submission.TITLE)
         assertThat(submission.author).isEqualTo(Fixture.submission.AUTHOR)
         assertThat(submission.thumbnail).isEqualTo(Fixture.submission.THUMBNAIL)
