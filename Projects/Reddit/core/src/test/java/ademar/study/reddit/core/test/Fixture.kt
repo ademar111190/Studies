@@ -5,7 +5,7 @@ import ademar.study.reddit.core.model.HelloWorld
 import ademar.study.reddit.core.model.Post
 import ademar.study.reddit.core.model.internal.Child
 import ademar.study.reddit.core.model.internal.Data
-import ademar.study.reddit.core.model.internal.Response
+import ademar.study.reddit.core.model.internal.PostResponse
 import org.mockito.Mockito.`when` as whenever
 
 object Fixture {
@@ -85,7 +85,7 @@ object Fixture {
 
     }
 
-    object response {
+    object postResponse {
 
         val JSON = """
         {
@@ -94,8 +94,8 @@ object Fixture {
         }
         """
 
-        fun makeModel(): Response {
-            val model = Response()
+        fun makeModel(): PostResponse {
+            val model = PostResponse()
             model.data = data.makeModel()
             return model
         }

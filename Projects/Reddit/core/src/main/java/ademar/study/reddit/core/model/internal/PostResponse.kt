@@ -6,7 +6,7 @@ import nz.bradcampbell.paperparcel.PaperParcel
 
 @JsonObject
 @PaperParcel
-class Response {
+class PostResponse {
 
     @JsonField(name = arrayOf("data"))
     lateinit var data: Data

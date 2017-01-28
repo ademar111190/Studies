@@ -6,17 +6,17 @@ import com.bluelinelabs.logansquare.LoganSquare
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class ResponseTest : BaseTest() {
+class PostResponseTest : BaseTest() {
 
     @Test
     fun testParse() {
-        val response = LoganSquare.parse(Fixture.response.JSON, Response::class.java)
+        val response = LoganSquare.parse(Fixture.postResponse.JSON, PostResponse::class.java)
         assertThat(response.data).isNotNull()
     }
 
     @Test
     fun testSerialize() {
-        val json = LoganSquare.serialize(Fixture.response.makeModel())
+        val json = LoganSquare.serialize(Fixture.postResponse.makeModel())
         assertThat(json).contains("\"data\":{")
     }
 
