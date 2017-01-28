@@ -1,0 +1,100 @@
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        resConfigs "pt", "en"
+    }
+
+    signingConfigs {
+        release {
+            keyAlias System.getenv("KEY_ALIAS")
+            keyPassword System.getenv("KEY_PASSWORD")
+            storeFile file("../../ GooglePlay / Keystore ")
+            storePassword System.getenv("STORE_PASSWORD")
+        }
+    }
+
+    buildTypes {
+        all {
+            shrinkResources false
+            minifyEnabled false
+            proguardFile getDefaultProguardFile("proguard-android.txt")
+            proguardFile "proguard-rules.pro"
+        }
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+
+    productFlavors {
+        development {
+            versionName rootProject.ext.versionName + " - development "
+        }
+        qa {
+            versionName rootProject.ext.versionName + " - qa - " + "git rev-parse --short HEAD".execute().text.trim()
+        }
+        production
+    }
+
+    packagingOptions {
+        exclude "META-INF/LICENSE"
+        exclude "META-INF/LICENSE.txt"
+        exclude "META-INF/NOTICE.txt"
+        exclude "META-INF/*.properties"
+    }
+
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    compile project(":core")
+
+    compile "com.android.support:appcompat-v7:$supportVersion"
+    compile "com.android.support:design:$supportVersion"
+    compile "com.jakewharton.rxbinding:rxbinding-kotlin:$rxBindingVersion"
+    compile "com.jakewharton.rxbinding:rxbinding-design-kotlin:$rxBindingVersion"
+    compile "com.squareup.picasso:picasso:$picassoVersion"
+
+    kaptTest "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    testCompile "junit:junit:$jUnitVersion"
+    testCompile "org.assertj:assertj-core:$assertJVersion"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+
+}
+
+task(variants) << {
+    android.applicationVariants.all { variant ->
+        print("Variant: ")
+        println(variant.name)
+    }
+}
+
+task(flavors) << {
+    android.productFlavors.all { flavor ->
+        print("Flavor: ")
+        println(flavor.name)
+    }
+}
+
+tasks.withType(Test) {
+    afterTest { desc, result ->
+        println "${result.resultType} on test ${desc.name} [${desc.className}]"
+    }
+}

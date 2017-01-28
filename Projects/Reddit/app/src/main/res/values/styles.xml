@@ -1,0 +1,95 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Bases -->
+
+    <style name="AbstractTheme" parent="Theme.AppCompat.NoActionBar"/>
+
+    <style name="BaseTheme" parent="AbstractTheme">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+
+    <!-- App -->
+
+    <style name="AppTheme" parent="BaseTheme"/>
+
+    <style name="AppAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert"/>
+
+    <style name="AppAlertDialog.CustomView">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- Shadows -->
+
+    <style name="AppShadow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">8dp</item>
+    </style>
+
+    <style name="AppShadow.Day">
+        <item name="android:background">@drawable/shadow_day</item>
+    </style>
+
+    <style name="AppShadow.Night">
+        <item name="android:background">@drawable/shadow_night</item>
+    </style>
+
+    <style name="AppShadow.Day.Bottom">
+        <item name="android:background">@drawable/shadow_day_inverted</item>
+    </style>
+
+    <style name="AppShadow.Night.Bottom">
+        <item name="android:background">@drawable/shadow_night_inverted</item>
+    </style>
+
+    <style name="AppContentShadow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="AppContentShadow.Day">
+        <item name="android:foreground">@drawable/shadow_day</item>
+    </style>
+
+    <style name="AppContentShadow.Night">
+        <item name="android:foreground">@drawable/shadow_night</item>
+    </style>
+
+    <style name="AppContentShadow.Day.Bottom">
+        <item name="android:foreground">@drawable/shadow_day_inverted</item>
+    </style>
+
+    <style name="AppContentShadow.Night.Bottom">
+        <item name="android:foreground">@drawable/shadow_night_inverted</item>
+    </style>
+
+    <!-- TextView -->
+
+    <style name="AppTextView" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:fontFamily" tools:ignore="NewApi">sans-serif</item>
+    </style>
+
+    <style name="AppTextView.Primary" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+    <style name="AppTextView.Secondary" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:textColor">@color/secondary_text</item>
+    </style>
+
+    <!-- Toolbar -->
+
+    <style name="AppToolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/primary</item>
+    </style>
+
+    <!-- Start -->
+
+    <style name="StartTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_launch</item>
+    </style>
+
+</resources>
