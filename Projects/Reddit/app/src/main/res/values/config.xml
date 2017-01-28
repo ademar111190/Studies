@@ -3,6 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
 
-    <string name="api_url">https://private-965f8-template19.apiary-mock.com/</string>
+    <string name="api_url">https://www.reddit.com/r/Android/</string>
 
 </resources>
