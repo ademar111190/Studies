@@ -2,8 +2,10 @@ package ademar.study.reddit.test
 
 import ademar.study.reddit.core.model.Error
 import ademar.study.reddit.core.model.HelloWorld
+import ademar.study.reddit.core.model.Post
 import ademar.study.reddit.model.ErrorViewModel
 import ademar.study.reddit.model.home.HelloWorldViewModel
+import ademar.study.reddit.model.home.PostViewModel
 
 object Fixture {
 
@@ -50,6 +52,46 @@ object Fixture {
 
         fun makeModel(): HelloWorldViewModel {
             return HelloWorldViewModel(MESSAGE)
+        }
+
+    }
+
+    object post {
+
+        val TITLE = ""
+        val AUTHOR = ""
+        val THUMBNAIL = ""
+        val CREATED = 1485666124L
+        val COMMENTS = 7L
+        val DOWNS = 1L
+        val UPS = 3L
+
+        fun makeModel(): Post {
+            val model = Post()
+            model.title = TITLE
+            model.author = AUTHOR
+            model.thumbnail = THUMBNAIL
+            model.created = CREATED
+            model.comments = COMMENTS
+            model.downs = DOWNS
+            model.ups = UPS
+            return model
+        }
+
+    }
+
+    object postViewModel {
+
+        val TITLE = ""
+        val AUTHOR = ""
+        val THUMBNAIL = ""
+        val CREATED = 1485666124L
+        val COMMENTS = 7L
+        val DOWNS = 1L
+        val UPS = 3L
+
+        fun makeModel(): PostViewModel {
+            return PostViewModel(TITLE, AUTHOR, THUMBNAIL, CREATED, COMMENTS, DOWNS, UPS)
         }
 
     }

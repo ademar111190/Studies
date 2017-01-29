@@ -1,6 +1,5 @@
 package ademar.study.reddit.mapper.home
 
-import ademar.study.reddit.mapper.HelloWorldMapper
 import ademar.study.reddit.test.BaseTest
 import ademar.study.reddit.test.Fixture
 import org.assertj.core.api.Assertions.assertThat

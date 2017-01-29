@@ -4,7 +4,7 @@ import ademar.study.reddit.core.interactor.GetHelloWorldUseCase
 import ademar.study.reddit.core.model.Error
 import ademar.study.reddit.core.model.HelloWorld
 import ademar.study.reddit.mapper.ErrorMapper
-import ademar.study.reddit.mapper.HelloWorldMapper
+import ademar.study.reddit.mapper.home.HelloWorldMapper
 import ademar.study.reddit.model.ErrorViewModel
 import ademar.study.reddit.model.home.HelloWorldViewModel
 import ademar.study.reddit.test.BaseTest

@@ -1,4 +1,4 @@
-package ademar.study.reddit.mapper
+package ademar.study.reddit.mapper.home
 
 import ademar.study.reddit.core.model.HelloWorld
 import ademar.study.reddit.core.model.StandardErrors

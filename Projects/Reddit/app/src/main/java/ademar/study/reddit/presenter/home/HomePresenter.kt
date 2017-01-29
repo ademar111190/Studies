@@ -3,7 +3,7 @@ package ademar.study.reddit.presenter.home
 import ademar.study.reddit.core.interactor.GetHelloWorldUseCase
 import ademar.study.reddit.injection.LifeCycleScope
 import ademar.study.reddit.mapper.ErrorMapper
-import ademar.study.reddit.mapper.HelloWorldMapper
+import ademar.study.reddit.mapper.home.HelloWorldMapper
 import ademar.study.reddit.presenter.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
