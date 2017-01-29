@@ -1,7 +1,6 @@
 package ademar.study.reddit.core.test
 
 import ademar.study.reddit.core.model.Error
-import ademar.study.reddit.core.model.HelloWorld
 import ademar.study.reddit.core.model.Post
 import ademar.study.reddit.core.model.internal.Child
 import ademar.study.reddit.core.model.internal.Data
@@ -62,23 +61,6 @@ object Fixture {
         fun makeModel(): Error {
             val model = Error()
             model.code = CODE
-            model.message = MESSAGE
-            return model
-        }
-
-    }
-
-    object helloWorld {
-
-        val MESSAGE = "Hello World!"
-        val JSON = """
-        {
-            "message": "$MESSAGE"
-        }
-        """
-
-        fun makeModel(): HelloWorld {
-            val model = HelloWorld()
             model.message = MESSAGE
             return model
         }

@@ -2,7 +2,8 @@ package ademar.study.reddit.view.home
 
 import ademar.study.reddit.R
 import ademar.study.reddit.injection.LifeCycleModule
-import ademar.study.reddit.model.home.HelloWorldViewModel
+import ademar.study.reddit.model.ErrorViewModel
+import ademar.study.reddit.model.home.PostViewModel
 import ademar.study.reddit.presenter.home.HomePresenter
 import ademar.study.reddit.presenter.home.HomeView
 import ademar.study.reddit.view.base.BaseActivity
@@ -59,8 +60,22 @@ class HomeActivity : BaseActivity(), HomeView {
         reload.visibility = GONE
     }
 
-    override fun bindHelloWorld(viewModel: HelloWorldViewModel) {
-        text.text = viewModel.message
+    override fun clearPosts() {
+    }
+
+    override fun bindPost(viewModel: PostViewModel) {
+    }
+
+    override fun showUnloadedPosts() {
+    }
+
+    override fun hideUnloadedPosts() {
+    }
+
+    override fun showUnloadedError(viewModel: ErrorViewModel) {
+    }
+
+    override fun hideUnloadedError() {
     }
 
     companion object {

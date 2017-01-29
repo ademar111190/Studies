@@ -1,12 +1,12 @@
 package ademar.study.reddit.presenter.home
 
-import ademar.study.reddit.core.interactor.GetHelloWorldUseCase
+import ademar.study.reddit.core.interactor.GetPostsUseCase
 import ademar.study.reddit.core.model.Error
-import ademar.study.reddit.core.model.HelloWorld
+import ademar.study.reddit.core.model.Post
 import ademar.study.reddit.mapper.ErrorMapper
-import ademar.study.reddit.mapper.home.HelloWorldMapper
+import ademar.study.reddit.mapper.home.PostMapper
 import ademar.study.reddit.model.ErrorViewModel
-import ademar.study.reddit.model.home.HelloWorldViewModel
+import ademar.study.reddit.model.home.PostViewModel
 import ademar.study.reddit.test.BaseTest
 import ademar.study.reddit.test.Fixture
 import io.reactivex.Observable
@@ -14,50 +14,58 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyNoMoreInteractions
 import org.mockito.Mockito.`when` as whenever
 
 class HomePresenterTest : BaseTest() {
 
-    @Mock lateinit var mockGetHelloWorldUseCase: GetHelloWorldUseCase
-    @Mock lateinit var mockHelloWorldMapper: HelloWorldMapper
+    @Mock lateinit var mockGetPostsUseCase: GetPostsUseCase
+    @Mock lateinit var mockPostMapper: PostMapper
     @Mock lateinit var mockErrorMapper: ErrorMapper
 
-    private lateinit var mockHelloWorld: HelloWorld
+    private lateinit var mockPost: Post
     private lateinit var mockError: Error
-    private lateinit var mockHelloWorldViewModel: HelloWorldViewModel
+    private lateinit var mockPostViewModel: PostViewModel
     private lateinit var mockErrorViewModel: ErrorViewModel
 
-    private var bindHelloWorldCount = 0
+    private var bindPostCount = 0
     private var showContentCount = 0
     private var showErrorCount = 0
     private var showLoadingCount = 0
     private var showRetryCount = 0
+    private var hideUnloadedErrorCount = 0
+    private var showUnloadedPostsCount = 0
+    private var hideUnloadedPostsCount = 0
+    private var showUnloadedErrorCount = 0
+    private var clearPostsCount = 0
 
     @Before
     override fun setUp() {
         super.setUp()
 
-        mockHelloWorld = Fixture.helloWorld.makeModel()
+        mockPost = Fixture.post.makeModel()
         mockError = Fixture.error.makeModel()
-        mockHelloWorldViewModel = Fixture.helloWorldViewModel.makeModel()
+        mockPostViewModel = Fixture.postViewModel.makeModel()
         mockErrorViewModel = Fixture.errorViewModel.makeModel()
 
-        whenever(mockHelloWorldMapper.transform(mockHelloWorld)).thenReturn(mockHelloWorldViewModel)
+        whenever(mockPostMapper.transform(mockPost)).thenReturn(mockPostViewModel)
         whenever(mockErrorMapper.transform(mockError)).thenReturn(mockErrorViewModel)
 
-        bindHelloWorldCount = 0
+        bindPostCount = 0
         showContentCount = 0
         showErrorCount = 0
         showLoadingCount = 0
         showRetryCount = 0
+        hideUnloadedErrorCount = 0
+        showUnloadedPostsCount = 0
+        hideUnloadedPostsCount = 0
+        showUnloadedErrorCount = 0
+        clearPostsCount = 0
     }
 
     @Test
     fun testOnAttachView() {
         val stubView = object : StubHomeView() {}
-        val presenter = HomePresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
     }
 
@@ -68,27 +76,30 @@ class HomePresenterTest : BaseTest() {
                 showLoadingCount++
             }
 
-            override fun bindHelloWorld(viewModel: HelloWorldViewModel) {
-                assertThat(viewModel).isEqualTo(mockHelloWorldViewModel)
-                bindHelloWorldCount++
+            override fun bindPost(viewModel: PostViewModel) {
+                assertThat(viewModel).isEqualTo(mockPostViewModel)
+                bindPostCount++
             }
 
             override fun showContent() {
                 showContentCount++
             }
+
+            override fun clearPosts() {
+                clearPostsCount++
+            }
         }
 
-        whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.just(mockHelloWorld))
+        whenever(mockGetPostsUseCase.currentPage()).thenReturn(Observable.just(mockPost))
 
-        val presenter = HomePresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onStart()
 
-        verify(mockGetHelloWorldUseCase).execute()
-        verifyNoMoreInteractions(mockGetHelloWorldUseCase)
         assertThat(showLoadingCount).isEqualTo(1)
-        assertThat(bindHelloWorldCount).isEqualTo(1)
+        assertThat(bindPostCount).isEqualTo(1)
         assertThat(showContentCount).isEqualTo(1)
+        assertThat(clearPostsCount).isEqualTo(1)
     }
 
     @Test
@@ -106,19 +117,22 @@ class HomePresenterTest : BaseTest() {
             override fun showRetry() {
                 showRetryCount++
             }
+
+            override fun clearPosts() {
+                clearPostsCount++
+            }
         }
 
-        whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError))
+        whenever(mockGetPostsUseCase.currentPage()).thenReturn(Observable.error(mockError))
 
-        val presenter = HomePresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onStart()
 
-        verify(mockGetHelloWorldUseCase).execute()
-        verifyNoMoreInteractions(mockGetHelloWorldUseCase)
         assertThat(showLoadingCount).isEqualTo(1)
         assertThat(showErrorCount).isEqualTo(1)
         assertThat(showRetryCount).isEqualTo(1)
+        assertThat(clearPostsCount).isEqualTo(1)
     }
 
     @Test
@@ -128,27 +142,30 @@ class HomePresenterTest : BaseTest() {
                 showLoadingCount++
             }
 
-            override fun bindHelloWorld(viewModel: HelloWorldViewModel) {
-                assertThat(viewModel).isEqualTo(mockHelloWorldViewModel)
-                bindHelloWorldCount++
+            override fun bindPost(viewModel: PostViewModel) {
+                assertThat(viewModel).isEqualTo(mockPostViewModel)
+                bindPostCount++
             }
 
             override fun showContent() {
                 showContentCount++
             }
+
+            override fun clearPosts() {
+                clearPostsCount++
+            }
         }
 
-        whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.just(mockHelloWorld))
+        whenever(mockGetPostsUseCase.currentPage()).thenReturn(Observable.just(mockPost))
 
-        val presenter = HomePresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onReloadClick()
 
-        verify(mockGetHelloWorldUseCase).execute()
-        verifyNoMoreInteractions(mockGetHelloWorldUseCase)
         assertThat(showLoadingCount).isEqualTo(1)
-        assertThat(bindHelloWorldCount).isEqualTo(1)
+        assertThat(bindPostCount).isEqualTo(1)
         assertThat(showContentCount).isEqualTo(1)
+        assertThat(clearPostsCount).isEqualTo(1)
     }
 
     @Test
@@ -166,24 +183,88 @@ class HomePresenterTest : BaseTest() {
             override fun showRetry() {
                 showRetryCount++
             }
+
+            override fun clearPosts() {
+                clearPostsCount++
+            }
         }
 
-        whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError))
+        whenever(mockGetPostsUseCase.currentPage()).thenReturn(Observable.error(mockError))
 
-        val presenter = HomePresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onReloadClick()
 
-        verify(mockGetHelloWorldUseCase).execute()
-        verifyNoMoreInteractions(mockGetHelloWorldUseCase)
         assertThat(showLoadingCount).isEqualTo(1)
         assertThat(showErrorCount).isEqualTo(1)
         assertThat(showRetryCount).isEqualTo(1)
+        assertThat(clearPostsCount).isEqualTo(1)
+    }
+
+    @Test
+    fun testOnPreviousPageClick_success() {
+        val stubView = object : StubHomeView() {
+            override fun hideUnloadedError() {
+                hideUnloadedErrorCount++
+            }
+
+            override fun showUnloadedPosts() {
+                showUnloadedPostsCount++
+            }
+
+            override fun bindPost(viewModel: PostViewModel) {
+                assertThat(viewModel).isEqualTo(mockPostViewModel)
+                bindPostCount++
+            }
+
+            override fun hideUnloadedPosts() {
+                hideUnloadedPostsCount++
+            }
+        }
+
+        whenever(mockGetPostsUseCase.previousPage()).thenReturn(Observable.just(mockPost))
+
+        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
+        presenter.onAttachView(stubView)
+        presenter.onPreviousPageClick()
+
+        assertThat(hideUnloadedErrorCount).isEqualTo(1)
+        assertThat(showUnloadedPostsCount).isEqualTo(1)
+        assertThat(bindPostCount).isEqualTo(1)
+        assertThat(hideUnloadedPostsCount).isEqualTo(1)
+    }
+
+    @Test
+    fun testOnPreviousPageClick_error() {
+        val stubView = object : StubHomeView() {
+            override fun hideUnloadedError() {
+                hideUnloadedErrorCount++
+            }
+
+            override fun showUnloadedPosts() {
+                showUnloadedPostsCount++
+            }
+
+            override fun showUnloadedError(viewModel: ErrorViewModel) {
+                assertThat(viewModel).isEqualTo(mockErrorViewModel)
+                showUnloadedErrorCount++
+            }
+        }
+
+        whenever(mockGetPostsUseCase.previousPage()).thenReturn(Observable.error(mockError))
+
+        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
+        presenter.onAttachView(stubView)
+        presenter.onPreviousPageClick()
+
+        assertThat(hideUnloadedErrorCount).isEqualTo(1)
+        assertThat(showUnloadedPostsCount).isEqualTo(1)
+        assertThat(showUnloadedErrorCount).isEqualTo(1)
     }
 
     @Test
     fun testOnDetachView() {
-        val presenter = HomePresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onDetachView()
     }
 
