@@ -94,6 +94,7 @@ object Fixture {
         val COMMENTS = 7L
         val DOWNS = 1L
         val UPS = 3L
+        val REFERENCE = "t3_5qpvlr"
         val JSON = """
         {
           "contest_mode": false,
@@ -114,7 +115,7 @@ object Fixture {
           "report_reasons": null,
           "author": "$AUTHOR",
           "media": null,
-          "name": "t3_5qpvlr",
+          "name": "$REFERENCE",
           "score": 3,
           "approved_by": null,
           "over_18": false,
@@ -205,6 +206,7 @@ object Fixture {
             model.comments = COMMENTS
             model.downs = DOWNS
             model.ups = UPS
+            model.reference = REFERENCE
             return model
         }
 

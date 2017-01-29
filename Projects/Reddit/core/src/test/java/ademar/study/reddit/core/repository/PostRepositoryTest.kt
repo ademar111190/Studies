@@ -37,7 +37,7 @@ class PostRepositoryTest : BaseTest() {
     }
 
     @Test
-    fun testPostRepository_success() {
+    fun testGetPosts_withoutBefore_success() {
         var called = false
         val mockResponse = MockResponse().setResponseCode(200)
                 .setBody(Fixture.postResponse.JSON)
@@ -58,7 +58,48 @@ class PostRepositoryTest : BaseTest() {
     }
 
     @Test
-    fun testPostRepository_error() {
+    fun testGetPosts_withoutBefore_error() {
+        var called = false
+        val mockResponse = MockResponse().setResponseCode(0)
+                .setBody(Fixture.error.JSON)
+        mockWebServer.enqueue(mockResponse)
+
+        val repository = PostRepository(mockRetrofit, mockPostCloudRepository)
+
+        repository.getPosts("Some Before")
+                .subscribe(mockOnNext, { error ->
+                    assertThat(error).isNotNull()
+                    called = true
+                }, mockOnSuccess)
+
+        verifyZeroInteractions(mockOnNext)
+        verifyZeroInteractions(mockOnSuccess)
+        assertThat(called).isTrue()
+    }
+
+    @Test
+    fun testGetPosts_withBefore_success() {
+        var called = false
+        val mockResponse = MockResponse().setResponseCode(200)
+                .setBody(Fixture.postResponse.JSON)
+        mockWebServer.enqueue(mockResponse)
+
+        val repository = PostRepository(mockRetrofit, mockPostCloudRepository)
+
+        repository.getPosts("Some Before")
+                .subscribe({ postResponse ->
+                    assertThat(postResponse).isNotNull()
+                    called = true
+                }, mockOnError, mockOnSuccess)
+
+        verifyZeroInteractions(mockOnError)
+        verify(mockOnSuccess).invoke()
+        verifyNoMoreInteractions(mockOnSuccess)
+        assertThat(called).isTrue()
+    }
+
+    @Test
+    fun testGetPosts_withBefore_error() {
         var called = false
         val mockResponse = MockResponse().setResponseCode(0)
                 .setBody(Fixture.error.JSON)

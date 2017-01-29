@@ -18,6 +18,7 @@ class PostTest : BaseTest() {
         assertThat(post.comments).isEqualTo(Fixture.post.COMMENTS)
         assertThat(post.downs).isEqualTo(Fixture.post.DOWNS)
         assertThat(post.ups).isEqualTo(Fixture.post.UPS)
+        assertThat(post.reference).isEqualTo(Fixture.post.REFERENCE)
     }
 
     @Test
@@ -30,6 +31,7 @@ class PostTest : BaseTest() {
         assertThat(json).contains("\"ups\":${Fixture.post.UPS}")
         assertThat(json).contains("\"num_comments\":${Fixture.post.COMMENTS}")
         assertThat(json).contains("\"created_utc\":${Fixture.post.CREATED}")
+        assertThat(json).contains("\"name\":\"${Fixture.post.REFERENCE}\"")
     }
 
 }

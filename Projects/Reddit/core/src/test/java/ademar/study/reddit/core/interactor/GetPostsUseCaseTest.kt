@@ -19,14 +19,14 @@ class GetPostsUseCaseTest : BaseTest() {
     @Mock lateinit var mockOnSuccess: () -> Unit
 
     @Test
-    fun testExecute_success() {
+    fun testCurrentPage_success() {
         var called = false
         val useCase = GetPostsUseCase(mockPostRepository)
         val mockPost = Fixture.postResponse.makeModel()
 
         whenever(mockPostRepository.getPosts()).thenReturn(Observable.just(mockPost))
 
-        useCase.execute()
+        useCase.currentPage()
                 .subscribe({ post ->
                     assertThat(post).isNotNull()
                     called = true
@@ -39,15 +39,68 @@ class GetPostsUseCaseTest : BaseTest() {
     }
 
     @Test
-    fun testExecute_error() {
+    fun testCurrentPage_error() {
         val useCase = GetPostsUseCase(mockPostRepository)
         val mockPostError = Fixture.error.makeModel()
 
         whenever(mockPostRepository.getPosts()).thenReturn(Observable.error(mockPostError))
 
-        useCase.execute()
+        useCase.currentPage()
                 .test()
                 .assertError(mockPostError)
+    }
+
+    @Test
+    fun testPreviousPage_success() {
+        var called = 0
+        val useCase = GetPostsUseCase(mockPostRepository)
+        val mockPost = Fixture.postResponse.makeModel()
+
+        whenever(mockPostRepository.getPosts()).thenReturn(Observable.just(mockPost))
+        whenever(mockPostRepository.getPosts(Fixture.post.REFERENCE)).thenReturn(Observable.just(mockPost))
+
+        useCase.currentPage()
+                .subscribe({ post ->
+                    assertThat(post).isNotNull()
+                    called++
+                }, mockOnError, mockOnSuccess)
+
+        useCase.previousPage()
+                .subscribe({ post ->
+                    assertThat(post).isNotNull()
+                    called++
+                }, mockOnError, mockOnSuccess)
+
+        verifyZeroInteractions(mockOnError)
+        verify(mockOnSuccess, times(2)).invoke()
+        verifyNoMoreInteractions(mockOnSuccess)
+        Assertions.assertThat(called).isEqualTo(2)
+    }
+
+    @Test
+    fun testPreviousPage_error() {
+        var called = false
+        val useCase = GetPostsUseCase(mockPostRepository)
+        val mockPost = Fixture.postResponse.makeModel()
+        val mockPostError = Fixture.error.makeModel()
+
+        whenever(mockPostRepository.getPosts()).thenReturn(Observable.just(mockPost))
+        whenever(mockPostRepository.getPosts(Fixture.post.REFERENCE)).thenReturn(Observable.error(mockPostError))
+
+        useCase.currentPage()
+                .subscribe({ post ->
+                    assertThat(post).isNotNull()
+                    called = true
+                }, mockOnError, mockOnSuccess)
+
+        useCase.previousPage()
+                .test()
+                .assertError(mockPostError)
+
+        verifyZeroInteractions(mockOnError)
+        verify(mockOnSuccess).invoke()
+        verifyNoMoreInteractions(mockOnSuccess)
+        Assertions.assertThat(called).isTrue()
     }
 
 }

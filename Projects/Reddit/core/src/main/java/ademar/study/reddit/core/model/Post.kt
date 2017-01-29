@@ -29,4 +29,7 @@ class Post {
     @JsonField(name = arrayOf("ups"))
     var ups: Long = 0L
 
+    @JsonField(name = arrayOf("name"))
+    lateinit var reference: String
+
 }

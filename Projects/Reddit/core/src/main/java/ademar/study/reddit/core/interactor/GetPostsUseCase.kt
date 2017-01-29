@@ -14,12 +14,24 @@ class GetPostsUseCase @Inject constructor(
 
 ) {
 
-    fun execute(): Observable<Post> {
+    private var lastReference: String? = null
+
+    fun currentPage(): Observable<Post> {
         return repository.getPosts()
                 .map(PostResponse::data)
                 .map(Data::children)
                 .flatMapIterable { it }
                 .map(Child::post)
+                .doOnNext { lastReference = it.reference }
+    }
+
+    fun previousPage(): Observable<Post> {
+        return repository.getPosts(lastReference)
+                .map(PostResponse::data)
+                .map(Data::children)
+                .flatMapIterable { it }
+                .map(Child::post)
+                .doOnNext { lastReference = it.reference }
     }
 
 }
