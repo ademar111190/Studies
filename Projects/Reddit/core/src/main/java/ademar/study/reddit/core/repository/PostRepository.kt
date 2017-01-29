@@ -14,8 +14,8 @@ class PostRepository @Inject constructor(
 
 ) {
 
-    fun getPosts(before: String? = null): Observable<PostResponse> {
-        return cloud.getPosts(before)
+    fun getPosts(after: String? = null): Observable<PostResponse> {
+        return cloud.getPosts(after)
                 .flatMap { retrofit.observeBody(it) }
     }
 

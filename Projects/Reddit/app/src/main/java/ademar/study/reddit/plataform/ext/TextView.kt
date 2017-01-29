@@ -1,4 +1,4 @@
-package ademar.study.reddit.ext
+package ademar.study.reddit.plataform.ext
 
 import android.graphics.Paint
 import android.widget.TextView

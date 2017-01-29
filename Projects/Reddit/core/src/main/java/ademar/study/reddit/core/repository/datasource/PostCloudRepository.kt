@@ -10,7 +10,7 @@ interface PostCloudRepository {
 
     @GET("/new/.json")
     fun getPosts(
-            @Query("before") before: String? = null
+            @Query("after") after: String? = null
     ): Observable<Response<PostResponse>>
 
 }

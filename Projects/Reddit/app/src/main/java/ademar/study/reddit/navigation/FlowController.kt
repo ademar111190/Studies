@@ -1,5 +1,6 @@
 package ademar.study.reddit.navigation
 
+import ademar.study.reddit.plataform.factories.IntentFactory
 import ademar.study.reddit.view.base.BaseActivity
 import ademar.study.reddit.view.home.HomeActivity
 import javax.inject.Inject

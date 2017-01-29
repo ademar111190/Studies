@@ -216,10 +216,6 @@ class HomePresenterTest : BaseTest() {
                 assertThat(viewModel).isEqualTo(mockPostViewModel)
                 bindPostCount++
             }
-
-            override fun hideUnloadedPosts() {
-                hideUnloadedPostsCount++
-            }
         }
 
         whenever(mockGetPostsUseCase.previousPage()).thenReturn(Observable.just(mockPost))
@@ -231,7 +227,6 @@ class HomePresenterTest : BaseTest() {
         assertThat(hideUnloadedErrorCount).isEqualTo(1)
         assertThat(showUnloadedPostsCount).isEqualTo(1)
         assertThat(bindPostCount).isEqualTo(1)
-        assertThat(hideUnloadedPostsCount).isEqualTo(1)
     }
 
     @Test

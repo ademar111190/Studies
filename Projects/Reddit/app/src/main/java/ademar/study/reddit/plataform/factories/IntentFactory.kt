@@ -1,4 +1,4 @@
-package ademar.study.reddit.navigation
+package ademar.study.reddit.plataform.factories
 
 import android.content.Intent
 import javax.inject.Inject

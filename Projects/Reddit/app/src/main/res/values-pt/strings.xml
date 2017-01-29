@@ -6,5 +6,40 @@
     <string name="app_name">Reddit</string>
     <string name="app_ok">OK</string>
     <string name="app_reload">Recarregar</string>
+    <string name="app_retry">Tentar novamente</string>
+
+    <!-- Post -->
+
+    <plurals name="post_time_year">
+        <item quantity="one">%d ano atrás</item>
+        <item quantity="other">%d anos atrás</item>
+    </plurals>
+    <plurals name="post_time_month">
+        <item quantity="one">%d mês atrás</item>
+        <item quantity="other">%d meses atrás</item>
+    </plurals>
+    <plurals name="post_time_day">
+        <item quantity="one">%d dia atrás</item>
+        <item quantity="other">%d dias atrás</item>
+    </plurals>
+    <plurals name="post_time_hour">
+        <item quantity="one">%d hora atrás</item>
+        <item quantity="other">%d horas atrás</item>
+    </plurals>
+    <plurals name="post_time_minute">
+        <item quantity="one">%d minuto atrás</item>
+        <item quantity="other">%d minutos atrás</item>
+    </plurals>
+    <plurals name="post_time_second">
+        <item quantity="one">%d segundo atrás</item>
+        <item quantity="other">%d segundos atrás</item>
+    </plurals>
+    <string name="post_time_now">Agora</string>
+    <plurals name="post_comments">
+        <item quantity="one">%d comentário</item>
+        <item quantity="other">%d comentários</item>
+    </plurals>
+    <string name="post_downs">%d descurtidas</string>
+    <string name="post_ups">%d curtidas</string>
 
 </resources>

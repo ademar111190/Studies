@@ -8,7 +8,7 @@ class PostViewModelTest : BaseTest() {
 
     @Test
     fun testInstantiate() {
-        PostViewModel("Some Title", "Some Author", "Some Thumbnail", 1L, 20L, -4L, 7L)
+        PostViewModel("Some Title", "Some Author", "Some Thumbnail", "Some created date", "Some comments", "Some downs", "Some ups")
     }
 
 }

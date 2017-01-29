@@ -60,13 +60,13 @@ object Fixture {
 
     object postViewModel {
 
-        val TITLE = ""
-        val AUTHOR = ""
-        val THUMBNAIL = ""
-        val CREATED = 1485666124L
-        val COMMENTS = 7L
-        val DOWNS = 1L
-        val UPS = 3L
+        val TITLE = "Some title"
+        val AUTHOR = "Some author"
+        val THUMBNAIL = "A thumb"
+        val CREATED = "Created 3 minutes ago"
+        val COMMENTS = "7 comments"
+        val DOWNS = "6 downs"
+        val UPS = "9 ups"
 
         fun makeModel(): PostViewModel {
             return PostViewModel(TITLE, AUTHOR, THUMBNAIL, CREATED, COMMENTS, DOWNS, UPS)

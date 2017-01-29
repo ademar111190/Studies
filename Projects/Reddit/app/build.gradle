@@ -26,8 +26,8 @@ android {
 
     buildTypes {
         all {
-            shrinkResources false
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFile getDefaultProguardFile("proguard-android.txt")
             proguardFile "proguard-rules.pro"
         }
@@ -67,6 +67,7 @@ dependencies {
 
     compile "com.android.support:appcompat-v7:$supportVersion"
     compile "com.android.support:design:$supportVersion"
+    compile "com.github.ybq:Endless-RecyclerView:$endlessRecyclerViewVersion"
     compile "com.jakewharton.rxbinding:rxbinding-kotlin:$rxBindingVersion"
     compile "com.jakewharton.rxbinding:rxbinding-design-kotlin:$rxBindingVersion"
     compile "com.squareup.picasso:picasso:$picassoVersion"

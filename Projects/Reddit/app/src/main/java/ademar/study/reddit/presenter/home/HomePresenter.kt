@@ -34,7 +34,6 @@ class HomePresenter @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ post ->
                     view?.bindPost(postMapper.transform(post))
-                    view?.hideUnloadedPosts()
                 }, { e ->
                     view?.showUnloadedError(errorMapper.transform(e))
                 }))

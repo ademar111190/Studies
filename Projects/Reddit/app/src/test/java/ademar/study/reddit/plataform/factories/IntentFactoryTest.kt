@@ -1,4 +1,4 @@
-package ademar.study.reddit.navigation
+package ademar.study.reddit.plataform.factories
 
 import ademar.study.reddit.test.BaseTest
 import org.junit.Test

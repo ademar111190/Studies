@@ -29,6 +29,7 @@ allprojects {
 
         assertJVersion = "3.6.2"
         daggerVersion = "2.8"
+        endlessRecyclerViewVersion = "1.0.3"
         jUnitVersion = "4.12"
         loganSquareVersion = "1.3.7"
         loganSquareConverterVersion = "1.4.1"
