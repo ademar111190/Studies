@@ -17,6 +17,9 @@ class Post {
     @JsonField(name = arrayOf("thumbnail"))
     lateinit var thumbnail: String
 
+    @JsonField(name = arrayOf("permalink"))
+    lateinit var link: String
+
     @JsonField(name = arrayOf("created_utc"))
     var created: Long = 0L
 

@@ -77,6 +77,7 @@ object Fixture {
         val DOWNS = 1L
         val UPS = 3L
         val REFERENCE = "t3_5qpvlr"
+        val LINK = "/r/Android/comments/5qpvlr/galaxy_s8_press_render_leak/"
         val JSON = """
         {
           "contest_mode": false,
@@ -161,7 +162,7 @@ object Fixture {
           "is_self": false,
           "hide_score": true,
           "spoiler": false,
-          "permalink": "/r/Android/comments/5qpvlr/galaxy_s8_press_render_leak/",
+          "permalink": "$LINK",
           "locked": false,
           "stickied": false,
           "created": 1485637324,
@@ -184,6 +185,7 @@ object Fixture {
             model.title = TITLE
             model.author = AUTHOR
             model.thumbnail = THUMBNAIL
+            model.link = LINK
             model.created = CREATED
             model.comments = COMMENTS
             model.downs = DOWNS

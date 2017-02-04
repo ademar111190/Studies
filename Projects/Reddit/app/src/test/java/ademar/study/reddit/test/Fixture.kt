@@ -34,9 +34,10 @@ object Fixture {
 
     object post {
 
-        val TITLE = ""
-        val AUTHOR = ""
-        val THUMBNAIL = ""
+        val TITLE = "Some title"
+        val AUTHOR = "An Author"
+        val THUMBNAIL = "http://some.thumb"
+        val LINK = "http://some.link"
         val CREATED = 1485666124L
         val COMMENTS = 7L
         val DOWNS = 1L
@@ -48,6 +49,7 @@ object Fixture {
             model.title = TITLE
             model.author = AUTHOR
             model.thumbnail = THUMBNAIL
+            model.link = LINK
             model.created = CREATED
             model.comments = COMMENTS
             model.downs = DOWNS
@@ -63,13 +65,14 @@ object Fixture {
         val TITLE = "Some title"
         val AUTHOR = "Some author"
         val THUMBNAIL = "A thumb"
+        val LINK = "A link"
         val CREATED = "Created 3 minutes ago"
         val COMMENTS = "7 comments"
         val DOWNS = "6 downs"
         val UPS = "9 ups"
 
         fun makeModel(): PostViewModel {
-            return PostViewModel(TITLE, AUTHOR, THUMBNAIL, CREATED, COMMENTS, DOWNS, UPS)
+            return PostViewModel(TITLE, AUTHOR, THUMBNAIL, LINK, CREATED, COMMENTS, DOWNS, UPS)
         }
 
     }

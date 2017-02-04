@@ -20,6 +20,7 @@ class PostMapper @Inject constructor(
         val title = post.title
         val author = post.author
         val thumbnail = post.thumbnail
+        val link = post.link
 
         val create = factory.makeCalendar()
         create.time = Date(post.created * 1000L)
@@ -60,7 +61,7 @@ class PostMapper @Inject constructor(
         val downs = resources.getString(R.string.post_downs, post.downs)
         val ups = resources.getString(R.string.post_ups, post.ups)
 
-        return PostViewModel(title, author, thumbnail, created, comments, downs, ups)
+        return PostViewModel(title, author, thumbnail, link, created, comments, downs, ups)
     }
 
 }
