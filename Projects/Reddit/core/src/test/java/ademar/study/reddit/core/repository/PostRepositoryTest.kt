@@ -14,12 +14,12 @@ import org.mockito.Mockito.`when` as whenever
 
 class PostRepositoryTest : BaseTest() {
 
-    private lateinit var mockRetrofit: Retrofit
-    private lateinit var mockPostCloudRepository: PostCloudRepository
-
     @Mock lateinit var mockOnNext: (PostResponse) -> Unit
     @Mock lateinit var mockOnError: (Throwable) -> Unit
     @Mock lateinit var mockOnSuccess: () -> Unit
+
+    private lateinit var mockRetrofit: Retrofit
+    private lateinit var mockPostCloudRepository: PostCloudRepository
 
     override fun setUp() {
         super.setUp()

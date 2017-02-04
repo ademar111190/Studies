@@ -2,6 +2,7 @@ package ademar.study.reddit.core.injection
 
 import ademar.study.reddit.core.ext.standardErrors
 import ademar.study.reddit.core.model.StandardErrors
+import ademar.study.reddit.core.repository.datasource.CommentCloudRepository
 import ademar.study.reddit.core.repository.datasource.PostCloudRepository
 import android.content.Context
 import com.github.aurae.retrofit2.LoganSquareConverterFactory
@@ -52,6 +53,11 @@ class CoreMockModule(
                 .build()
         retrofit.standardErrors = standardErrors
         return retrofit
+    }
+
+    @Provides
+    fun provideCommentCloudRepository(retrofit: Retrofit): CommentCloudRepository {
+        return retrofit.create(CommentCloudRepository::class.java)
     }
 
     @Provides

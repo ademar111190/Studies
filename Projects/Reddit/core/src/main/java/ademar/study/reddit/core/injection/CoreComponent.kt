@@ -1,6 +1,7 @@
 package ademar.study.reddit.core.injection
 
 import ademar.study.reddit.core.model.StandardErrors
+import ademar.study.reddit.core.repository.datasource.CommentCloudRepository
 import ademar.study.reddit.core.repository.datasource.PostCloudRepository
 import android.content.Context
 import dagger.Component
@@ -19,6 +20,7 @@ interface CoreComponent {
     val okHttpClient: OkHttpClient
     val retrofit: Retrofit
 
+    val commentCloudRepository: CommentCloudRepository
     val postCloudRepository: PostCloudRepository
 
 }

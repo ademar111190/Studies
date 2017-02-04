@@ -296,6 +296,78 @@ object Fixture {
           "data": ${postDetailData.JSON}
         }
         """
+        val SERVICE_JSON = """
+        [
+          {
+            "kind": "Listing",
+            "data": {
+              "modhash": "",
+              "children": [
+                {
+                  "kind": "t3",
+                  "data": {
+                    "contest_mode": false,
+                    "banned_by": null,
+                    "media_embed": {},
+                    "subreddit": "Android",
+                    "selftext_html": null,
+                    "selftext": "",
+                    "likes": null,
+                    "suggested_sort": null,
+                    "user_reports": [],
+                    "secure_media": null,
+                    "saved": false,
+                    "id": "5s1dkg",
+                    "gilded": 0,
+                    "secure_media_embed": {},
+                    "clicked": false,
+                    "report_reasons": null,
+                    "author": "shivamchatak",
+                    "media": null,
+                    "score": 26,
+                    "approved_by": null,
+                    "over_18": false,
+                    "domain": "forums.crackberry.com",
+                    "hidden": false,
+                    "num_comments": 3,
+                    "thumbnail": "default",
+                    "subreddit_id": "t5_2qlqh",
+                    "edited": false,
+                    "link_flair_css_class": null,
+                    "author_flair_css_class": null,
+                    "downs": 0,
+                    "archived": false,
+                    "removal_reason": null,
+                    "stickied": false,
+                    "is_self": false,
+                    "hide_score": false,
+                    "spoiler": false,
+                    "permalink": "/r/Android/comments/5s1dkg/blackberry_priv_starts_getting_february_security/",
+                    "locked": false,
+                    "name": "t3_5s1dkg",
+                    "created": 1486253188,
+                    "url": "http://forums.crackberry.com/blackberry-priv-f440/february-5th-2017-security-patch-available-1098992/",
+                    "author_flair_text": null,
+                    "quarantine": false,
+                    "title": "BlackBerry Priv starts getting February security update (February 5, 2017)",
+                    "created_utc": 1486224388,
+                    "link_flair_text": null,
+                    "ups": 26,
+                    "upvote_ratio": 0.85,
+                    "mod_reports": [],
+                    "visited": false,
+                    "num_reports": null,
+                    "distinguished": null
+                  }
+                }
+              ],
+              "after": null,
+              "before": null
+            }
+          },
+          $JSON
+          ]
+        """
 
         fun makeModel(): PostDetailResponse {
             val model = PostDetailResponse()
