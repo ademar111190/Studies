@@ -2,9 +2,7 @@ package ademar.study.reddit.core.test
 
 import ademar.study.reddit.core.model.Error
 import ademar.study.reddit.core.model.Post
-import ademar.study.reddit.core.model.internal.Child
-import ademar.study.reddit.core.model.internal.Data
-import ademar.study.reddit.core.model.internal.PostResponse
+import ademar.study.reddit.core.model.internal.*
 import org.mockito.Mockito.`when` as whenever
 
 object Fixture {
@@ -21,6 +19,62 @@ object Fixture {
         fun makeModel(): Child {
             val model = Child()
             model.post = post.makeModel()
+            return model
+        }
+
+    }
+
+    object comment {
+
+        val AUTHOR = "pranavsharma0096"
+        val TEXT = "Faster than Google's own devices. I'm impressed"
+        val DOWNS = 2L
+        val UPS = 7L
+        val JSON = """
+        {
+          "subreddit_id": "t5_2qlqh",
+          "banned_by": null,
+          "removal_reason": null,
+          "link_id": "t3_5s1dkg",
+          "likes": null,
+          "replies": "",
+          "user_reports": [],
+          "saved": false,
+          "id": "ddbppd1",
+          "gilded": 0,
+          "archived": false,
+          "report_reasons": null,
+          "author": "$AUTHOR",
+          "parent_id": "t3_5s1dkg",
+          "score": 1,
+          "approved_by": null,
+          "controversiality": 0,
+          "body": "$TEXT",
+          "edited": false,
+          "author_flair_css_class": null,
+          "downs": $DOWNS,
+          "body_html": "&lt;div class=\"md\"&gt;&lt;p&gt;Faster than Google&amp;#39;s own devices. I&amp;#39;m impressed&lt;/p&gt;\n&lt;/div&gt;",
+          "stickied": false,
+          "subreddit": "Android",
+          "score_hidden": true,
+          "name": "t1_ddbppd1",
+          "created": 1486254786,
+          "author_flair_text": null,
+          "created_utc": 1486225986,
+          "ups": $UPS,
+          "mod_reports": [],
+          "num_reports": null,
+          "distinguished": null
+        }
+        """
+
+        fun makeModel(): Comment {
+            val model = Comment()
+            model.replies = null
+            model.author = AUTHOR
+            model.text = TEXT
+            model.downs = DOWNS
+            model.ups = UPS
             return model
         }
 
@@ -191,6 +245,61 @@ object Fixture {
             model.downs = DOWNS
             model.ups = UPS
             model.reference = REFERENCE
+            return model
+        }
+
+    }
+
+    object postDetailData {
+
+        val JSON = """
+        {
+          "modhash": "",
+          "children": [${postDetailDataChildren.JSON}],
+          "after": null,
+          "before": null
+        }
+        """
+
+        fun makeModel(): PostDetailData {
+            val model = PostDetailData()
+            model.children = listOf(postDetailDataChildren.makeModel())
+            return model
+        }
+
+    }
+
+    object postDetailDataChildren {
+
+        val KIND = "t1"
+        val JSON = """
+        {
+          "kind": "$KIND",
+          "data": ${comment.JSON}
+        }
+        """
+
+        fun makeModel(): PostDetailDataChildren {
+            val model = PostDetailDataChildren()
+            model.kind = KIND
+            model.comment = comment.makeModel()
+            return model
+        }
+
+    }
+
+    object postDetailResponse {
+
+        val JSON = """
+        {
+          "kind": "Listing",
+          "data": ${postDetailData.JSON}
+        }
+        """
+
+        fun makeModel(): PostDetailResponse {
+            val model = PostDetailResponse()
+            model.data = postDetailData.makeModel()
             return model
         }
 
