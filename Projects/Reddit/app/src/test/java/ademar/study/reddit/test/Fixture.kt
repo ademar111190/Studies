@@ -1,11 +1,25 @@
 package ademar.study.reddit.test
 
+import ademar.study.reddit.core.model.Comment
 import ademar.study.reddit.core.model.Error
 import ademar.study.reddit.core.model.Post
 import ademar.study.reddit.model.ErrorViewModel
 import ademar.study.reddit.model.home.PostViewModel
 
 object Fixture {
+
+    object comment {
+
+        val TEXT = "Some text"
+        val AUTHOR = "An Author"
+        val DOWNS = 1L
+        val UPS = 3L
+
+        fun makeModel(): Comment {
+            return Comment(AUTHOR, TEXT, DOWNS, UPS, listOf())
+        }
+
+    }
 
     object error {
 
