@@ -8,7 +8,7 @@ class CommentViewModelTest : BaseTest() {
 
     @Test
     fun testInstantiate() {
-        CommentViewModel("An aithor", "A text", "7 downs", "9 ups", listOf())
+        CommentViewModel("An aithor", "A text", "7 downs", "9 ups", 3, listOf())
     }
 
 }

@@ -8,9 +8,9 @@ import retrofit2.http.Path
 
 interface CommentCloudRepository {
 
-    @GET("/comments/{link}/.json")
+    @GET("{link}/.json")
     fun getComments(
-            @Path("link") link: String
+            @Path("link", encoded = true) link: String
     ): Observable<Response<List<PostDetailResponse>>>
 
 }

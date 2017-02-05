@@ -34,6 +34,7 @@ class CommentMapperTest : BaseTest() {
 
         assertThat(viewModel.text).isEqualTo(Fixture.comment.TEXT)
         assertThat(viewModel.author).isEqualTo(Fixture.comment.AUTHOR)
+        assertThat(viewModel.level).isEqualTo(Fixture.comment.LEVEL)
         assertThat(viewModel.downs).isEqualTo(mockDowns)
         assertThat(viewModel.ups).isEqualTo(mockUps)
     }

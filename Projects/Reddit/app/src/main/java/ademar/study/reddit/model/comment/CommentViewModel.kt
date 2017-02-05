@@ -6,6 +6,7 @@ data class CommentViewModel(
         val text: String,
         val downs: String,
         val ups: String,
+        val level: Int,
         val replies: List<CommentViewModel>
 
 )

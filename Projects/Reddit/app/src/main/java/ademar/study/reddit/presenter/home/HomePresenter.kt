@@ -4,6 +4,7 @@ import ademar.study.reddit.core.interactor.GetPostsUseCase
 import ademar.study.reddit.injection.LifeCycleScope
 import ademar.study.reddit.mapper.ErrorMapper
 import ademar.study.reddit.mapper.home.PostMapper
+import ademar.study.reddit.navigation.FlowController
 import ademar.study.reddit.presenter.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -12,6 +13,7 @@ import javax.inject.Inject
 @LifeCycleScope
 class HomePresenter @Inject constructor(
 
+        private val flowController: FlowController,
         private val getPostsUseCase: GetPostsUseCase,
         private val postMapper: PostMapper,
         private val errorMapper: ErrorMapper
@@ -37,6 +39,10 @@ class HomePresenter @Inject constructor(
                 }, { e ->
                     view?.showUnloadedError(errorMapper.transform(e))
                 }))
+    }
+
+    fun onLinkClicked(link: String) {
+        flowController.launchComment(link)
     }
 
     private fun loadData() {

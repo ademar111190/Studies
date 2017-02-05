@@ -4,6 +4,7 @@ import ademar.study.reddit.core.model.Comment
 import ademar.study.reddit.core.model.Error
 import ademar.study.reddit.core.model.Post
 import ademar.study.reddit.model.ErrorViewModel
+import ademar.study.reddit.model.comment.CommentViewModel
 import ademar.study.reddit.model.home.PostViewModel
 
 object Fixture {
@@ -14,9 +15,24 @@ object Fixture {
         val AUTHOR = "An Author"
         val DOWNS = 1L
         val UPS = 3L
+        val LEVEL = 7
 
         fun makeModel(): Comment {
-            return Comment(AUTHOR, TEXT, DOWNS, UPS, listOf())
+            return Comment(AUTHOR, TEXT, DOWNS, UPS, LEVEL, listOf())
+        }
+
+    }
+
+    object commentViewModel {
+
+        val AUTHOR = "Some author"
+        val TEXT = "Some text"
+        val LEVEL = 3
+        val DOWNS = "6 downs"
+        val UPS = "9 ups"
+
+        fun makeModel(): CommentViewModel {
+            return CommentViewModel(AUTHOR, TEXT, DOWNS, UPS, LEVEL, listOf())
         }
 
     }

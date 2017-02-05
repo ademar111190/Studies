@@ -7,6 +7,7 @@ import ademar.study.reddit.mapper.ErrorMapper
 import ademar.study.reddit.mapper.home.PostMapper
 import ademar.study.reddit.model.ErrorViewModel
 import ademar.study.reddit.model.home.PostViewModel
+import ademar.study.reddit.navigation.FlowController
 import ademar.study.reddit.test.BaseTest
 import ademar.study.reddit.test.Fixture
 import io.reactivex.Observable
@@ -18,6 +19,7 @@ import org.mockito.Mockito.`when` as whenever
 
 class HomePresenterTest : BaseTest() {
 
+    @Mock lateinit var mockFlowController: FlowController
     @Mock lateinit var mockGetPostsUseCase: GetPostsUseCase
     @Mock lateinit var mockPostMapper: PostMapper
     @Mock lateinit var mockErrorMapper: ErrorMapper
@@ -65,7 +67,7 @@ class HomePresenterTest : BaseTest() {
     @Test
     fun testOnAttachView() {
         val stubView = object : StubHomeView() {}
-        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
     }
 
@@ -92,7 +94,7 @@ class HomePresenterTest : BaseTest() {
 
         whenever(mockGetPostsUseCase.currentPage()).thenReturn(Observable.just(mockPost))
 
-        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onStart()
 
@@ -125,7 +127,7 @@ class HomePresenterTest : BaseTest() {
 
         whenever(mockGetPostsUseCase.currentPage()).thenReturn(Observable.error(mockError))
 
-        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onStart()
 
@@ -158,7 +160,7 @@ class HomePresenterTest : BaseTest() {
 
         whenever(mockGetPostsUseCase.currentPage()).thenReturn(Observable.just(mockPost))
 
-        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onReloadClick()
 
@@ -191,7 +193,7 @@ class HomePresenterTest : BaseTest() {
 
         whenever(mockGetPostsUseCase.currentPage()).thenReturn(Observable.error(mockError))
 
-        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onReloadClick()
 
@@ -220,7 +222,7 @@ class HomePresenterTest : BaseTest() {
 
         whenever(mockGetPostsUseCase.previousPage()).thenReturn(Observable.just(mockPost))
 
-        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onPreviousPageClick()
 
@@ -248,7 +250,7 @@ class HomePresenterTest : BaseTest() {
 
         whenever(mockGetPostsUseCase.previousPage()).thenReturn(Observable.error(mockError))
 
-        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onPreviousPageClick()
 
@@ -259,7 +261,7 @@ class HomePresenterTest : BaseTest() {
 
     @Test
     fun testOnDetachView() {
-        val presenter = HomePresenter(mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetPostsUseCase, mockPostMapper, mockErrorMapper)
         presenter.onDetachView()
     }
 

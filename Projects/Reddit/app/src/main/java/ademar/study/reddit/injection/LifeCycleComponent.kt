@@ -1,6 +1,7 @@
 package ademar.study.reddit.injection
 
 import ademar.study.reddit.core.injection.CoreComponent
+import ademar.study.reddit.view.comment.CommentActivity
 import ademar.study.reddit.view.common.StartActivity
 import ademar.study.reddit.view.home.HomeActivity
 import dagger.Component
@@ -10,6 +11,7 @@ import dagger.Component
 interface LifeCycleComponent {
 
     fun inject(o: StartActivity)
+    fun inject(o: CommentActivity)
     fun inject(o: HomeActivity)
 
 }

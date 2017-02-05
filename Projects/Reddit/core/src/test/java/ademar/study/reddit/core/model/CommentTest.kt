@@ -7,7 +7,7 @@ class CommentTest : BaseTest() {
 
     @Test
     fun testInstantiate() {
-        Comment("An author", "A text", 7, 6, listOf())
+        Comment("An author", "A text", 7, 6, 3, listOf())
     }
 
 }

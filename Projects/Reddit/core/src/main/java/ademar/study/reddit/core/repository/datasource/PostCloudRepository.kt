@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface PostCloudRepository {
 
-    @GET("/new/.json")
+    @GET("/r/Android/new/.json")
     fun getPosts(
             @Query("after") after: String? = null
     ): Observable<Response<PostResponse>>

@@ -288,6 +288,23 @@ object Fixture {
 
     }
 
+    object postDetailDataReply {
+
+        val JSON = """
+        {
+          "kind": "t1",
+          "data": ${postDetailData.JSON}
+        }
+        """
+
+        fun makeModel(): PostDetailDataReply {
+            val model = PostDetailDataReply()
+            model.data = postDetailData.makeModel()
+            return model
+        }
+
+    }
+
     object postDetailResponse {
 
         val JSON = """

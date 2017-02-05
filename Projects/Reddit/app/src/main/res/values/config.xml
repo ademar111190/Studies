@@ -3,6 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
 
-    <string name="api_url">https://www.reddit.com/r/Android/</string>
+    <string name="api_url">https://www.reddit.com/</string>
 
 </resources>

@@ -17,6 +17,7 @@ class GetCommentsUseCase @Inject constructor(
         return repository.getComments(postLink)
                 .flatMapIterable { it }
                 .map { it.data }
+                .filter { it.children != null }
                 .map { it.children }
                 .flatMapIterable { it }
                 .filter { it.isComment() }

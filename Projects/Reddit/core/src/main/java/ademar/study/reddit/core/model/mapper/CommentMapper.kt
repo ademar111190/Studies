@@ -6,18 +6,18 @@ import ademar.study.reddit.core.model.internal.Comment as InternalComment
 
 class CommentMapper @Inject constructor() {
 
-    fun transform(comment: InternalComment): Comment {
+    fun transform(comment: InternalComment, level: Int = 0): Comment {
         val author = comment.author
         val text = comment.text
         val downs = comment.downs
         val ups = comment.ups
         val replies = arrayListOf<Comment>()
-        comment.replies?.let {
-            replies.addAll(it.children
+        comment.replies?.data?.children?.let {
+            replies.addAll(it
                     .filter { it.isComment() }
-                    .map { transform(it.comment) })
+                    .map { transform(it.comment, level + 1) })
         }
-        return Comment(author, text, downs, ups, replies)
+        return Comment(author, text, downs, ups, level, replies)
     }
 
 }

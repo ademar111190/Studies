@@ -4,9 +4,9 @@ import com.bluelinelabs.logansquare.annotation.JsonField
 import com.bluelinelabs.logansquare.annotation.JsonObject
 
 @JsonObject
-class PostDetailData {
+class PostDetailDataReply {
 
-    @JsonField(name = arrayOf("children"))
-    var children: List<PostDetailDataChildren>? = null
+    @JsonField(name = arrayOf("data"))
+    lateinit var data: PostDetailData
 
 }

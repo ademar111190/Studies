@@ -1,10 +1,10 @@
 package ademar.study.reddit.view.home
 
 import ademar.study.reddit.R
-import ademar.study.reddit.plataform.ext.inflate
 import ademar.study.reddit.injection.LifeCycleModule
 import ademar.study.reddit.model.ErrorViewModel
 import ademar.study.reddit.model.home.PostViewModel
+import ademar.study.reddit.plataform.ext.inflate
 import ademar.study.reddit.presenter.home.HomePresenter
 import ademar.study.reddit.presenter.home.HomeView
 import ademar.study.reddit.view.base.BaseActivity
@@ -54,6 +54,9 @@ class HomeActivity : BaseActivity(), HomeView {
         }
 
         list.layoutManager = LinearLayoutManager(this)
+        adapter.listener = { link ->
+            presenter.onLinkClicked(link)
+        }
         list.adapter = adapter
 
         loadView = list.inflate(R.layout.load_item)

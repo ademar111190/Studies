@@ -22,7 +22,7 @@ class CommentMapperTest : BaseTest() {
     fun testTransform_withChildren() {
         val mapper = CommentMapper()
         val comment = mapper.transform(Fixture.comment.makeModel().apply {
-            replies = Fixture.postDetailData.makeModel()
+            replies = Fixture.postDetailDataReply.makeModel()
         })
         assertThat(comment.author).isEqualTo(Fixture.comment.AUTHOR)
         assertThat(comment.text).isEqualTo(Fixture.comment.TEXT)

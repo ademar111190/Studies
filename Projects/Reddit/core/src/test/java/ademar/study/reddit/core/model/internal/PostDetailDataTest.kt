@@ -11,7 +11,7 @@ class PostDetailDataTest : BaseTest() {
     @Test
     fun testParse() {
         val postDetailData = LoganSquare.parse(Fixture.postDetailData.JSON, PostDetailData::class.java)
-        assertThat(postDetailData.children.size).isEqualTo(1)
+        assertThat(postDetailData.children?.size).isEqualTo(1)
     }
 
     @Test

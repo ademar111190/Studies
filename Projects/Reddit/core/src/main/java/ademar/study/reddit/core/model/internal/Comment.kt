@@ -7,7 +7,7 @@ import com.bluelinelabs.logansquare.annotation.JsonObject
 class Comment {
 
     @JsonField(name = arrayOf("replies"))
-    var replies: PostDetailData? = null
+    var replies: PostDetailDataReply? = null
 
     @JsonField(name = arrayOf("author"))
     lateinit var author: String

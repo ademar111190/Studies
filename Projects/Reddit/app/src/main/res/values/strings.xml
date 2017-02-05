@@ -42,4 +42,9 @@
     <string name="post_downs">%d downs</string>
     <string name="post_ups">%d ups</string>
 
+    <!-- Comment -->
+
+    <string name="comment_title">Comments</string>
+    <string name="comment_no_comments">There is no comments</string>
+
 </resources>

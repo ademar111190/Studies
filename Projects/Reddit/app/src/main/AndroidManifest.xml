@@ -35,6 +35,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".view.comment.CommentActivity"/>
+
         <activity android:name=".view.home.HomeActivity"/>
 
         <!-- Samsung -->

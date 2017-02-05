@@ -15,6 +15,7 @@ class CommentMapper @Inject constructor(
     fun transform(comment: Comment): CommentViewModel {
         val author = comment.author
         val text = comment.text
+        val level = comment.level
 
         val resources = context.resources
         val downs = resources.getString(R.string.post_downs, comment.downs)
@@ -22,7 +23,7 @@ class CommentMapper @Inject constructor(
 
         val comments = comment.comments.map { transform(it) }
 
-        return CommentViewModel(author, text, downs, ups, comments)
+        return CommentViewModel(author, text, downs, ups, level, comments)
     }
 
 }

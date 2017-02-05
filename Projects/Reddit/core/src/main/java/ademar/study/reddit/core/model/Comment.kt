@@ -6,5 +6,6 @@ data class Comment(
         val text: String,
         val downs: Long,
         val ups: Long,
+        val level: Int,
         val comments: List<Comment>
 )

@@ -42,4 +42,9 @@
     <string name="post_downs">%d descurtidas</string>
     <string name="post_ups">%d curtidas</string>
 
+    <!-- Comment -->
+
+    <string name="comment_title">Comentários</string>
+    <string name="comment_no_comments">Não há comentários</string>
+
 </resources>

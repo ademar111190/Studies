@@ -3,22 +3,31 @@ package ademar.study.reddit.view.home
 import ademar.study.reddit.R
 import ademar.study.reddit.model.home.PostViewModel
 import ademar.study.reddit.view.common.LoadViewHolder
-import android.util.Log
 import android.view.View
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.post_item.view.*
 
-class PostViewHolder(view: View) : LoadViewHolder(view), View.OnClickListener {
+class PostViewHolder(
+
+        view: View,
+        private val listener: (String) -> Unit
+
+) : LoadViewHolder(view), View.OnClickListener {
+
+    private var link: String? = null
 
     init {
         view.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-        Log.d("Ademar", "clicked")
+        link?.let { link ->
+            listener(link)
+        }
     }
 
     fun bind(viewModel: PostViewModel) {
+        link = viewModel.link
         itemView.title.text = viewModel.title
         itemView.author.text = viewModel.author
         itemView.created.text = viewModel.created
