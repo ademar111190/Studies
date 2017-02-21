@@ -24,7 +24,6 @@ package_path = name + "/app/src/main/java/" + package.replace(".", "/")
 
 shutil.copytree("Template", name, symlinks=True)
 
-
 for file_path in [
     # app files
     "/app/src/main/java/ademar/study/template/App.kt",
@@ -70,6 +69,7 @@ for file_path in [
     "/core/src/main/java/ademar/study/template/core/ext/Throwable.kt",
     "/core/src/main/java/ademar/study/template/core/injection/CoreComponent.kt",
     "/core/src/main/java/ademar/study/template/core/injection/CoreModule.kt",
+    "/core/src/main/java/ademar/study/template/core/interactor/GetAllHelloWorldUseCase.kt",
     "/core/src/main/java/ademar/study/template/core/interactor/GetHelloWorldUseCase.kt",
     "/core/src/main/java/ademar/study/template/core/model/Error.kt",
     "/core/src/main/java/ademar/study/template/core/model/FieldProperty.kt",
@@ -84,6 +84,7 @@ for file_path in [
     "/core/src/test/java/ademar/study/template/core/ext/ThrowableTest.kt",
     "/core/src/test/java/ademar/study/template/core/injection/CoreMockComponent.kt",
     "/core/src/test/java/ademar/study/template/core/injection/CoreMockModule.kt",
+    "/core/src/test/java/ademar/study/template/core/interactor/GetAllHelloWorldUseCaseTest.kt",
     "/core/src/test/java/ademar/study/template/core/interactor/GetHelloWorldUseCaseTest.kt",
     "/core/src/test/java/ademar/study/template/core/model/ErrorTest.kt",
     "/core/src/test/java/ademar/study/template/core/model/FieldPropertyTest.kt",

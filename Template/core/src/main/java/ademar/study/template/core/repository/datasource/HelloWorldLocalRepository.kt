@@ -8,5 +8,6 @@ import javax.inject.Singleton
 class HelloWorldLocalRepository @Inject constructor() {
 
     var helloWorld: HelloWorld? = null
+    var hellos: List<HelloWorld>? = null
 
 }

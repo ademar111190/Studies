@@ -10,4 +10,7 @@ interface HelloWorldCloudRepository {
     @GET("/hello")
     fun getHelloWorld(): Observable<Response<HelloWorld>>
 
+    @GET("/hellos")
+    fun getAllHelloWorld(): Observable<Response<List<HelloWorld>>>
+
 }

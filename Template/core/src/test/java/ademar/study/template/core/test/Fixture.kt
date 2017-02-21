@@ -30,6 +30,18 @@ object Fixture {
 
     }
 
+    object hellos {
+
+        val JSON = """
+        [${helloWorld.JSON}]
+        """
+
+        fun makeModel(): List<HelloWorld> {
+            return listOf(helloWorld.makeModel())
+        }
+
+    }
+
     object helloWorld {
 
         val MESSAGE = "Hello World!"

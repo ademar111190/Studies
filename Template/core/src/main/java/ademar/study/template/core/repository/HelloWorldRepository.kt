@@ -18,12 +18,23 @@ class HelloWorldRepository @Inject constructor(
 
     fun getHelloWorld(): Observable<HelloWorld> {
         val cached = local.helloWorld
-        if (cached != null) {
-            return Observable.just(cached)
+        return if (cached != null) {
+            Observable.just(cached)
         } else {
-            return cloud.getHelloWorld()
+            cloud.getHelloWorld()
                     .flatMap { retrofit.observeBody(it) }
                     .doOnNext { local.helloWorld = it }
+        }
+    }
+
+    fun getAllHelloWorld(): Observable<List<HelloWorld>> {
+        val cached = local.hellos
+        return if (cached != null) {
+            Observable.just(cached)
+        } else {
+            cloud.getAllHelloWorld()
+                    .flatMap { retrofit.observeBody(it) }
+                    .doOnNext { local.hellos = it }
         }
     }
 
