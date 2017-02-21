@@ -3,7 +3,7 @@ package ademar.study.template.presenter.home
 import ademar.study.template.core.interactor.GetHelloWorldUseCase
 import ademar.study.template.injection.LifeCycleScope
 import ademar.study.template.mapper.ErrorMapper
-import ademar.study.template.mapper.HelloWorldMapper
+import ademar.study.template.mapper.home.HelloWorldMapper
 import ademar.study.template.presenter.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

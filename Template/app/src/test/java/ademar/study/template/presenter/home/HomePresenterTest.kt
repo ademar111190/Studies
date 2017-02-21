@@ -4,7 +4,7 @@ import ademar.study.template.core.interactor.GetHelloWorldUseCase
 import ademar.study.template.core.model.Error
 import ademar.study.template.core.model.HelloWorld
 import ademar.study.template.mapper.ErrorMapper
-import ademar.study.template.mapper.HelloWorldMapper
+import ademar.study.template.mapper.home.HelloWorldMapper
 import ademar.study.template.model.ErrorViewModel
 import ademar.study.template.model.home.HelloWorldViewModel
 import ademar.study.template.test.BaseTest

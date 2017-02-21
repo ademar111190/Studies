@@ -1,4 +1,4 @@
-package ademar.study.template.mapper
+package ademar.study.template.mapper.home
 
 import ademar.study.template.core.model.HelloWorld
 import ademar.study.template.core.model.StandardErrors
