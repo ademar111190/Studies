@@ -1,4 +1,4 @@
-package ademar.study.template.mapper.home
+package ademar.study.template.mapper.detail
 
 import ademar.study.template.test.BaseTest
 import ademar.study.template.test.Fixture

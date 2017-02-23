@@ -1,8 +1,8 @@
-package ademar.study.template.mapper.home
+package ademar.study.template.mapper.detail
 
 import ademar.study.template.core.model.HelloWorld
 import ademar.study.template.core.model.StandardErrors
-import ademar.study.template.model.home.HelloWorldViewModel
+import ademar.study.template.model.detail.HelloWorldViewModel
 import javax.inject.Inject
 
 class HelloWorldMapper @Inject constructor(

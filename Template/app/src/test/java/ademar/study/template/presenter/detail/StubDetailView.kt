@@ -1,10 +1,10 @@
-package ademar.study.template.presenter.home
+package ademar.study.template.presenter.detail
 
-import ademar.study.template.model.home.HelloWorldViewModel
+import ademar.study.template.model.detail.HelloWorldViewModel
 import ademar.study.template.presenter.StubLoadDataView
 import org.assertj.core.api.Assertions.fail
 
-open class StubHomeView : StubLoadDataView(), HomeView {
+open class StubDetailView : StubLoadDataView(), DetailView {
 
     override fun bindHelloWorld(viewModel: HelloWorldViewModel) {
         fail("Shouldn't call bindHelloWorld, viewModel $viewModel")

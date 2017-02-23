@@ -1,22 +1,22 @@
-package ademar.study.template.presenter.home
+package ademar.study.template.presenter.detail
 
 import ademar.study.template.core.interactor.GetHelloWorldUseCase
 import ademar.study.template.injection.LifeCycleScope
 import ademar.study.template.mapper.ErrorMapper
-import ademar.study.template.mapper.home.HelloWorldMapper
+import ademar.study.template.mapper.detail.HelloWorldMapper
 import ademar.study.template.presenter.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @LifeCycleScope
-class HomePresenter @Inject constructor(
+class DetailPresenter @Inject constructor(
 
         private val getHelloWorldUseCase: GetHelloWorldUseCase,
         private val helloWorldMapper: HelloWorldMapper,
         private val errorMapper: ErrorMapper
 
-) : BasePresenter<HomeView>() {
+) : BasePresenter<DetailView>() {
 
     fun onStart() {
         loadData()

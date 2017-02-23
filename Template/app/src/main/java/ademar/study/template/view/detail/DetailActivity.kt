@@ -1,22 +1,22 @@
-package ademar.study.template.view.home
+package ademar.study.template.view.detail
 
 import ademar.study.template.R
 import ademar.study.template.injection.LifeCycleModule
-import ademar.study.template.model.home.HelloWorldViewModel
-import ademar.study.template.presenter.home.HomePresenter
-import ademar.study.template.presenter.home.HomeView
+import ademar.study.template.model.detail.HelloWorldViewModel
+import ademar.study.template.presenter.detail.DetailPresenter
+import ademar.study.template.presenter.detail.DetailView
 import ademar.study.template.view.base.BaseActivity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import kotlinx.android.synthetic.main.home_activity.*
+import kotlinx.android.synthetic.main.detail_activity.*
 import javax.inject.Inject
 
-class HomeActivity : BaseActivity(), HomeView {
+class DetailActivity : BaseActivity(), DetailView {
 
-    @Inject lateinit var presenter: HomePresenter
+    @Inject lateinit var presenter: DetailPresenter
 
     override fun makeLifeCycleModule(): LifeCycleModule {
         return LifeCycleModule(getBaseActivity())
@@ -24,7 +24,7 @@ class HomeActivity : BaseActivity(), HomeView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.home_activity)
+        setContentView(R.layout.detail_activity)
         prepareTaskDescription()
         component.inject(this)
         presenter.onAttachView(this)
@@ -66,7 +66,7 @@ class HomeActivity : BaseActivity(), HomeView {
     companion object {
 
         fun populateIntent(intent: Intent, context: Context): Intent {
-            intent.setClassName(context, HomeActivity::class.java.name)
+            intent.setClassName(context, DetailActivity::class.java.name)
             return intent
         }
 

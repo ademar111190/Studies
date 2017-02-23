@@ -1,4 +1,4 @@
-package ademar.study.template.model.home
+package ademar.study.template.model.detail
 
 import ademar.study.template.test.BaseTest
 import org.junit.Test

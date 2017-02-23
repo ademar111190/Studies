@@ -1,12 +1,12 @@
-package ademar.study.template.presenter.home
+package ademar.study.template.presenter.detail
 
 import ademar.study.template.core.interactor.GetHelloWorldUseCase
 import ademar.study.template.core.model.Error
 import ademar.study.template.core.model.HelloWorld
 import ademar.study.template.mapper.ErrorMapper
-import ademar.study.template.mapper.home.HelloWorldMapper
+import ademar.study.template.mapper.detail.HelloWorldMapper
 import ademar.study.template.model.ErrorViewModel
-import ademar.study.template.model.home.HelloWorldViewModel
+import ademar.study.template.model.detail.HelloWorldViewModel
 import ademar.study.template.test.BaseTest
 import ademar.study.template.test.Fixture
 import io.reactivex.Observable
@@ -18,7 +18,7 @@ import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyNoMoreInteractions
 import org.mockito.Mockito.`when` as whenever
 
-class HomePresenterTest : BaseTest() {
+class DetailPresenterTest : BaseTest() {
 
     @Mock lateinit var mockGetHelloWorldUseCase: GetHelloWorldUseCase
     @Mock lateinit var mockHelloWorldMapper: HelloWorldMapper
@@ -56,14 +56,14 @@ class HomePresenterTest : BaseTest() {
 
     @Test
     fun testOnAttachView() {
-        val stubView = object : StubHomeView() {}
-        val presenter = HomePresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val stubView = object : StubDetailView() {}
+        val presenter = DetailPresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
     }
 
     @Test
     fun testOnStart_success() {
-        val stubView = object : StubHomeView() {
+        val stubView = object : StubDetailView() {
             override fun showLoading() {
                 showLoadingCount++
             }
@@ -80,7 +80,7 @@ class HomePresenterTest : BaseTest() {
 
         whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.just(mockHelloWorld))
 
-        val presenter = HomePresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = DetailPresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onStart()
 
@@ -93,7 +93,7 @@ class HomePresenterTest : BaseTest() {
 
     @Test
     fun testOnStart_error() {
-        val stubView = object : StubHomeView() {
+        val stubView = object : StubDetailView() {
             override fun showLoading() {
                 showLoadingCount++
             }
@@ -110,7 +110,7 @@ class HomePresenterTest : BaseTest() {
 
         whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError))
 
-        val presenter = HomePresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = DetailPresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onStart()
 
@@ -123,7 +123,7 @@ class HomePresenterTest : BaseTest() {
 
     @Test
     fun testOnReloadClick_success() {
-        val stubView = object : StubHomeView() {
+        val stubView = object : StubDetailView() {
             override fun showLoading() {
                 showLoadingCount++
             }
@@ -140,7 +140,7 @@ class HomePresenterTest : BaseTest() {
 
         whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.just(mockHelloWorld))
 
-        val presenter = HomePresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = DetailPresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onReloadClick()
 
@@ -153,7 +153,7 @@ class HomePresenterTest : BaseTest() {
 
     @Test
     fun testOnReloadClick_error() {
-        val stubView = object : StubHomeView() {
+        val stubView = object : StubDetailView() {
             override fun showLoading() {
                 showLoadingCount++
             }
@@ -170,7 +170,7 @@ class HomePresenterTest : BaseTest() {
 
         whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError))
 
-        val presenter = HomePresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = DetailPresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onReloadClick()
 
@@ -183,7 +183,7 @@ class HomePresenterTest : BaseTest() {
 
     @Test
     fun testOnDetachView() {
-        val presenter = HomePresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = DetailPresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
         presenter.onDetachView()
     }
 
