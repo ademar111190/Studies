@@ -3,6 +3,7 @@ package ademar.study.template.injection
 import ademar.study.template.core.injection.CoreComponent
 import ademar.study.template.view.common.StartActivity
 import ademar.study.template.view.detail.DetailActivity
+import ademar.study.template.view.home.HomeActivity
 import dagger.Component
 
 @LifeCycleScope
@@ -11,5 +12,6 @@ interface LifeCycleComponent {
 
     fun inject(o: StartActivity)
     fun inject(o: DetailActivity)
+    fun inject(o: HomeActivity)
 
 }

@@ -11,8 +11,9 @@ class GetAllHelloWorldUseCase @Inject constructor(
 
 ) {
 
-    fun execute(): Observable<List<HelloWorld>> {
+    fun execute(): Observable<HelloWorld> {
         return repository.getAllHelloWorld()
+                .flatMapIterable { it }
     }
 
 }

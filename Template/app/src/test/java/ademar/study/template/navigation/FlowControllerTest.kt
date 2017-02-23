@@ -3,6 +3,7 @@ package ademar.study.template.navigation
 import ademar.study.template.test.BaseTest
 import ademar.study.template.view.base.BaseActivity
 import ademar.study.template.view.detail.DetailActivity
+import ademar.study.template.view.home.HomeActivity
 import android.content.Intent
 import org.junit.Test
 import org.mockito.Mock
@@ -25,6 +26,20 @@ class FlowControllerTest : BaseTest() {
         val flowController = FlowController(mockBaseActivity, mockIntentFactory)
 
         flowController.launchHome()
+
+        verify(mockIntentFactory).makeIntent()
+        verifyNoMoreInteractions(mockIntentFactory)
+        verify(mockIntent).setClassName(mockBaseActivity, HomeActivity::class.java.name)
+        verifyNoMoreInteractions(mockIntent)
+        verify(mockBaseActivity).startActivity(mockIntent)
+        verifyNoMoreInteractions(mockBaseActivity)
+    }
+
+    @Test
+    fun testLaunchDetail() {
+        val flowController = FlowController(mockBaseActivity, mockIntentFactory)
+
+        flowController.launchDetail()
 
         verify(mockIntentFactory).makeIntent()
         verifyNoMoreInteractions(mockIntentFactory)

@@ -1,4 +1,4 @@
-package ademar.study.template.model.detail
+package ademar.study.template.model
 
 data class HelloWorldViewModel(
 

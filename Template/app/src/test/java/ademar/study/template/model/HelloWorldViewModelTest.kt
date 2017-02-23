@@ -1,5 +1,6 @@
-package ademar.study.template.model.detail
+package ademar.study.template.model
 
+import ademar.study.template.model.HelloWorldViewModel
 import ademar.study.template.test.BaseTest
 import org.junit.Test
 import org.mockito.Mockito.`when` as whenever

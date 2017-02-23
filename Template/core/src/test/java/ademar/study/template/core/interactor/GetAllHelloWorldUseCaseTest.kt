@@ -16,13 +16,13 @@ class GetAllHelloWorldUseCaseTest : BaseTest() {
     @Test
     fun testExecute_success() {
         val useCase = GetAllHelloWorldUseCase(mockHelloWorldRepository)
-        val mockHellos = listOf(Fixture.helloWorld.makeModel())
+        val mockHello = Fixture.helloWorld.makeModel()
 
-        whenever(mockHelloWorldRepository.getAllHelloWorld()).thenReturn(Observable.just(mockHellos))
+        whenever(mockHelloWorldRepository.getAllHelloWorld()).thenReturn(Observable.just(listOf(mockHello)))
 
         useCase.execute()
                 .test()
-                .assertResult(mockHellos)
+                .assertResult(mockHello)
                 .assertNoErrors()
 
         verify(mockHelloWorldRepository).getAllHelloWorld()

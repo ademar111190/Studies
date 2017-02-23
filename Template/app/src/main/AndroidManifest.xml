@@ -37,6 +37,8 @@
 
         <activity android:name=".view.detail.DetailActivity"/>
 
+        <activity android:name=".view.home.HomeActivity"/>
+
         <!-- Samsung -->
 
         <uses-library

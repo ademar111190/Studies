@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
 
+    <bool name="large_screen">false</bool>
+
     <string name="api_url">https://private-965f8-template19.apiary-mock.com/</string>
 
 </resources>
