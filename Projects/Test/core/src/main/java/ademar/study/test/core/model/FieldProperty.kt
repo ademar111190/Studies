@@ -3,7 +3,7 @@ package ademar.study.test.core.model
 import java.util.*
 import kotlin.reflect.KProperty
 
-class FieldProperty<Clazz, Field : Any> {
+class FieldProperty<in Clazz, Field : Any> {
 
     private val map = WeakHashMap<Clazz, Field>()
 

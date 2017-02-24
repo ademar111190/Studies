@@ -1,4 +1,4 @@
-package ademar.study.test.mapper.home
+package ademar.study.test.mapper
 
 import ademar.study.test.mapper.HelloWorldMapper
 import ademar.study.test.test.BaseTest

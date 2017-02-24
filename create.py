@@ -114,6 +114,9 @@ for file_path in [
 edit(name + "/app/src/main/AndroidManifest.xml", "ademar.study.template", package)
 edit(name + "/app/src/main/res/values/strings.xml", "Template", name)
 edit(name + "/app/src/main/res/values-pt/strings.xml", "Modelo", name)
+edit(name + "/app/src/main/res/layout/detail_activity.xml", "ademar.study.template", package)
+edit(name + "/app/src/main/res/layout/home_activity.xml", "ademar.study.template", package)
+edit(name + "/app/src/main/res/layout-sw600dp/home_activity.xml", "ademar.study.template", package)
 edit(name + "/core/src/main/AndroidManifest.xml", "ademar.study.template", package)
 
 shutil.rmtree(name + "/.idea")

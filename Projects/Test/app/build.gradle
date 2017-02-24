@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: "kotlin-kapt"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-android-extensions"
 
@@ -53,10 +54,6 @@ android {
         exclude "META-INF/*.properties"
     }
 
-}
-
-kapt {
-    generateStubs = true
 }
 
 dependencies {

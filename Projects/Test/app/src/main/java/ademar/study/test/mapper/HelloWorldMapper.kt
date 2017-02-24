@@ -2,7 +2,7 @@ package ademar.study.test.mapper
 
 import ademar.study.test.core.model.HelloWorld
 import ademar.study.test.core.model.StandardErrors
-import ademar.study.test.model.home.HelloWorldViewModel
+import ademar.study.test.model.HelloWorldViewModel
 import javax.inject.Inject
 
 class HelloWorldMapper @Inject constructor(

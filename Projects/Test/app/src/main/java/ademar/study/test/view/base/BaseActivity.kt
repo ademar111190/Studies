@@ -10,6 +10,8 @@ import ademar.study.test.presenter.LoadDataView
 import android.app.ActivityManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.support.v4.app.NavUtils
+import android.support.v4.app.TaskStackBuilder
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -63,6 +65,17 @@ abstract class BaseActivity : AppCompatActivity(), LoadDataView {
                 .setPositiveButton(R.string.app_ok, null)
                 .create()
                 .show()
+    }
+
+    fun back() {
+        val upIntent = NavUtils.getParentActivityIntent(this);
+        if (NavUtils.shouldUpRecreateTask(this, upIntent) || isTaskRoot) {
+            TaskStackBuilder.create(this)
+                    .addNextIntentWithParentStack(upIntent)
+                    .startActivities()
+        } else {
+            NavUtils.navigateUpTo(this, upIntent)
+        }
     }
 
 }

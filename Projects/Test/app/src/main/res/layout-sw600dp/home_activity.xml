@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="ademar.study.test.view.home.HomeFragment"
+        android:layout_width="320dp"
+        android:layout_height="match_parent"/>
+
+    <FrameLayout
+        android:id="@+id/detail_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="320dp"/>
+
+    <View
+        style="@style/AppVerticalShadow.Night"
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="?android:attr/actionBarSize"/>
+
+</merge>

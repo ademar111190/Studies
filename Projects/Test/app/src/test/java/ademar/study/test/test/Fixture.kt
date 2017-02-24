@@ -3,7 +3,7 @@ package ademar.study.test.test
 import ademar.study.test.core.model.Error
 import ademar.study.test.core.model.HelloWorld
 import ademar.study.test.model.ErrorViewModel
-import ademar.study.test.model.home.HelloWorldViewModel
+import ademar.study.test.model.HelloWorldViewModel
 
 object Fixture {
 
