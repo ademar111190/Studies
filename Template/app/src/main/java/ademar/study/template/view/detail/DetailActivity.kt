@@ -29,6 +29,7 @@ class DetailActivity : BaseActivity(), DetailView {
         component.inject(this)
         presenter.onAttachView(this)
         reload.setOnClickListener { presenter.onReloadClick() }
+        toolbar.setNavigationOnClickListener { back() }
     }
 
     override fun onStart() {

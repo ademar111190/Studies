@@ -35,7 +35,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.detail.DetailActivity"/>
+        <activity
+            android:name=".view.detail.DetailActivity"
+            android:parentActivityName=".view.home.HomeActivity"/>
 
         <activity android:name=".view.home.HomeActivity"/>
 
