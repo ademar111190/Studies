@@ -64,6 +64,15 @@
         <item name="android:foreground">@drawable/shadow_night_inverted</item>
     </style>
 
+    <style name="AppVerticalShadow">
+        <item name="android:layout_width">8dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="AppVerticalShadow.Night">
+        <item name="android:background">@drawable/shadow_night_vertical</item>
+    </style>
+
     <!-- TextView -->
 
     <style name="AppTextView" parent="android:Widget.Holo.Light.TextView">

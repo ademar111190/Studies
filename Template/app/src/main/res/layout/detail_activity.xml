@@ -1,41 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/AppToolbar"
-        app:navigationIcon="@drawable/ic_back"
-        app:title="@string/app_name"/>
-
-    <View
-        style="@style/AppShadow.Night"
-        android:layout_marginTop="?attr/actionBarSize"/>
-
-    <TextView
-        android:id="@+id/text"
-        style="@style/AppTextView.Primary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        tools:text="Hello World!"/>
-
-    <ProgressBar
-        android:id="@+id/load"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-
-    <Button
-        android:id="@+id/reload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/app_reload"/>
+    <fragment
+        android:id="@+id/detail_fragment"
+        android:name="ademar.study.template.view.detail.DetailFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </merge>

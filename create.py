@@ -51,9 +51,11 @@ for file_path in [
     "/app/src/main/java/ademar/study/template/view/base/BaseViewHolder.kt",
     "/app/src/main/java/ademar/study/template/view/common/StartActivity.kt",
     "/app/src/main/java/ademar/study/template/view/detail/DetailActivity.kt",
+    "/app/src/main/java/ademar/study/template/view/detail/DetailFragment.kt",
     "/app/src/main/java/ademar/study/template/view/home/HomeActivity.kt",
     "/app/src/main/java/ademar/study/template/view/home/HomeAdapter.kt",
     "/app/src/main/java/ademar/study/template/view/home/HomeViewHolder.kt",
+    "/app/src/main/java/ademar/study/template/view/home/HomeFragment.kt",
     # app test files
     "/app/src/test/java/ademar/study/template/injection/LifeCycleMockComponent.kt",
     "/app/src/test/java/ademar/study/template/injection/LifeCycleMockModule.kt",
