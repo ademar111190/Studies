@@ -4,7 +4,6 @@ import ademar.study.test.test.BaseTest
 import ademar.study.test.test.Fixture
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
-import org.mockito.Mockito.`when` as whenever
 
 class ErrorMapperTest : BaseTest() {
 

@@ -68,7 +68,7 @@ abstract class BaseActivity : AppCompatActivity(), LoadDataView {
     }
 
     fun back() {
-        val upIntent = NavUtils.getParentActivityIntent(this);
+        val upIntent = NavUtils.getParentActivityIntent(this)
         if (NavUtils.shouldUpRecreateTask(this, upIntent) || isTaskRoot) {
             TaskStackBuilder.create(this)
                     .addNextIntentWithParentStack(upIntent)

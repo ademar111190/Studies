@@ -4,7 +4,6 @@ import ademar.study.template.core.test.BaseTest
 import ademar.study.template.core.test.Fixture
 import org.assertj.core.api.Assertions
 import org.junit.Test
-import org.mockito.Mockito.`when` as whenever
 
 class ThrowableTest : BaseTest() {
 

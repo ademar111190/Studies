@@ -64,12 +64,13 @@ dependencies {
 
     compile "com.android.support:appcompat-v7:$supportVersion"
     compile "com.android.support:design:$supportVersion"
-    compile "com.jakewharton.rxbinding:rxbinding-kotlin:$rxBindingVersion"
-    compile "com.jakewharton.rxbinding:rxbinding-design-kotlin:$rxBindingVersion"
+    compile "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVersion"
+    compile "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$rxBindingVersion"
     compile "com.squareup.picasso:picasso:$picassoVersion"
 
     kaptTest "com.google.dagger:dagger-compiler:$daggerVersion"
 
+    testCompile "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion"
     testCompile "junit:junit:$jUnitVersion"
     testCompile "org.assertj:assertj-core:$assertJVersion"
     testCompile "org.mockito:mockito-core:$mockitoVersion"

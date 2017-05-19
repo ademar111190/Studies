@@ -11,10 +11,10 @@ import android.content.Intent
 import android.content.res.Resources
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import com.nhaarman.mockito_kotlin.whenever
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.*
-import org.mockito.Mockito.`when` as whenever
 
 class FlowControllerTest : BaseTest() {
 

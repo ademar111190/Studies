@@ -3,11 +3,12 @@ package ademar.study.test.core.interactor
 import ademar.study.test.core.repository.HelloWorldRepository
 import ademar.study.test.core.test.BaseTest
 import ademar.study.test.core.test.Fixture
+import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.*
-import org.mockito.Mockito.`when` as whenever
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoMoreInteractions
 
 class GetAllHelloWorldUseCaseTest : BaseTest() {
 

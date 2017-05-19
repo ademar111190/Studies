@@ -5,13 +5,13 @@ import ademar.study.template.core.model.StandardErrors
 import ademar.study.template.core.repository.datasource.HelloWorldCloudRepository
 import android.content.Context
 import com.github.aurae.retrofit2.LoganSquareConverterFactory
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.mockwebserver.MockWebServer
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import javax.inject.Singleton
 
 @Module

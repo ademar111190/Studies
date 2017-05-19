@@ -9,6 +9,7 @@ import ademar.study.template.model.ErrorViewModel
 import ademar.study.template.model.HelloWorldViewModel
 import ademar.study.template.test.BaseTest
 import ademar.study.template.test.Fixture
+import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -16,7 +17,6 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyNoMoreInteractions
-import org.mockito.Mockito.`when` as whenever
 
 class DetailPresenterTest : BaseTest() {
 

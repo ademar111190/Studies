@@ -8,6 +8,7 @@ import ademar.study.template.core.model.StandardErrors
 import ademar.study.template.injection.DaggerLifeCycleMockComponent
 import ademar.study.template.injection.LifeCycleMockModule
 import android.content.Context
+import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
@@ -16,7 +17,6 @@ import org.junit.After
 import org.junit.Before
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import org.mockito.Mockito.`when` as whenever
 
 abstract class BaseTest {
 

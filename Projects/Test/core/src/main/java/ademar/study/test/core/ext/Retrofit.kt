@@ -23,8 +23,8 @@ fun <T> Retrofit.observeBody(response: Response<T>): Observable<T> {
                 val errorBody = response.errorBody()
                 if (errorBody != null) {
                     val converter = responseBodyConverter<Error>(Error::class.java, arrayOf<Annotation>())
-                    val error: Error = converter.convert(errorBody)
-                    if (error.message.isNotEmpty()) {
+                    val error: Error? = converter.convert(errorBody)
+                    if (error?.message?.isNotEmpty() ?: false) {
                         return Observable.error(error)
                     }
                 }

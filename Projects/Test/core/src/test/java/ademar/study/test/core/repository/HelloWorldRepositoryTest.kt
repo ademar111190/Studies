@@ -1,31 +1,32 @@
 package ademar.study.test.core.repository
 
-import ademar.study.test.core.model.HelloWorld
 import ademar.study.test.core.repository.datasource.HelloWorldCloudRepository
 import ademar.study.test.core.repository.datasource.HelloWorldLocalRepository
 import ademar.study.test.core.test.BaseTest
 import ademar.study.test.core.test.Fixture
+import com.nhaarman.mockito_kotlin.whenever
 import okhttp3.mockwebserver.MockResponse
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.*
 import retrofit2.Retrofit
-import org.mockito.Mockito.`when` as whenever
 
 class HelloWorldRepositoryTest : BaseTest() {
 
     private lateinit var mockRetrofit: Retrofit
     private lateinit var mockHelloWorldCloudRepository: HelloWorldCloudRepository
 
+    private var nextCalls = 0
+    private var errorCalled = false
+    private var successCalled = false
+
     @Mock lateinit var mockHelloWorldLocalRepository: HelloWorldLocalRepository
-    @Mock lateinit var mockHelloWorldOnNext: (HelloWorld) -> Unit
-    @Mock lateinit var mockHellosOnNext: (List<HelloWorld>) -> Unit
-    @Mock lateinit var mockOnError: (Throwable) -> Unit
-    @Mock lateinit var mockOnSuccess: () -> Unit
 
     override fun setUp() {
         super.setUp()
+        nextCalls = 0
+        errorCalled = false
+        successCalled = false
         mockWebServer.start()
         mockContext = coreMockModule.provideContext()
         val mockHttpLoggingInterceptor = coreMockModule.provideHttpLoggingInterceptor()
@@ -41,7 +42,6 @@ class HelloWorldRepositoryTest : BaseTest() {
 
     @Test
     fun testHelloWorld_successService() {
-        var called = false
         val mockResponse = MockResponse().setResponseCode(200)
                 .setBody(Fixture.helloWorld.JSON)
         mockWebServer.enqueue(mockResponse)
@@ -51,18 +51,20 @@ class HelloWorldRepositoryTest : BaseTest() {
         repository.getHelloWorld()
                 .subscribe({ helloWorld ->
                     assertThat(helloWorld).isNotNull()
-                    called = true
-                }, mockOnError, mockOnSuccess)
+                    nextCalls++
+                }, {
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
 
-        verifyZeroInteractions(mockOnError)
-        verify(mockOnSuccess).invoke()
-        verifyNoMoreInteractions(mockOnSuccess)
-        assertThat(called).isTrue()
+        assertThat(nextCalls).isEqualTo(1)
+        assertThat(errorCalled).isFalse()
+        assertThat(successCalled).isTrue()
     }
 
     @Test
     fun testHelloWorld_successCached() {
-        var called = false
         val mockHelloWorld = Fixture.helloWorld.makeModel()
 
         whenever(mockHelloWorldLocalRepository.helloWorld).thenReturn(mockHelloWorld)
@@ -72,18 +74,20 @@ class HelloWorldRepositoryTest : BaseTest() {
         repository.getHelloWorld()
                 .subscribe({ helloWorld ->
                     assertThat(helloWorld).isEqualTo(mockHelloWorld)
-                    called = true
-                }, mockOnError, mockOnSuccess)
+                    nextCalls++
+                }, {
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
 
-        verifyZeroInteractions(mockOnError)
-        verify(mockOnSuccess).invoke()
-        verifyNoMoreInteractions(mockOnSuccess)
-        assertThat(called).isTrue()
+        assertThat(nextCalls).isEqualTo(1)
+        assertThat(errorCalled).isFalse()
+        assertThat(successCalled).isTrue()
     }
 
     @Test
     fun testHelloWorld_successError() {
-        var called = false
         val mockResponse = MockResponse().setResponseCode(0)
                 .setBody(Fixture.error.JSON)
         mockWebServer.enqueue(mockResponse)
@@ -91,19 +95,22 @@ class HelloWorldRepositoryTest : BaseTest() {
         val repository = HelloWorldRepository(mockRetrofit, mockHelloWorldCloudRepository, mockHelloWorldLocalRepository)
 
         repository.getHelloWorld()
-                .subscribe(mockHelloWorldOnNext, { error ->
+                .subscribe({
+                    nextCalls++
+                }, { error ->
                     assertThat(error).isNotNull()
-                    called = true
-                }, mockOnSuccess)
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
 
-        verifyZeroInteractions(mockHelloWorldOnNext)
-        verifyZeroInteractions(mockOnSuccess)
-        assertThat(called).isTrue()
+        assertThat(nextCalls).isEqualTo(0)
+        assertThat(errorCalled).isTrue()
+        assertThat(successCalled).isFalse()
     }
 
     @Test
     fun testHellos_successService() {
-        var called = false
         val mockResponse = MockResponse().setResponseCode(200)
                 .setBody(Fixture.hellos.JSON)
         mockWebServer.enqueue(mockResponse)
@@ -115,18 +122,20 @@ class HelloWorldRepositoryTest : BaseTest() {
         repository.getAllHelloWorld()
                 .subscribe({ hellos ->
                     assertThat(hellos.size).isEqualTo(1)
-                    called = true
-                }, mockOnError, mockOnSuccess)
+                    nextCalls++
+                }, {
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
 
-        verifyZeroInteractions(mockOnError)
-        verify(mockOnSuccess).invoke()
-        verifyNoMoreInteractions(mockOnSuccess)
-        assertThat(called).isTrue()
+        assertThat(nextCalls).isEqualTo(1)
+        assertThat(errorCalled).isFalse()
+        assertThat(successCalled).isTrue()
     }
 
     @Test
     fun testHellos_successCached() {
-        var called = false
         val mockHellos = listOf(Fixture.helloWorld.makeModel())
 
         whenever(mockHelloWorldLocalRepository.hellos).thenReturn(mockHellos)
@@ -136,18 +145,20 @@ class HelloWorldRepositoryTest : BaseTest() {
         repository.getAllHelloWorld()
                 .subscribe({ hellos ->
                     assertThat(hellos).isEqualTo(mockHellos)
-                    called = true
-                }, mockOnError, mockOnSuccess)
+                    nextCalls++
+                }, {
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
 
-        verifyZeroInteractions(mockOnError)
-        verify(mockOnSuccess).invoke()
-        verifyNoMoreInteractions(mockOnSuccess)
-        assertThat(called).isTrue()
+        assertThat(nextCalls).isEqualTo(1)
+        assertThat(errorCalled).isFalse()
+        assertThat(successCalled).isTrue()
     }
 
     @Test
     fun testHellos_successError() {
-        var called = false
         val mockResponse = MockResponse().setResponseCode(0)
                 .setBody(Fixture.error.JSON)
         mockWebServer.enqueue(mockResponse)
@@ -157,14 +168,18 @@ class HelloWorldRepositoryTest : BaseTest() {
         val repository = HelloWorldRepository(mockRetrofit, mockHelloWorldCloudRepository, mockHelloWorldLocalRepository)
 
         repository.getAllHelloWorld()
-                .subscribe(mockHellosOnNext, { error ->
+                .subscribe({
+                    nextCalls++
+                }, { error ->
                     assertThat(error).isNotNull()
-                    called = true
-                }, mockOnSuccess)
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
 
-        verifyZeroInteractions(mockHellosOnNext)
-        verifyZeroInteractions(mockOnSuccess)
-        assertThat(called).isTrue()
+        assertThat(nextCalls).isEqualTo(0)
+        assertThat(errorCalled).isTrue()
+        assertThat(successCalled).isFalse()
     }
 
 }

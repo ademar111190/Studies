@@ -3,7 +3,9 @@ package ademar.study.template.core.ext
 import ademar.study.template.core.model.Error
 import ademar.study.template.core.test.BaseTest
 import ademar.study.template.core.test.Fixture
+import com.nhaarman.mockito_kotlin.whenever
 import okhttp3.ResponseBody
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -11,21 +13,24 @@ import org.mockito.Mockito.*
 import retrofit2.Converter
 import retrofit2.Response
 import retrofit2.Retrofit
-import org.mockito.Mockito.`when` as whenever
 
 class RetrofitTest : BaseTest() {
 
+    private var nextCalls = 0
+    private var errorCalled = false
+    private var successCalled = false
+
+    @Mock lateinit var mockResponseBody: ResponseBody
     @Mock lateinit var mockRetrofit: Retrofit
     @Mock lateinit var mockResponse: Response<String>
-    @Mock lateinit var mockResponseBody: ResponseBody
     @Mock lateinit var mockConverter: Converter<ResponseBody, Error>
-    @Mock lateinit var mockOnNext: (String) -> Unit
-    @Mock lateinit var mockOnError: (Throwable) -> Unit
-    @Mock lateinit var mockOnSuccess: () -> Unit
 
     @Before
     override fun setUp() {
         super.setUp()
+        nextCalls = 0
+        errorCalled = false
+        successCalled = false
         mockRetrofit.standardErrors = mockStandardErrors
     }
 
@@ -36,16 +41,22 @@ class RetrofitTest : BaseTest() {
         whenever(mockResponse.body()).thenReturn(foo)
 
         mockRetrofit.observeBody(mockResponse)
-                .subscribe(mockOnNext, mockOnError, mockOnSuccess)
+                .subscribe({
+                    assertThat(it).isEqualTo(foo)
+                    nextCalls++
+                }, {
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
+
+        assertThat(nextCalls).isEqualTo(1)
+        assertThat(errorCalled).isFalse()
+        assertThat(successCalled).isTrue()
 
         verify(mockResponse).code()
         verify(mockResponse).body()
         verifyNoMoreInteractions(mockResponse)
-        verify(mockOnNext).invoke(foo)
-        verifyNoMoreInteractions(mockOnNext)
-        verifyZeroInteractions(mockOnError)
-        verify(mockOnSuccess).invoke()
-        verifyNoMoreInteractions(mockOnSuccess)
     }
 
     @Test
@@ -53,13 +64,21 @@ class RetrofitTest : BaseTest() {
         whenever(mockResponse.code()).thenReturn(401)
 
         mockRetrofit.observeBody(mockResponse)
-                .subscribe(mockOnNext, mockOnError, mockOnSuccess)
+                .subscribe({
+                    nextCalls++
+                }, { e ->
+                    assertThat(e).isEqualTo(mockErrorUnauthorized)
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
+
+        assertThat(nextCalls).isEqualTo(0)
+        assertThat(errorCalled).isTrue()
+        assertThat(successCalled).isFalse()
 
         verify(mockResponse).code()
         verifyNoMoreInteractions(mockResponse)
-        verifyZeroInteractions(mockOnNext)
-        verify(mockOnError).invoke(mockErrorUnauthorized)
-        verifyZeroInteractions(mockOnSuccess)
     }
 
     @Test
@@ -71,7 +90,18 @@ class RetrofitTest : BaseTest() {
         whenever(mockConverter.convert(mockResponseBody)).thenReturn(errorModel)
 
         mockRetrofit.observeBody(mockResponse)
-                .subscribe(mockOnNext, mockOnError, mockOnSuccess)
+                .subscribe({
+                    nextCalls++
+                }, { e ->
+                    assertThat(e).isEqualTo(errorModel)
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
+
+        assertThat(nextCalls).isEqualTo(0)
+        assertThat(errorCalled).isTrue()
+        assertThat(successCalled).isFalse()
 
         verify(mockResponse).code()
         verify(mockResponse).errorBody()
@@ -79,10 +109,6 @@ class RetrofitTest : BaseTest() {
         verifyZeroInteractions(mockResponseBody)
         verify(mockConverter).convert(mockResponseBody)
         verifyNoMoreInteractions(mockConverter)
-        verifyNoMoreInteractions(mockOnNext)
-        verify(mockOnError).invoke(errorModel)
-        verifyNoMoreInteractions(mockOnError)
-        verifyZeroInteractions(mockOnSuccess)
     }
 
     @Test
@@ -91,13 +117,22 @@ class RetrofitTest : BaseTest() {
         whenever(mockRetrofit.responseBodyConverter<Error>(any(), any())).thenReturn(null)
 
         mockRetrofit.observeBody(mockResponse)
-                .subscribe(mockOnNext, mockOnError, mockOnSuccess)
+                .subscribe({
+                    nextCalls++
+                }, { e ->
+                    assertThat(e).isEqualTo(mockErrorUnknown)
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
+
+        assertThat(nextCalls).isEqualTo(0)
+        assertThat(errorCalled).isTrue()
+        assertThat(successCalled).isFalse()
 
         verify(mockResponse).code()
         verify(mockResponse).errorBody()
         verifyNoMoreInteractions(mockResponse)
-        verifyZeroInteractions(mockOnNext)
-        verifyZeroInteractions(mockOnSuccess)
     }
 
     @Test
@@ -110,15 +145,24 @@ class RetrofitTest : BaseTest() {
         whenever(mockConverter.convert(mockResponseBody)).thenReturn(null)
 
         mockRetrofit.observeBody(mockResponse)
-                .subscribe(mockOnNext, mockOnError, mockOnSuccess)
+                .subscribe({
+                    nextCalls++
+                }, { e ->
+                    assertThat(e).isEqualTo(mockErrorUnknown)
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
+
+        assertThat(nextCalls).isEqualTo(0)
+        assertThat(errorCalled).isTrue()
+        assertThat(successCalled).isFalse()
 
         verify(mockResponse).code()
         verify(mockResponse).errorBody()
         verifyNoMoreInteractions(mockResponse)
         verify(mockConverter).convert(mockResponseBody)
         verifyNoMoreInteractions(mockConverter)
-        verifyZeroInteractions(mockOnNext)
-        verifyZeroInteractions(mockOnSuccess)
     }
 
 }

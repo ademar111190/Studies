@@ -1,11 +1,9 @@
 package ademar.study.test.mapper
 
-import ademar.study.test.mapper.HelloWorldMapper
 import ademar.study.test.test.BaseTest
 import ademar.study.test.test.Fixture
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
-import org.mockito.Mockito.`when` as whenever
 
 class HelloWorldMapperTest : BaseTest() {
 
