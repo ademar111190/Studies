@@ -5,8 +5,6 @@ import javax.inject.Inject
 
 class IntentFactory @Inject constructor() {
 
-    fun makeIntent(): Intent {
-        return Intent()
-    }
+    fun makeIntent() = Intent()
 
 }

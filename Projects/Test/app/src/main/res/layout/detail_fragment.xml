@@ -1,40 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/AppToolbar"
-        app:title="@string/app_name"/>
+    <ScrollView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
 
-    <TextView
-        android:id="@+id/text"
-        style="@style/AppTextView.Primary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        tools:text="Hello World!"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/app_vertical_margin"
+            android:paddingEnd="@dimen/app_horizontal_margin"
+            android:paddingStart="@dimen/app_horizontal_margin"
+            android:paddingTop="@dimen/app_vertical_margin"
+            tools:ignore="UseCompoundDrawables">
+
+            <TextView
+                android:id="@+id/text"
+                style="@style/PrimaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                tools:text="Hello World!"/>
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="@dimen/app_vertical_margin"
+                android:contentDescription="@null"
+                tools:src="@drawable/ic_launch"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <ProgressBar
         android:id="@+id/load"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_gravity="center"/>
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/reload"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_centerInParent="true"
         android:text="@string/app_reload"/>
 
-    <View
-        style="@style/AppShadow.Night"
-        android:layout_marginTop="?attr/actionBarSize"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/AppToolbar"
+        app:title="@string/app_name"/>
 
-</FrameLayout>
+</RelativeLayout>

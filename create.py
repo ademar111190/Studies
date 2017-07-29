@@ -30,6 +30,7 @@ for file_path in [
     "/app/src/main/java/ademar/study/template/ext/TextView.kt",
     "/app/src/main/java/ademar/study/template/ext/View.kt",
     "/app/src/main/java/ademar/study/template/ext/ViewGroup.kt",
+    "/app/src/main/java/ademar/study/template/injection/GlideModule.kt",
     "/app/src/main/java/ademar/study/template/injection/LifeCycleComponent.kt",
     "/app/src/main/java/ademar/study/template/injection/LifeCycleModule.kt",
     "/app/src/main/java/ademar/study/template/injection/LifeCycleScope.kt",
@@ -113,6 +114,7 @@ for file_path in [
 
 edit(name + "/app/src/main/AndroidManifest.xml", "ademar.study.template", package)
 edit(name + "/app/src/main/res/values/strings.xml", "Template", name)
+edit(name + "/app/src/main/res/values-es/strings.xml", "Modelo", name)
 edit(name + "/app/src/main/res/values-pt/strings.xml", "Modelo", name)
 edit(name + "/app/src/main/res/layout/detail_activity.xml", "ademar.study.template", package)
 edit(name + "/app/src/main/res/layout/home_activity.xml", "ademar.study.template", package)

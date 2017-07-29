@@ -3,8 +3,8 @@
 
     <!-- App -->
 
-    <string name="app_name">Teste</string>
+    <string name="app_name">Modelo</string>
     <string name="app_ok">OK</string>
-    <string name="app_reload">Recarregar</string>
+    <string name="app_reload">Recargar</string>
 
 </resources>

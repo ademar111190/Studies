@@ -1,6 +1,7 @@
 package ademar.study.test.view.detail
 
 import ademar.study.test.R
+import ademar.study.test.injection.GlideApp
 import ademar.study.test.model.HelloWorldViewModel
 import ademar.study.test.presenter.detail.DetailPresenter
 import ademar.study.test.presenter.detail.DetailView
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import kotlinx.android.synthetic.main.detail_fragment.*
 import javax.inject.Inject
 
@@ -40,31 +42,39 @@ class DetailFragment : BaseFragment(), DetailView {
         presenter.onStart()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroyView() {
+        super.onDestroyView()
         presenter.onDetachView()
     }
 
     override fun showLoading() {
-        text.visibility = GONE
+        content.visibility = GONE
         load.visibility = VISIBLE
         reload.visibility = GONE
     }
 
     override fun showRetry() {
-        text.visibility = GONE
+        content.visibility = GONE
         load.visibility = GONE
         reload.visibility = VISIBLE
     }
 
     override fun showContent() {
-        text.visibility = VISIBLE
+        content.visibility = VISIBLE
         load.visibility = GONE
         reload.visibility = GONE
     }
 
     override fun bindHelloWorld(viewModel: HelloWorldViewModel) {
         text.text = viewModel.message
+
+        GlideApp.with(this)
+                .load(viewModel.image)
+                .centerInside()
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .placeholder(R.drawable.ic_launcher)
+                .error(R.drawable.ic_launcher)
+                .into(image)
     }
 
     companion object {

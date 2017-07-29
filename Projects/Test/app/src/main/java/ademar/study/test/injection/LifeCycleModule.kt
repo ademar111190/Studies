@@ -13,8 +13,6 @@ class LifeCycleModule(
 
     @Provides
     @LifeCycleScope
-    fun provideBaseActivity(): BaseActivity {
-        return baseActivity
-    }
+    fun provideBaseActivity() = baseActivity
 
 }

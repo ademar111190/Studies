@@ -11,8 +11,6 @@ class HelloWorldMapper @Inject constructor(
 
 ) {
 
-    fun transform(helloWorld: HelloWorld): HelloWorldViewModel {
-        return HelloWorldViewModel(helloWorld.message ?: standardErrors.UNKNOWN.message)
-    }
+    fun transform(helloWorld: HelloWorld) = HelloWorldViewModel(helloWorld.message ?: standardErrors.UNKNOWN.message)
 
 }

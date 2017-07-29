@@ -22,15 +22,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/reload"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/app_reload"/>
-
-    <View
-        style="@style/AppShadow.Night"
-        android:layout_marginTop="?attr/actionBarSize"/>
 
 </FrameLayout>

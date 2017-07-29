@@ -40,8 +40,8 @@ class HomeFragment : BaseFragment(), HomeView {
         presenter.onStart()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroyView() {
+        super.onDestroyView()
         presenter.onDetachView()
     }
 

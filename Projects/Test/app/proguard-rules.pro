@@ -9,6 +9,15 @@
 -dontwarn android.net.SSLCertificateSocketFactory
 -dontwarn android.app.Notification
 
+# Glide
+
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.AppGlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
 # Kotlin
 -dontwarn kotlin.**
 
@@ -16,9 +25,6 @@
 -keep class com.bluelinelabs.logansquare.** { *; }
 -keep @com.bluelinelabs.logansquare.annotation.JsonObject class *
 -keep class **$$JsonObjectMapper { *; }
-
-# Picasso
--dontwarn com.squareup.okhttp.**
 
 # RxJava
 -keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {

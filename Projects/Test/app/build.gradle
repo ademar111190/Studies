@@ -59,14 +59,16 @@ android {
 dependencies {
 
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
     compile project(":core")
 
     compile "com.android.support:appcompat-v7:$supportVersion"
     compile "com.android.support:design:$supportVersion"
+    compile "com.github.bumptech.glide:glide:$glideVersion"
+    compile "com.github.bumptech.glide:okhttp3-integration:$glideVersion"
     compile "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVersion"
     compile "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$rxBindingVersion"
-    compile "com.squareup.picasso:picasso:$picassoVersion"
 
     kaptTest "com.google.dagger:dagger-compiler:$daggerVersion"
 
