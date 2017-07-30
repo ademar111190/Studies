@@ -10,21 +10,17 @@ object Fixture {
         val CODE = 1
         val MESSAGE = "Some error"
         val JSON = """
-        {
-            "code": $CODE,
-            "message": "$MESSAGE"
-        }
-        """
+        |{
+        |    "code": $CODE,
+        |    "message": "$MESSAGE"
+        |}
+        """.trimMargin()
 
-        fun makeException(): Throwable {
-            return Exception("Some error")
-        }
+        fun makeException(): Throwable = Exception("Some error")
 
-        fun makeModel(): Error {
-            val model = Error()
-            model.code = CODE
-            model.message = MESSAGE
-            return model
+        fun makeModel() = Error().apply {
+            code = CODE
+            message = MESSAGE
         }
 
     }
@@ -32,12 +28,10 @@ object Fixture {
     object hellos {
 
         val JSON = """
-        [${helloWorld.JSON}]
-        """
+        |[${helloWorld.JSON}]
+        """.trimMargin()
 
-        fun makeModel(): List<HelloWorld> {
-            return listOf(helloWorld.makeModel())
-        }
+        fun makeModel() = listOf(helloWorld.makeModel())
 
     }
 
@@ -45,15 +39,13 @@ object Fixture {
 
         val MESSAGE = "Hello World!"
         val JSON = """
-        {
-            "message": "$MESSAGE"
-        }
-        """
+        |{
+        |    "message": "$MESSAGE"
+        |}
+        """.trimMargin()
 
-        fun makeModel(): HelloWorld {
-            val model = HelloWorld()
-            model.message = MESSAGE
-            return model
+        fun makeModel() = HelloWorld().apply {
+            message = MESSAGE
         }
 
     }

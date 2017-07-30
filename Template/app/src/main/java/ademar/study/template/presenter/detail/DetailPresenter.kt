@@ -18,13 +18,9 @@ class DetailPresenter @Inject constructor(
 
 ) : BasePresenter<DetailView>() {
 
-    fun onStart() {
-        loadData()
-    }
+    fun onStart() = loadData()
 
-    fun onReloadClick() {
-        loadData()
-    }
+    fun onReloadClick() = loadData()
 
     private fun loadData() {
         view?.showLoading()

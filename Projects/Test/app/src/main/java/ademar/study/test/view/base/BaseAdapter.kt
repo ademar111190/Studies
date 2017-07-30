@@ -16,9 +16,7 @@ abstract class BaseAdapter<Data, ViewHolder : BaseViewHolder<Data>> : RecyclerVi
         }
     }
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
+    override fun getItemCount() = data.size
 
     fun addItem(item: Data) {
         data.add(item)

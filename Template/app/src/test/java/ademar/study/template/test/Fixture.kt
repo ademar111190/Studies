@@ -12,11 +12,9 @@ object Fixture {
         val CODE = 1
         val MESSAGE = "Some error"
 
-        fun makeModel(): Error {
-            val model = Error()
-            model.code = CODE
-            model.message = MESSAGE
-            return model
+        fun makeModel() = Error().apply {
+            code = CODE
+            message = MESSAGE
         }
 
     }
@@ -26,9 +24,7 @@ object Fixture {
         val CODE = 1
         val MESSAGE = "Some error"
 
-        fun makeModel(): ErrorViewModel {
-            return ErrorViewModel(CODE, MESSAGE)
-        }
+        fun makeModel() = ErrorViewModel(CODE, MESSAGE)
 
     }
 
@@ -36,10 +32,8 @@ object Fixture {
 
         val MESSAGE = "Hello World!"
 
-        fun makeModel(): HelloWorld {
-            val model = HelloWorld()
-            model.message = MESSAGE
-            return model
+        fun makeModel() = HelloWorld().apply {
+            message = MESSAGE
         }
 
     }
@@ -47,10 +41,9 @@ object Fixture {
     object helloWorldViewModel {
 
         val MESSAGE = "Hello World!"
+        val IMAGE = "An Image"
 
-        fun makeModel(): HelloWorldViewModel {
-            return HelloWorldViewModel(MESSAGE)
-        }
+        fun makeModel() = HelloWorldViewModel(MESSAGE, IMAGE)
 
     }
 

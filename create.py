@@ -78,7 +78,6 @@ for file_path in [
     # core files
     "/core/src/main/java/ademar/study/template/core/ext/CharSequence.kt",
     "/core/src/main/java/ademar/study/template/core/ext/Retrofit.kt",
-    "/core/src/main/java/ademar/study/template/core/ext/Throwable.kt",
     "/core/src/main/java/ademar/study/template/core/injection/CoreComponent.kt",
     "/core/src/main/java/ademar/study/template/core/injection/CoreModule.kt",
     "/core/src/main/java/ademar/study/template/core/interactor/GetAllHelloWorldUseCase.kt",
@@ -93,7 +92,6 @@ for file_path in [
     # core test files
     "/core/src/test/java/ademar/study/template/core/ext/CharSequenceTest.kt",
     "/core/src/test/java/ademar/study/template/core/ext/RetrofitTest.kt",
-    "/core/src/test/java/ademar/study/template/core/ext/ThrowableTest.kt",
     "/core/src/test/java/ademar/study/template/core/injection/CoreMockComponent.kt",
     "/core/src/test/java/ademar/study/template/core/injection/CoreMockModule.kt",
     "/core/src/test/java/ademar/study/template/core/interactor/GetAllHelloWorldUseCaseTest.kt",
@@ -105,6 +103,7 @@ for file_path in [
     "/core/src/test/java/ademar/study/template/core/repository/HelloWorldRepositoryTest.kt",
     "/core/src/test/java/ademar/study/template/core/test/BaseTest.kt",
     "/core/src/test/java/ademar/study/template/core/test/Fixture.kt",
+    "/core/src/test/java/ademar/study/template/core/test/JsonAssertions.kt",
     "/core/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker"
 ]:
     out_file_path = file_path.replace("template", name.lower())

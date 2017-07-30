@@ -11,6 +11,8 @@ class HelloWorldMapper @Inject constructor(
 
 ) {
 
-    fun transform(helloWorld: HelloWorld) = HelloWorldViewModel(helloWorld.message ?: standardErrors.UNKNOWN.message)
+    fun transform(helloWorld: HelloWorld) = HelloWorldViewModel(
+            helloWorld.message ?: standardErrors.UNKNOWN.message,
+            "https://developer.android.com/images/brand/Android_Robot_100.png")
 
 }

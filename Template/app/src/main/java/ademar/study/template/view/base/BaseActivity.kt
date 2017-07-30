@@ -25,9 +25,7 @@ abstract class BaseActivity : AppCompatActivity(), LoadDataView {
                 .build()
     }
 
-    protected open fun makeLifeCycleModule(): LifeCycleModule {
-        return LifeCycleModule(this)
-    }
+    protected open fun makeLifeCycleModule() = LifeCycleModule(this)
 
     protected fun prepareTaskDescription(
             label: String = getString(R.string.app_name),
@@ -42,13 +40,9 @@ abstract class BaseActivity : AppCompatActivity(), LoadDataView {
         setTaskDescription(ActivityManager.TaskDescription(label, bitmap, colorPrimary))
     }
 
-    fun getApp(): App {
-        return applicationContext as App
-    }
+    fun getApp() = applicationContext as App
 
-    override fun getBaseActivity(): BaseActivity {
-        return this
-    }
+    override fun getBaseActivity() = this
 
     override fun showLoading() {
     }
@@ -59,13 +53,12 @@ abstract class BaseActivity : AppCompatActivity(), LoadDataView {
     override fun showContent() {
     }
 
-    override fun showError(viewModel: ErrorViewModel) {
-        AlertDialog.Builder(this, R.style.AppAlertDialog)
-                .setMessage(viewModel.message)
-                .setPositiveButton(R.string.app_ok, null)
-                .create()
-                .show()
-    }
+    override fun showError(viewModel: ErrorViewModel) = AlertDialog
+            .Builder(this, R.style.AppAlertDialog)
+            .setMessage(viewModel.message)
+            .setPositiveButton(R.string.app_ok, null)
+            .create()
+            .show()
 
     fun back() {
         val upIntent = NavUtils.getParentActivityIntent(this)

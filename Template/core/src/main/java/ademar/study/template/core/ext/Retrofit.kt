@@ -9,29 +9,32 @@ import retrofit2.Retrofit
 
 var Retrofit.standardErrors: StandardErrors by FieldProperty()
 
-fun <T> Retrofit.observeBody(response: Response<T>): Observable<T> {
-    try {
-        when (response.code()) {
-            200 -> {
-                val body = response.body()
-                return Observable.just(body)
-            }
-            401 -> {
-                return Observable.error(standardErrors.UNAUTHORIZED)
-            }
-            else -> {
-                val errorBody = response.errorBody()
-                if (errorBody != null) {
-                    val converter = responseBodyConverter<Error>(Error::class.java, arrayOf<Annotation>())
-                    val error: Error? = converter.convert(errorBody)
-                    if (error?.message?.isNotEmpty() ?: false) {
-                        return Observable.error(error)
-                    }
-                }
-                return Observable.error(standardErrors.UNKNOWN)
+fun <T> Retrofit.observeBody(response: Response<T>): Observable<T> = try {
+    when (response.code()) {
+        200 -> {
+            val body = response.body()
+            if (body != null) {
+                Observable.just(body)
+            } else {
+                Observable.empty()
             }
         }
-    } catch (e: Exception) {
-        return Observable.error(e)
+        401 -> Observable.error(standardErrors.UNAUTHORIZED)
+        else -> {
+            val errorBody = response.errorBody()
+            if (errorBody != null) {
+                val converter = responseBodyConverter<Error>(Error::class.java, arrayOf<Annotation>())
+                val error: Error? = converter.convert(errorBody)
+                if (error?.message?.isNotEmpty() ?: false) {
+                    Observable.error(error)
+                } else {
+                    Observable.error(standardErrors.UNKNOWN)
+                }
+            } else {
+                Observable.error(standardErrors.UNKNOWN)
+            }
+        }
     }
+} catch (e: Exception) {
+    Observable.error(e)
 }

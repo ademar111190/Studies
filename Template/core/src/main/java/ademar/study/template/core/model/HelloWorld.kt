@@ -16,9 +16,6 @@ class HelloWorld : PaperParcelable {
 
         @JvmField val CREATOR = PaperParcelHelloWorld.CREATOR
 
-        val UNKNOWN = Error().apply { code = 10000 }
-        val UNAUTHORIZED = Error().apply { code = 10001 }
-
     }
 
 }

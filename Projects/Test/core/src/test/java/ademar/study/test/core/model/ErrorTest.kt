@@ -2,6 +2,8 @@ package ademar.study.test.core.model
 
 import ademar.study.test.core.test.BaseTest
 import ademar.study.test.core.test.Fixture
+import ademar.study.test.core.test.JsonAssertions.assertJsonIntValue
+import ademar.study.test.core.test.JsonAssertions.assertJsonStringValue
 import com.bluelinelabs.logansquare.LoganSquare
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -18,8 +20,8 @@ class ErrorTest : BaseTest() {
     @Test
     fun testSerialize() {
         val json = LoganSquare.serialize(Fixture.error.makeModel())
-        assertThat(json).contains("\"code\":${Fixture.error.CODE}")
-        assertThat(json).contains("\"message\":\"${Fixture.error.MESSAGE}\"")
+        assertJsonIntValue(json, "code", Fixture.error.CODE)
+        assertJsonStringValue(json, "message", Fixture.error.MESSAGE)
     }
 
     @Test

@@ -2,6 +2,7 @@ package ademar.study.template.core.model
 
 import ademar.study.template.core.test.BaseTest
 import ademar.study.template.core.test.Fixture
+import ademar.study.template.core.test.JsonAssertions.assertJsonStringValue
 import com.bluelinelabs.logansquare.LoganSquare
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -17,7 +18,7 @@ class HelloWorldTest : BaseTest() {
     @Test
     fun testSerialize() {
         val json = LoganSquare.serialize(Fixture.helloWorld.makeModel())
-        assertThat(json).contains("\"message\":\"${Fixture.helloWorld.MESSAGE}\"")
+        assertJsonStringValue(json, "message", Fixture.helloWorld.MESSAGE)
     }
 
 }

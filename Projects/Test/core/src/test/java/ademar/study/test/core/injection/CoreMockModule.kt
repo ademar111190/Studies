@@ -23,15 +23,11 @@ class CoreMockModule(
 ) {
 
     @Provides
-    fun provideContext(): Context {
-        return mockContext
-    }
+    fun provideContext() = mockContext
 
     @Provides
     @Singleton
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor()
-    }
+    fun provideHttpLoggingInterceptor() = HttpLoggingInterceptor()
 
     @Provides
     @Singleton

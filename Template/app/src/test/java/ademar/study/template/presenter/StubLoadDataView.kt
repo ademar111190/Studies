@@ -11,24 +11,14 @@ open class StubLoadDataView : LoadDataView {
         Mockito.mock(BaseActivity::class.java)
     }
 
-    override fun getBaseActivity(): BaseActivity {
-        return mockBaseActivity
-    }
+    override fun getBaseActivity() = mockBaseActivity
 
-    override fun showLoading() {
-        fail("Shouldn't call showLoading")
-    }
+    override fun showLoading() = fail("Shouldn't call showLoading")
 
-    override fun showRetry() {
-        fail("Shouldn't call showRetry")
-    }
+    override fun showRetry() = fail("Shouldn't call showRetry")
 
-    override fun showError(viewModel: ErrorViewModel) {
-        fail("Shouldn't call showError, viewModel: $viewModel")
-    }
+    override fun showError(viewModel: ErrorViewModel) = fail("Shouldn't call showError, viewModel: $viewModel")
 
-    override fun showContent() {
-        fail("Shouldn't call showContent")
-    }
+    override fun showContent() = fail("Shouldn't call showContent")
 
 }

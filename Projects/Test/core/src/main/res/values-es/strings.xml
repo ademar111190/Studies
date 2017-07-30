@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="error_message_unknown">Se ha producido un error inesperado.</string>
+    <string name="error_message_unauthorized">Usuario sin autorización</string>
+    <string name="error_message_no_connection">No se pudo acceder al servidor, por favor verifique su conexión a Internet.</string>
+
+</resources>

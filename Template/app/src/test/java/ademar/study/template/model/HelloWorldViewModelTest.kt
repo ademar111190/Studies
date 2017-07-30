@@ -7,7 +7,7 @@ class HelloWorldViewModelTest : BaseTest() {
 
     @Test
     fun testInstantiate() {
-        HelloWorldViewModel("Hello World!")
+        HelloWorldViewModel("Hello World!", "An Image")
     }
 
 }

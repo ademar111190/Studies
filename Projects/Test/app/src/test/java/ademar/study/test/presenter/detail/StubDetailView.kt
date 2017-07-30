@@ -6,8 +6,6 @@ import org.assertj.core.api.Assertions.fail
 
 open class StubDetailView : StubLoadDataView(), DetailView {
 
-    override fun bindHelloWorld(viewModel: HelloWorldViewModel) {
-        fail("Shouldn't call bindHelloWorld, viewModel $viewModel")
-    }
+    override fun bindHelloWorld(viewModel: HelloWorldViewModel) = fail("Shouldn't call bindHelloWorld, viewModel $viewModel")
 
 }

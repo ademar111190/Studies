@@ -17,17 +17,11 @@ open class BaseFragment : Fragment(), LoadDataView {
                 .build()
     }
 
-    protected open fun makeLifeCycleModule(): LifeCycleModule {
-        return LifeCycleModule(getBaseActivity()!!)
-    }
+    protected open fun makeLifeCycleModule() = LifeCycleModule(getBaseActivity()!!)
 
-    fun getApp(): App {
-        return context.applicationContext as App
-    }
+    fun getApp() = context.applicationContext as App
 
-    override fun getBaseActivity(): BaseActivity? {
-        return activity as BaseActivity?
-    }
+    override fun getBaseActivity() = activity as BaseActivity?
 
     override fun showLoading() {
     }

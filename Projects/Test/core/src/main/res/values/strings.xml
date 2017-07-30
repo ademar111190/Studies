@@ -3,5 +3,6 @@
 
     <string name="error_message_unknown">An unexpected error has occurred.</string>
     <string name="error_message_unauthorized">User unauthorized</string>
+    <string name="error_message_no_connection">Can\'t access the server, please verify your internet connection.</string>
 
 </resources>

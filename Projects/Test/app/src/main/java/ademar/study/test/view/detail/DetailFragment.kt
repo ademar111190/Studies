@@ -79,9 +79,7 @@ class DetailFragment : BaseFragment(), DetailView {
 
     companion object {
 
-        fun newInstance(): DetailFragment {
-            return DetailFragment()
-        }
+        fun newInstance() = DetailFragment()
 
     }
 

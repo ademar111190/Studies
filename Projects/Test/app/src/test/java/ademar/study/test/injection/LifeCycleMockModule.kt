@@ -17,8 +17,6 @@ class LifeCycleMockModule {
 
     @Provides
     @LifeCycleScope
-    fun provideBaseActivity(): BaseActivity {
-        return mockBaseActivity
-    }
+    fun provideBaseActivity() = mockBaseActivity
 
 }

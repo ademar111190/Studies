@@ -22,15 +22,11 @@ class CoreModule(
 ) {
 
     @Provides
-    fun provideContext(): Context {
-        return context
-    }
+    fun provideContext() = context
 
     @Provides
     @Singleton
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor()
-    }
+    fun provideHttpLoggingInterceptor() = HttpLoggingInterceptor()
 
     @Provides
     @Singleton

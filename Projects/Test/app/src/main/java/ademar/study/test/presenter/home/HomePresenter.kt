@@ -20,17 +20,11 @@ class HomePresenter @Inject constructor(
 
 ) : BasePresenter<HomeView>() {
 
-    fun onStart() {
-        loadData()
-    }
+    fun onStart() = loadData()
 
-    fun onReloadClick() {
-        loadData()
-    }
+    fun onReloadClick() = loadData()
 
-    fun onHelloWorldClick() {
-        flowController.launchDetail()
-    }
+    fun onHelloWorldClick() = flowController.launchDetail()
 
     private fun loadData() {
         view?.showLoading()

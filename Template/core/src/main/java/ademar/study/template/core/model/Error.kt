@@ -2,6 +2,7 @@ package ademar.study.template.core.model
 
 import com.bluelinelabs.logansquare.annotation.JsonField
 import com.bluelinelabs.logansquare.annotation.JsonObject
+import java.util.*
 
 @JsonObject
 class Error : Throwable() {
@@ -12,26 +13,10 @@ class Error : Throwable() {
     @JsonField(name = arrayOf("message"))
     override var message: String = ""
 
-    fun report() {
-        println(this)
-    }
+    fun report() = println(this)
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other?.javaClass != javaClass) return false
+    override fun equals(other: Any?) = other is Error && code == other.code && message == other.message
 
-        other as Error
-
-        if (code != other.code) return false
-        if (message != other.message) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = code
-        result = 31 * result + message.hashCode()
-        return result
-    }
+    override fun hashCode() = Objects.hash(code, message)
 
 }
