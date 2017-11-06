@@ -19,7 +19,7 @@ open class BaseFragment : Fragment(), LoadDataView {
 
     protected open fun makeLifeCycleModule() = LifeCycleModule(getBaseActivity()!!)
 
-    fun getApp() = context.applicationContext as App
+    fun getApp() = context!!.applicationContext as App
 
     override fun getBaseActivity() = activity as BaseActivity?
 

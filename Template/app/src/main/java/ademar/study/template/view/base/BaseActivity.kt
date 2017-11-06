@@ -33,11 +33,13 @@ abstract class BaseActivity : AppCompatActivity(), LoadDataView {
             colorPrimary: Int = ContextCompat.getColor(this, R.color.primary)
     ) {
         val drawable = ContextCompat.getDrawable(this, icon)
-        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, canvas.width, canvas.height)
-        drawable.draw(canvas)
-        setTaskDescription(ActivityManager.TaskDescription(label, bitmap, colorPrimary))
+        if (drawable != null) {
+            val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            drawable.setBounds(0, 0, canvas.width, canvas.height)
+            drawable.draw(canvas)
+            setTaskDescription(ActivityManager.TaskDescription(label, bitmap, colorPrimary))
+        }
     }
 
     fun getApp() = applicationContext as App
@@ -61,7 +63,7 @@ abstract class BaseActivity : AppCompatActivity(), LoadDataView {
             .show()
 
     fun back() {
-        val upIntent = NavUtils.getParentActivityIntent(this)
+        val upIntent = NavUtils.getParentActivityIntent(this) ?: intent
         if (NavUtils.shouldUpRecreateTask(this, upIntent) || isTaskRoot) {
             TaskStackBuilder.create(this)
                     .addNextIntentWithParentStack(upIntent)

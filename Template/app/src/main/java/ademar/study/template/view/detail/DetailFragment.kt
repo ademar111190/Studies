@@ -20,18 +20,18 @@ class DetailFragment : BaseFragment(), DetailView {
 
     @Inject lateinit var presenter: DetailPresenter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.detail_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.detail_fragment, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         component.inject(this)
         presenter.onAttachView(this)
 
         reload.setOnClickListener { presenter.onReloadClick() }
-        if (!context.resources.getBoolean(R.bool.large_screen)) {
+        if (context?.resources?.getBoolean(R.bool.large_screen) != true) {
             toolbar.setNavigationIcon(R.drawable.ic_back)
             toolbar.setNavigationOnClickListener { getBaseActivity()?.back() }
         }
