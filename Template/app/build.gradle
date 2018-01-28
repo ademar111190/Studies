@@ -29,8 +29,11 @@ android {
         all {
             shrinkResources true
             minifyEnabled true
+
             proguardFile getDefaultProguardFile("proguard-android.txt")
             proguardFile "proguard-rules.pro"
+
+            buildConfigField "String", "API_URL", "\"https://private-965f8-template19.apiary-mock.com/\""
         }
         release {
             signingConfig signingConfigs.release

@@ -6,6 +6,7 @@ build
 # files
 .DS_Store
 local.properties
+.gradletasknamecache
 
 # all files of
 *.iml

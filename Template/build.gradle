@@ -1,12 +1,13 @@
 buildscript {
 
     repositories {
+        google()
         jcenter()
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:3.0.0"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.51"
+        classpath "com.android.tools.build:gradle:3.0.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.21"
     }
 
 }
@@ -14,36 +15,36 @@ buildscript {
 allprojects {
 
     repositories {
+        google()
         jcenter()
         mavenCentral()
         maven { url "https://jitpack.io" }
-        maven { url "https://maven.google.com" }
     }
 
     ext {
         compileSdkVersion = 26
-        buildToolsVersion = "27.0.0"
+        buildToolsVersion = "27.0.3"
         minSdkVersion = 21
-        targetSdkVersion = 26
+        targetSdkVersion = 27
         versionCode = 1
         versionName = "0.0.1"
 
-        assertJVersion = "3.8.0"
-        daggerVersion = "2.12"
-        glideVersion = "4.3.0"
+        assertJVersion = "3.9.0"
+        daggerVersion = "2.14.1"
+        glideVersion = "4.5.0"
         jUnitVersion = "4.12"
         loganSquareVersion = "1.3.7"
         loganSquareConverterVersion = "1.4.1"
-        kotlinVersion = "1.1.51"
-        mockitoVersion = "2.11.0"
+        kotlinVersion = "1.2.21"
+        mockitoVersion = "2.13.0"
         mockitoKotlinVersion = "1.5.0"
-        okHttpVersion = "3.9.0"
-        paperParcelVersion = "2.0.4"
+        okHttpVersion = "3.9.1"
+        paperParcelVersion = "2.0.5"
         retrofitVersion = "2.3.0"
         rxAndroidVersion = "2.0.1"
         rxBindingVersion = "2.0.0"
-        rxJavaVersion = "2.1.6"
-        supportVersion = "27.0.0"
+        rxJavaVersion = "2.1.9"
+        supportVersion = "27.0.2"
     }
 
 }

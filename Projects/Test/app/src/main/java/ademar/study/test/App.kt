@@ -9,7 +9,7 @@ class App : Application() {
 
     val coreComponent: CoreComponent by lazy {
         DaggerCoreComponent.builder()
-                .coreModule(CoreModule(this, getString(R.string.api_url)))
+                .coreModule(CoreModule(this, BuildConfig.API_URL))
                 .build()
     }
 
