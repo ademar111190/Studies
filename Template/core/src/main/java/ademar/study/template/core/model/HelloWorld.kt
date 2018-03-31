@@ -1,21 +1,13 @@
 package ademar.study.template.core.model
 
-import paperparcel.PaperParcel
-import paperparcel.PaperParcelable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import se.ansman.kotshi.JsonSerializable
 
 @JsonSerializable
-@PaperParcel
+@Parcelize
 data class HelloWorld(
 
         val message: String
 
-) : PaperParcelable {
-
-    companion object {
-
-        @JvmField val CREATOR = PaperParcelHelloWorld.CREATOR
-
-    }
-
-}
+) : Parcelable
