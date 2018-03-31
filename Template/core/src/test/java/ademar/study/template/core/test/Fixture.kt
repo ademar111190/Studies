@@ -18,10 +18,7 @@ object Fixture {
 
         fun makeException(): Throwable = Exception("Some error")
 
-        fun makeModel() = Error().apply {
-            code = CODE
-            message = MESSAGE
-        }
+        fun makeModel() = Error(CODE, MESSAGE)
 
     }
 
@@ -44,9 +41,7 @@ object Fixture {
         |}
         """.trimMargin()
 
-        fun makeModel() = HelloWorld().apply {
-            message = MESSAGE
-        }
+        fun makeModel() = HelloWorld(MESSAGE)
 
     }
 

@@ -9,6 +9,7 @@ import ademar.study.template.model.ErrorViewModel
 import ademar.study.template.model.HelloWorldViewModel
 import ademar.study.template.test.BaseTest
 import ademar.study.template.test.Fixture
+import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
 import org.assertj.core.api.Assertions.assertThat
@@ -45,7 +46,7 @@ class DetailPresenterTest : BaseTest() {
         mockErrorViewModel = Fixture.errorViewModel.makeModel()
 
         whenever(mockHelloWorldMapper.transform(mockHelloWorld)).thenReturn(mockHelloWorldViewModel)
-        whenever(mockErrorMapper.transform(mockError)).thenReturn(mockErrorViewModel)
+        whenever(mockErrorMapper.transform(any())).thenReturn(mockErrorViewModel)
 
         bindHelloWorldCount = 0
         showContentCount = 0
@@ -108,7 +109,7 @@ class DetailPresenterTest : BaseTest() {
             }
         }
 
-        whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError))
+        whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError.toThrowable()))
 
         val presenter = DetailPresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
@@ -168,7 +169,7 @@ class DetailPresenterTest : BaseTest() {
             }
         }
 
-        whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError))
+        whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError.toThrowable()))
 
         val presenter = DetailPresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)

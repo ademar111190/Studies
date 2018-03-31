@@ -1,16 +1,16 @@
 package ademar.study.template.core.model
 
-import com.bluelinelabs.logansquare.annotation.JsonField
-import com.bluelinelabs.logansquare.annotation.JsonObject
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
+import se.ansman.kotshi.JsonSerializable
 
-@JsonObject
+@JsonSerializable
 @PaperParcel
-class HelloWorld : PaperParcelable {
+data class HelloWorld(
 
-    @JsonField(name = arrayOf("message"))
-    var message: String? = null
+        val message: String
+
+) : PaperParcelable {
 
     companion object {
 

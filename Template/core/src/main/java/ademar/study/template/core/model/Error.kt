@@ -1,22 +1,17 @@
 package ademar.study.template.core.model
 
-import com.bluelinelabs.logansquare.annotation.JsonField
-import com.bluelinelabs.logansquare.annotation.JsonObject
-import java.util.*
+import se.ansman.kotshi.JsonSerializable
 
-@JsonObject
-class Error : Throwable() {
+@JsonSerializable
+data class Error(
 
-    @JsonField(name = arrayOf("code"))
-    var code: Int = 0
+        val code: Int,
+        val message: String
 
-    @JsonField(name = arrayOf("message"))
-    override var message: String = ""
+) {
 
     fun report() = println(this)
 
-    override fun equals(other: Any?) = other is Error && code == other.code && message == other.message
-
-    override fun hashCode() = Objects.hash(code, message)
+    fun toThrowable() = Throwable("{ \"code\": $code, \"message\": \"$message\" }")
 
 }

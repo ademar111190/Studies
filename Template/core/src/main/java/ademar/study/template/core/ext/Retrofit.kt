@@ -19,19 +19,19 @@ fun <T> Retrofit.observeBody(response: Response<T>): Observable<T> = try {
                 Observable.empty()
             }
         }
-        401 -> Observable.error(standardErrors.UNAUTHORIZED)
+        401 -> Observable.error(standardErrors.UNAUTHORIZED.toThrowable())
         else -> {
             val errorBody = response.errorBody()
             if (errorBody != null) {
                 val converter = responseBodyConverter<Error>(Error::class.java, arrayOf<Annotation>())
                 val error: Error? = converter.convert(errorBody)
-                if (error?.message?.isNotEmpty() ?: false) {
-                    Observable.error(error)
+                if (error?.message?.isNotEmpty() == true) {
+                    Observable.error(error.toThrowable())
                 } else {
-                    Observable.error(standardErrors.UNKNOWN)
+                    Observable.error(standardErrors.UNKNOWN.toThrowable())
                 }
             } else {
-                Observable.error(standardErrors.UNKNOWN)
+                Observable.error(standardErrors.UNKNOWN.toThrowable())
             }
         }
     }

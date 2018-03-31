@@ -12,10 +12,16 @@
 # Kotlin
 -dontwarn kotlin.**
 
-# LoganSquare
--keep class com.bluelinelabs.logansquare.** { *; }
--keep @com.bluelinelabs.logansquare.annotation.JsonObject class *
--keep class **$$JsonObjectMapper { *; }
+# Moshi
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-keep @com.squareup.moshi.JsonQualifier interface *
+-keepclasseswithmembers class * {
+    @com.squareup.moshi.* <methods>;
+}
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
 
 # OkHttp
 -dontwarn okhttp3.**
@@ -25,8 +31,8 @@
 -dontwarn okio.**
 
 # Retrofit
--dontwarn retrofit2.**
--keep class retrofit2.** { *; }
+-dontnote retrofit2.Platform
+-dontwarn retrofit2.Platform$Java8
 
 # RxJava
 -keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {

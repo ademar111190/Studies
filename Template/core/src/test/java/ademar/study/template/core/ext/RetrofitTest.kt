@@ -1,6 +1,7 @@
 package ademar.study.template.core.ext
 
 import ademar.study.template.core.model.Error
+import ademar.study.template.core.model.StandardErrors
 import ademar.study.template.core.test.BaseTest
 import ademar.study.template.core.test.Fixture
 import com.nhaarman.mockito_kotlin.whenever
@@ -67,7 +68,7 @@ class RetrofitTest : BaseTest() {
                 .subscribe({
                     nextCalls++
                 }, { e ->
-                    assertThat(e).isEqualTo(mockErrorUnauthorized)
+                    assertThat(StandardErrors(mockContext).toError(e)).isEqualTo(mockErrorUnauthorized)
                     errorCalled = true
                 }, {
                     successCalled = true
@@ -93,7 +94,7 @@ class RetrofitTest : BaseTest() {
                 .subscribe({
                     nextCalls++
                 }, { e ->
-                    assertThat(e).isEqualTo(errorModel)
+                    assertThat(StandardErrors(mockContext).toError(e)).isEqualTo(errorModel)
                     errorCalled = true
                 }, {
                     successCalled = true
@@ -120,7 +121,7 @@ class RetrofitTest : BaseTest() {
                 .subscribe({
                     nextCalls++
                 }, { e ->
-                    assertThat(e).isEqualTo(mockErrorUnknown)
+                    assertThat(StandardErrors(mockContext).toError(e)).isEqualTo(mockErrorUnknown)
                     errorCalled = true
                 }, {
                     successCalled = true
@@ -148,7 +149,7 @@ class RetrofitTest : BaseTest() {
                 .subscribe({
                     nextCalls++
                 }, { e ->
-                    assertThat(e).isEqualTo(mockErrorUnknown)
+                    assertThat(StandardErrors(mockContext).toError(e)).isEqualTo(mockErrorUnknown)
                     errorCalled = true
                 }, {
                     successCalled = true

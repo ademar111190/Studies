@@ -10,6 +10,7 @@ import ademar.study.template.model.HelloWorldViewModel
 import ademar.study.template.navigation.FlowController
 import ademar.study.template.test.BaseTest
 import ademar.study.template.test.Fixture
+import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
 import org.assertj.core.api.Assertions.assertThat
@@ -48,7 +49,7 @@ class HomePresenterTest : BaseTest() {
         mockErrorViewModel = Fixture.errorViewModel.makeModel()
 
         whenever(mockHelloWorldMapper.transform(mockHelloWorld)).thenReturn(mockHelloWorldViewModel)
-        whenever(mockErrorMapper.transform(mockError)).thenReturn(mockErrorViewModel)
+        whenever(mockErrorMapper.transform(any())).thenReturn(mockErrorViewModel)
 
         clearHelloWorldsCount = 0
         bindHelloWorldCount = 0
@@ -121,7 +122,7 @@ class HomePresenterTest : BaseTest() {
             }
         }
 
-        whenever(mockGetAllHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError))
+        whenever(mockGetAllHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError.toThrowable()))
 
         val presenter = HomePresenter(mockFlowController, mockGetAllHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
@@ -191,7 +192,7 @@ class HomePresenterTest : BaseTest() {
             }
         }
 
-        whenever(mockGetAllHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError))
+        whenever(mockGetAllHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError.toThrowable()))
 
         val presenter = HomePresenter(mockFlowController, mockGetAllHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)

@@ -56,9 +56,8 @@ class StandardErrorsTest : BaseTest() {
     @Test
     fun testToError_withCode() {
         val standardErrors = StandardErrors(mockContext)
-        val exception = Fixture.error.makeModel()
         val mockErrorCode = 7
-        exception.code = mockErrorCode
+        val exception = Fixture.error.makeModel().copy(code = mockErrorCode).toThrowable()
         val error = standardErrors.toError(exception)
         assertThat(error.code).isEqualTo(mockErrorCode)
         assertThat(error.message).isEqualTo(Fixture.error.MESSAGE)
