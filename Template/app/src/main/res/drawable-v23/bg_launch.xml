@@ -5,4 +5,10 @@
         <color android:color="@color/primary_dark"/>
     </item>
 
+    <item
+        android:width="96dp"
+        android:height="96dp"
+        android:drawable="@drawable/ic_launch"
+        android:gravity="center"/>
+
 </layer-list>
