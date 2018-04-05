@@ -15,6 +15,7 @@
 # Moshi
 -dontwarn okio.**
 -dontwarn javax.annotation.**
+-keep public class kotlin.reflect.jvm.internal.impl.builtins.* { public *; }
 -keep @com.squareup.moshi.JsonQualifier interface *
 -keepclasseswithmembers class * {
     @com.squareup.moshi.* <methods>;
@@ -25,7 +26,7 @@
 
 # OkHttp
 -dontwarn okhttp3.**
--keep class okhttp3.** { *;}
+-keep class okhttp3.** { *; }
 
 # Okio
 -dontwarn okio.**
