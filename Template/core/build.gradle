@@ -28,6 +28,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "se.ansman.kotshi:compiler:$kotshiVersion"
 
+    api "androidx.core:core-ktx:$ktxVersion"
     api "com.android.support:support-annotations:$supportVersion"
     api "com.google.dagger:dagger:$daggerVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
