@@ -33,7 +33,7 @@ class GetAllHelloWorldUseCaseTest : BaseTest() {
     @Test
     fun testExecute_error() {
         val useCase = GetAllHelloWorldUseCase(mockHelloWorldRepository)
-        val mockHelloWorldError = Fixture.error.makeModel()
+        val mockHelloWorldError = Fixture.error.makeModel().toThrowable()
 
         whenever(mockHelloWorldRepository.getAllHelloWorld()).thenReturn(Observable.error(mockHelloWorldError))
 

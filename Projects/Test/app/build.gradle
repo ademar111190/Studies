@@ -74,10 +74,15 @@ dependencies {
 
     implementation "com.android.support:appcompat-v7:$supportVersion"
     implementation "com.android.support:design:$supportVersion"
+    implementation "com.android.support:recyclerview-v7:$supportVersion"
+    implementation "com.android.support:support-compat:$supportVersion"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     implementation "com.github.bumptech.glide:okhttp3-integration:$glideVersion"
-    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rxBindingVersion"
     implementation "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxBindingVersion"
 
     kaptTest "com.google.dagger:dagger-compiler:$daggerVersion"
 

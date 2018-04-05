@@ -12,10 +12,7 @@ object Fixture {
         val CODE = 1
         val MESSAGE = "Some error"
 
-        fun makeModel() = Error().apply {
-            code = CODE
-            message = MESSAGE
-        }
+        fun makeModel() = Error(CODE, MESSAGE)
 
     }
 
@@ -32,9 +29,7 @@ object Fixture {
 
         val MESSAGE = "Hello World!"
 
-        fun makeModel() = HelloWorld().apply {
-            message = MESSAGE
-        }
+        fun makeModel() = HelloWorld(MESSAGE)
 
     }
 

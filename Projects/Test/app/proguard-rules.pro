@@ -10,11 +10,10 @@
 -dontwarn android.app.Notification
 
 # Glide
-
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
 -keep public class * implements com.bumptech.glide.module.GlideModule
--keep public class * extends com.bumptech.glide.AppGlideModule
--keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
   **[] $VALUES;
   public *;
 }
@@ -37,4 +36,13 @@
 }
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+
+# Support Library
+-keep public class android.support.v7.app.AppCompatViewInflater { *; }
+-keep public class android.support.v7.widget.** { *; }
+-keep public class android.support.v7.internal.widget.** { *; }
+-keep public class android.support.v7.internal.view.menu.** { *; }
+-keep public class * extends android.support.v4.view.ActionProvider {
+    public <init>(android.content.Context);
 }

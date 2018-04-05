@@ -11,10 +11,11 @@ class ErrorMapperTest : BaseTest() {
     @Test
     fun testTransform() {
         val mockError = Fixture.error.makeModel()
-        whenever(mockStandardErrors.toError(mockError)).thenReturn(mockError)
+        val throwable = mockError.toThrowable()
+        whenever(mockStandardErrors.toError(throwable)).thenReturn(mockError)
 
         val mapper = ErrorMapper(mockStandardErrors)
-        val viewModel = mapper.transform(mockError)
+        val viewModel = mapper.transform(throwable)
         assertThat(viewModel.code).isEqualTo(Fixture.error.CODE)
         assertThat(viewModel.message).isEqualTo(Fixture.error.MESSAGE)
     }

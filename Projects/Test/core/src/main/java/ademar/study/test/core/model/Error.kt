@@ -1,22 +1,20 @@
 package ademar.study.test.core.model
 
-import com.bluelinelabs.logansquare.annotation.JsonField
-import com.bluelinelabs.logansquare.annotation.JsonObject
-import java.util.*
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import se.ansman.kotshi.JsonSerializable
 
-@JsonObject
-class Error : Throwable() {
+@JsonSerializable
+@Parcelize
+data class Error(
 
-    @JsonField(name = arrayOf("code"))
-    var code: Int = 0
+        val code: Int,
+        val message: String
 
-    @JsonField(name = arrayOf("message"))
-    override var message: String = ""
+) : Parcelable {
 
     fun report() = println(this)
 
-    override fun equals(other: Any?) = other is Error && code == other.code && message == other.message
-
-    override fun hashCode() = Objects.hash(code, message)
+    fun toThrowable() = Throwable("{ \"code\": $code, \"message\": \"$message\" }")
 
 }

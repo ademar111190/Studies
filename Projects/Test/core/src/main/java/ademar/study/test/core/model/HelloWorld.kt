@@ -1,21 +1,13 @@
 package ademar.study.test.core.model
 
-import com.bluelinelabs.logansquare.annotation.JsonField
-import com.bluelinelabs.logansquare.annotation.JsonObject
-import paperparcel.PaperParcel
-import paperparcel.PaperParcelable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import se.ansman.kotshi.JsonSerializable
 
-@JsonObject
-@PaperParcel
-class HelloWorld : PaperParcelable {
+@JsonSerializable
+@Parcelize
+data class HelloWorld(
 
-    @JsonField(name = arrayOf("message"))
-    var message: String? = null
+        val message: String
 
-    companion object {
-
-        @JvmField val CREATOR = PaperParcelHelloWorld.CREATOR
-
-    }
-
-}
+) : Parcelable

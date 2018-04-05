@@ -78,6 +78,7 @@ for file_path in [
     # core files
     "/core/src/main/java/ademar/study/template/core/ext/CharSequence.kt",
     "/core/src/main/java/ademar/study/template/core/ext/Retrofit.kt",
+    "/core/src/main/java/ademar/study/template/core/injection/ApplicationJsonAdapterFactory.kt",
     "/core/src/main/java/ademar/study/template/core/injection/CoreComponent.kt",
     "/core/src/main/java/ademar/study/template/core/injection/CoreModule.kt",
     "/core/src/main/java/ademar/study/template/core/interactor/GetAllHelloWorldUseCase.kt",

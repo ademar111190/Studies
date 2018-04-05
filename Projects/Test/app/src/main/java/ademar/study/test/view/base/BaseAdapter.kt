@@ -9,9 +9,9 @@ abstract class BaseAdapter<Data, ViewHolder : BaseViewHolder<Data>> : RecyclerVi
 
     private val data: ArrayList<Data> = arrayListOf()
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-        holder?.bind(data[position]) {
+        holder.bind(data[position]) {
             listener(item)
         }
     }

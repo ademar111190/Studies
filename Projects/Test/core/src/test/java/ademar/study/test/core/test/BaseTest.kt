@@ -52,18 +52,9 @@ abstract class BaseTest {
                 .coreMockModule(coreMockModule)
                 .build()
 
-        mockErrorUnknown = Error().apply {
-            code = 1
-            message = "Mock Error Unknown"
-        }
-        mockErrorUnauthorized = Error().apply {
-            code = 2
-            message = "Mock Error Unauthorized"
-        }
-        mockErrorNoConnection = Error().apply {
-            code = 3
-            message = "Mock Error No Connection"
-        }
+        mockErrorUnknown = Error(1, "Mock Error Unknown")
+        mockErrorUnauthorized = Error(2, "Mock Error Unauthorized")
+        mockErrorNoConnection = Error(3, "Mock Error No Connection")
 
         whenever(mockContext.getString(R.string.error_message_unknown)).thenReturn("UNKNOWN")
         whenever(mockContext.getString(R.string.error_message_unauthorized)).thenReturn("UNAUTHORIZED")

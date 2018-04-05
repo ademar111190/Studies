@@ -56,14 +56,8 @@ abstract class BaseTest {
                 .coreComponent(coreComponent)
                 .build()
 
-        mockErrorUnknown = Error().apply {
-            code = 1
-            message = "Mock Error Unknown"
-        }
-        mockErrorUnauthorized = Error().apply {
-            code = 2
-            message = "Mock Error Unauthorized"
-        }
+        mockErrorUnknown = Error(1, "Mock Error Unknown")
+        mockErrorUnauthorized = Error(2, "Mock Error Unauthorized")
 
         whenever(mockContext.getString(R.string.error_message_unknown)).thenReturn("UNKNOWN")
         whenever(mockContext.getString(R.string.error_message_unauthorized)).thenReturn("UNAUTHORIZED")
