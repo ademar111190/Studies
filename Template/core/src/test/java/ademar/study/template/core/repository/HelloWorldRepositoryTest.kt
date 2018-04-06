@@ -64,9 +64,61 @@ class HelloWorldRepositoryTest : BaseTest() {
     }
 
     @Test
-    fun testHelloWorld_successCached() {
-        val mockHelloWorld = Fixture.helloWorld()
+    fun testHelloWorld_successCached_noUpdate() {
+        val mockResponse = MockResponse().setResponseCode(200)
+                .setBody(readJson("helloWorld"))
+        mockWebServer.enqueue(mockResponse)
 
+        val mockHelloWorld = Fixture.helloWorld()
+        whenever(mockHelloWorldMemoryRepository.helloWorld).thenReturn(mockHelloWorld)
+
+        val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
+
+        repository.getHelloWorld()
+                .subscribe({ helloWorld ->
+                    assertThat(helloWorld).isEqualTo(mockHelloWorld)
+                    nextCalls++
+                }, {
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
+
+        assertThat(nextCalls).isEqualTo(1)
+        assertThat(errorCalled).isFalse()
+        assertThat(successCalled).isTrue()
+    }
+
+    @Test
+    fun testHelloWorld_successCached_update() {
+        val mockResponse = MockResponse().setResponseCode(200)
+                .setBody(readJson("helloWorldUpdate"))
+        mockWebServer.enqueue(mockResponse)
+
+        whenever(mockHelloWorldMemoryRepository.helloWorld).thenReturn(Fixture.helloWorld())
+
+        val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
+
+        repository.getHelloWorld()
+                .subscribe({
+                    nextCalls++
+                }, {
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
+
+        assertThat(nextCalls).isEqualTo(2)
+        assertThat(errorCalled).isFalse()
+        assertThat(successCalled).isTrue()
+    }
+
+    @Test
+    fun testHelloWorld_successCached_error() {
+        val mockResponse = MockResponse().setResponseCode(0)
+        mockWebServer.enqueue(mockResponse)
+
+        val mockHelloWorld = Fixture.helloWorld()
         whenever(mockHelloWorldMemoryRepository.helloWorld).thenReturn(mockHelloWorld)
 
         val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
@@ -119,8 +171,7 @@ class HelloWorldRepositoryTest : BaseTest() {
         val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
 
         repository.getAllHelloWorld()
-                .subscribe({ hellos ->
-                    assertThat(hellos.size).isEqualTo(1)
+                .subscribe({
                     nextCalls++
                 }, {
                     errorCalled = true
@@ -134,16 +185,64 @@ class HelloWorldRepositoryTest : BaseTest() {
     }
 
     @Test
-    fun testHellos_successCached() {
-        val mockHellos = listOf(Fixture.helloWorld())
+    fun testHellos_successCached_noUpdate() {
+        val mockResponse = MockResponse().setResponseCode(200)
+                .setBody(readJson("helloWorlds"))
+        mockWebServer.enqueue(mockResponse)
 
-        whenever(mockHelloWorldMemoryRepository.hellos).thenReturn(mockHellos)
+        whenever(mockHelloWorldMemoryRepository.hellos).thenReturn(listOf(Fixture.helloWorld()))
 
         val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
 
         repository.getAllHelloWorld()
-                .subscribe({ hellos ->
-                    assertThat(hellos).isEqualTo(mockHellos)
+                .subscribe({
+                    nextCalls++
+                }, {
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
+
+        assertThat(nextCalls).isEqualTo(1)
+        assertThat(errorCalled).isFalse()
+        assertThat(successCalled).isTrue()
+    }
+
+    @Test
+    fun testHellos_successCached_update() {
+        val mockResponse = MockResponse().setResponseCode(200)
+                .setBody(readJson("helloWorldsUpdate"))
+        mockWebServer.enqueue(mockResponse)
+
+        whenever(mockHelloWorldMemoryRepository.hellos).thenReturn(listOf(Fixture.helloWorld()))
+
+        val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
+
+        repository.getAllHelloWorld()
+                .subscribe({
+                    nextCalls++
+                }, {
+                    errorCalled = true
+                }, {
+                    successCalled = true
+                })
+
+        assertThat(nextCalls).isEqualTo(2)
+        assertThat(errorCalled).isFalse()
+        assertThat(successCalled).isTrue()
+    }
+
+    @Test
+    fun testHellos_successCached_error() {
+        val mockResponse = MockResponse().setResponseCode(0)
+        mockWebServer.enqueue(mockResponse)
+
+        whenever(mockHelloWorldMemoryRepository.hellos).thenReturn(listOf(Fixture.helloWorld()))
+
+        val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
+
+        repository.getAllHelloWorld()
+                .subscribe({
                     nextCalls++
                 }, {
                     errorCalled = true

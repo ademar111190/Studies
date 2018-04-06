@@ -32,8 +32,8 @@ class HomePresenter @Inject constructor(
         subscriptions.add(getHelloWorlds.execute()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ helloWorld ->
-                    view?.bindHelloWorld(helloWorldMapper.transform(helloWorld))
+                .subscribe({
+                    view?.bindHelloWorld(helloWorldMapper.transform(it))
                     view?.showContent()
                 }, { e ->
                     view?.showError(errorMapper.transform(e))

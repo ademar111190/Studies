@@ -12,7 +12,7 @@ import javax.inject.Inject
 @LifeCycleScope
 class DetailPresenter @Inject constructor(
 
-        private val getHelloWorldUseCase: GetHelloWorld,
+        private val getHelloWorld: GetHelloWorld,
         private val helloWorldMapper: HelloWorldMapper,
         private val errorMapper: ErrorMapper
 
@@ -24,11 +24,11 @@ class DetailPresenter @Inject constructor(
 
     private fun loadData() {
         view?.showLoading()
-        subscriptions.add(getHelloWorldUseCase.execute()
+        subscriptions.add(getHelloWorld.execute()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ helloWorld ->
-                    view?.bindHelloWorld(helloWorldMapper.transform(helloWorld))
+                .subscribe({
+                    view?.bindHelloWorld(helloWorldMapper.transform(it))
                     view?.showContent()
                 }, { e ->
                     view?.showError(errorMapper.transform(e))

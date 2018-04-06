@@ -16,19 +16,28 @@ class HelloWorldRepository @Inject constructor(
 
     fun getHelloWorld(): Observable<HelloWorld> {
         val cached = memory.helloWorld
-        return if (cached != null) {
-            Observable.just(cached)
+        val fromCloud = cloud.getHelloWorld()
+                .doOnNext { memory.helloWorld = it }
+        return if (cached == null) {
+            fromCloud
         } else {
-            cloud.getHelloWorld().doOnNext { memory.helloWorld = it }
+            Observable.fromIterable(listOf(cached)).mergeWith(fromCloud
+                    .onErrorResumeNext(Observable.empty())
+                    .filter { cached != it })
         }
     }
 
-    fun getAllHelloWorld(): Observable<List<HelloWorld>> {
+    fun getAllHelloWorld(): Observable<HelloWorld> {
         val cached = memory.hellos
-        return if (cached != null) {
-            Observable.just(cached)
+        val fromCloud = cloud.getAllHelloWorld()
+                .doOnNext { memory.hellos = it }
+                .flatMapIterable { it }
+        return if (cached == null) {
+            fromCloud
         } else {
-            cloud.getAllHelloWorld().doOnNext { memory.hellos = it }
+            Observable.fromIterable(cached).mergeWith(fromCloud
+                    .onErrorResumeNext(Observable.empty())
+                    .filter { !cached.contains(it) })
         }
     }
 

@@ -30,6 +30,7 @@ class HomeFragment : BaseFragment(), HomeView {
 
         reload.setOnClickListener { presenter.onReloadClick() }
         adapter.listener = { presenter.onHelloWorldClick() }
+        listRefresh.setOnRefreshListener { presenter.onReloadClick() }
 
         list.layoutManager = LinearLayoutManager(context)
         list.adapter = adapter
@@ -49,18 +50,21 @@ class HomeFragment : BaseFragment(), HomeView {
         list.visibility = View.GONE
         load.visibility = View.VISIBLE
         reload.visibility = View.GONE
+        listRefresh.isRefreshing = false
     }
 
     override fun showRetry() {
         list.visibility = View.GONE
         load.visibility = View.GONE
         reload.visibility = View.VISIBLE
+        listRefresh.isRefreshing = false
     }
 
     override fun showContent() {
         list.visibility = View.VISIBLE
         load.visibility = View.GONE
         reload.visibility = View.GONE
+        listRefresh.isRefreshing = false
     }
 
     override fun clearHelloWorlds() {

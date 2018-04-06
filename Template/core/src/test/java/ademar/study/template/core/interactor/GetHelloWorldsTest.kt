@@ -19,7 +19,7 @@ class GetHelloWorldsTest : BaseTest() {
         val useCase = GetHelloWorlds(mockHelloWorldRepository)
         val mockHello = Fixture.helloWorld()
 
-        whenever(mockHelloWorldRepository.getAllHelloWorld()).thenReturn(Observable.just(listOf(mockHello)))
+        whenever(mockHelloWorldRepository.getAllHelloWorld()).thenReturn(Observable.just(mockHello))
 
         useCase.execute()
                 .test()
