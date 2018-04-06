@@ -9,8 +9,6 @@ import javax.inject.Inject
 
 class HomeAdapter @Inject constructor() : BaseAdapter<HelloWorldViewModel, HomeViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        return HomeViewHolder(parent.inflate(R.layout.hello_item))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = HomeViewHolder(parent.inflate(R.layout.hello_item))
 
 }

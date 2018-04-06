@@ -1,15 +1,22 @@
 package ademar.study.template.core.repository
 
+import ademar.study.template.core.injection.ApplicationJsonAdapterFactory
 import ademar.study.template.core.repository.datasource.HelloWorldCloudRepository
 import ademar.study.template.core.repository.datasource.HelloWorldMemoryRepository
 import ademar.study.template.core.test.BaseTest
 import ademar.study.template.core.test.Fixture
 import com.nhaarman.mockito_kotlin.whenever
+import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.Moshi
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.mockwebserver.MockResponse
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.mockito.Mock
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class HelloWorldRepositoryTest : BaseTest() {
 
@@ -28,11 +35,22 @@ class HelloWorldRepositoryTest : BaseTest() {
         errorCalled = false
         successCalled = false
         mockWebServer.start()
-        mockContext = coreMockModule.provideContext()
-        val mockHttpLoggingInterceptor = coreMockModule.provideHttpLoggingInterceptor()
-        val mockOkHttpClient = coreMockModule.provideOkHttpClient(mockHttpLoggingInterceptor)
-        mockRetrofit = coreMockModule.provideRetrofit(mockOkHttpClient)
-        mockHelloWorldCloudRepository = coreMockModule.provideHelloWorldCloudRepository(mockRetrofit)
+
+        mockRetrofit = Retrofit.Builder()
+                .baseUrl(mockWebServer.url(""))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder()
+                        .add(KotlinJsonAdapterFactory())
+                        .add(ApplicationJsonAdapterFactory.INSTANCE)
+                        .build()))
+                .client(OkHttpClient.Builder()
+                        .addInterceptor(HttpLoggingInterceptor().apply {
+                            level = HttpLoggingInterceptor.Level.BODY
+                        })
+                        .build())
+                .build()
+
+        mockHelloWorldCloudRepository = mockRetrofit.create(HelloWorldCloudRepository::class.java)
     }
 
     override fun tearDown() {

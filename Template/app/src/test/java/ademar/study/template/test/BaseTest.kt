@@ -1,8 +1,6 @@
 package ademar.study.template.test
 
 import ademar.study.template.R
-import ademar.study.template.core.injection.CoreModule
-import ademar.study.template.injection.LifeCycleMockModule
 import ademar.study.template.test.Fixture.NO_CONNECTION
 import ademar.study.template.test.Fixture.UNAUTHORIZED
 import ademar.study.template.test.Fixture.UNKNOWN
@@ -20,10 +18,7 @@ import org.mockito.MockitoAnnotations
 
 abstract class BaseTest {
 
-    lateinit var lifeCycleMockModule: LifeCycleMockModule
-
     @Mock lateinit var mockContext: Context
-    @Mock lateinit var mockCoreModule: CoreModule
 
     private var rxError: Throwable? = null
 
@@ -44,8 +39,6 @@ abstract class BaseTest {
             error.printStackTrace()
             rxError = error
         }
-
-        lifeCycleMockModule = LifeCycleMockModule()
 
         whenever(mockContext.getString(R.string.error_message_unknown)).thenReturn(UNKNOWN)
         whenever(mockContext.getString(R.string.error_message_unauthorized)).thenReturn(UNAUTHORIZED)

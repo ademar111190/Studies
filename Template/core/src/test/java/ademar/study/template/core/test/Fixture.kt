@@ -11,4 +11,3 @@ object Fixture {
     fun helloWorld() = HelloWorld(MESSAGE)
 
 }
-

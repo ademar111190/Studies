@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [(CoreModule::class)])
+@Component(modules = [CoreModule::class])
 interface CoreComponent {
 
     val context: Context

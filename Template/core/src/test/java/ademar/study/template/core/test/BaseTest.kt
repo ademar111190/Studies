@@ -1,6 +1,5 @@
 package ademar.study.template.core.test
 
-import ademar.study.template.core.injection.CoreMockModule
 import android.content.Context
 import android.support.annotation.CallSuper
 import io.reactivex.android.plugins.RxAndroidPlugins
@@ -16,7 +15,6 @@ import org.mockito.MockitoAnnotations
 abstract class BaseTest {
 
     lateinit var mockWebServer: MockWebServer
-    lateinit var coreMockModule: CoreMockModule
 
     @Mock lateinit var mockContext: Context
 
@@ -40,7 +38,6 @@ abstract class BaseTest {
         }
 
         mockWebServer = MockWebServer()
-        coreMockModule = CoreMockModule(mockContext, mockWebServer)
     }
 
     @After
