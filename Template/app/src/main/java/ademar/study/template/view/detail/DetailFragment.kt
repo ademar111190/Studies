@@ -16,6 +16,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import kotlinx.android.synthetic.main.detail_fragment.*
 import javax.inject.Inject
 
+
 class DetailFragment : BaseFragment(), DetailView {
 
     @Inject lateinit var presenter: DetailPresenter
@@ -71,9 +72,9 @@ class DetailFragment : BaseFragment(), DetailView {
         GlideApp.with(this)
                 .load(viewModel.image)
                 .centerInside()
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .placeholder(R.drawable.ic_launcher)
-                .error(R.drawable.ic_launcher)
                 .into(image)
     }
 
