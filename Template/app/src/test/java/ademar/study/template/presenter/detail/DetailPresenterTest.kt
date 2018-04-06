@@ -1,7 +1,6 @@
 package ademar.study.template.presenter.detail
 
-import ademar.study.template.core.interactor.GetHelloWorldUseCase
-import ademar.study.template.core.model.Error
+import ademar.study.template.core.interactor.GetHelloWorld
 import ademar.study.template.core.model.HelloWorld
 import ademar.study.template.mapper.ErrorMapper
 import ademar.study.template.mapper.HelloWorldMapper
@@ -21,7 +20,7 @@ import org.mockito.Mockito.verifyNoMoreInteractions
 
 class DetailPresenterTest : BaseTest() {
 
-    @Mock lateinit var mockGetHelloWorldUseCase: GetHelloWorldUseCase
+    @Mock lateinit var mockGetHelloWorldUseCase: GetHelloWorld
     @Mock lateinit var mockHelloWorldMapper: HelloWorldMapper
     @Mock lateinit var mockErrorMapper: ErrorMapper
 
@@ -40,10 +39,10 @@ class DetailPresenterTest : BaseTest() {
     override fun setUp() {
         super.setUp()
 
-        mockHelloWorld = Fixture.helloWorld.makeModel()
-        mockError = Fixture.error.makeModel()
-        mockHelloWorldViewModel = Fixture.helloWorldViewModel.makeModel()
-        mockErrorViewModel = Fixture.errorViewModel.makeModel()
+        mockHelloWorld = Fixture.helloWorld()
+        mockError = Fixture.error()
+        mockHelloWorldViewModel = Fixture.helloWorldViewModel()
+        mockErrorViewModel = Fixture.errorViewModel()
 
         whenever(mockHelloWorldMapper.transform(mockHelloWorld)).thenReturn(mockHelloWorldViewModel)
         whenever(mockErrorMapper.transform(any())).thenReturn(mockErrorViewModel)
@@ -109,7 +108,7 @@ class DetailPresenterTest : BaseTest() {
             }
         }
 
-        whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError.toThrowable()))
+        whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError))
 
         val presenter = DetailPresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
@@ -169,7 +168,7 @@ class DetailPresenterTest : BaseTest() {
             }
         }
 
-        whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError.toThrowable()))
+        whenever(mockGetHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError))
 
         val presenter = DetailPresenter(mockGetHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)

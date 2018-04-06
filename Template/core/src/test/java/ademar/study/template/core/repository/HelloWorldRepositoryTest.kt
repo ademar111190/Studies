@@ -1,7 +1,7 @@
 package ademar.study.template.core.repository
 
 import ademar.study.template.core.repository.datasource.HelloWorldCloudRepository
-import ademar.study.template.core.repository.datasource.HelloWorldLocalRepository
+import ademar.study.template.core.repository.datasource.HelloWorldMemoryRepository
 import ademar.study.template.core.test.BaseTest
 import ademar.study.template.core.test.Fixture
 import com.nhaarman.mockito_kotlin.whenever
@@ -20,7 +20,7 @@ class HelloWorldRepositoryTest : BaseTest() {
     private var errorCalled = false
     private var successCalled = false
 
-    @Mock lateinit var mockHelloWorldLocalRepository: HelloWorldLocalRepository
+    @Mock lateinit var mockHelloWorldMemoryRepository: HelloWorldMemoryRepository
 
     override fun setUp() {
         super.setUp()
@@ -31,7 +31,7 @@ class HelloWorldRepositoryTest : BaseTest() {
         mockContext = coreMockModule.provideContext()
         val mockHttpLoggingInterceptor = coreMockModule.provideHttpLoggingInterceptor()
         val mockOkHttpClient = coreMockModule.provideOkHttpClient(mockHttpLoggingInterceptor)
-        mockRetrofit = coreMockModule.provideRetrofit(mockOkHttpClient, mockStandardErrors)
+        mockRetrofit = coreMockModule.provideRetrofit(mockOkHttpClient)
         mockHelloWorldCloudRepository = coreMockModule.provideHelloWorldCloudRepository(mockRetrofit)
     }
 
@@ -43,10 +43,10 @@ class HelloWorldRepositoryTest : BaseTest() {
     @Test
     fun testHelloWorld_successService() {
         val mockResponse = MockResponse().setResponseCode(200)
-                .setBody(Fixture.helloWorld.JSON)
+                .setBody(readJson("helloWorld"))
         mockWebServer.enqueue(mockResponse)
 
-        val repository = HelloWorldRepository(mockRetrofit, mockHelloWorldCloudRepository, mockHelloWorldLocalRepository)
+        val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
 
         repository.getHelloWorld()
                 .subscribe({ helloWorld ->
@@ -65,11 +65,11 @@ class HelloWorldRepositoryTest : BaseTest() {
 
     @Test
     fun testHelloWorld_successCached() {
-        val mockHelloWorld = Fixture.helloWorld.makeModel()
+        val mockHelloWorld = Fixture.helloWorld()
 
-        whenever(mockHelloWorldLocalRepository.helloWorld).thenReturn(mockHelloWorld)
+        whenever(mockHelloWorldMemoryRepository.helloWorld).thenReturn(mockHelloWorld)
 
-        val repository = HelloWorldRepository(mockRetrofit, mockHelloWorldCloudRepository, mockHelloWorldLocalRepository)
+        val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
 
         repository.getHelloWorld()
                 .subscribe({ helloWorld ->
@@ -89,10 +89,9 @@ class HelloWorldRepositoryTest : BaseTest() {
     @Test
     fun testHelloWorld_successError() {
         val mockResponse = MockResponse().setResponseCode(0)
-                .setBody(Fixture.error.JSON)
         mockWebServer.enqueue(mockResponse)
 
-        val repository = HelloWorldRepository(mockRetrofit, mockHelloWorldCloudRepository, mockHelloWorldLocalRepository)
+        val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
 
         repository.getHelloWorld()
                 .subscribe({
@@ -112,12 +111,12 @@ class HelloWorldRepositoryTest : BaseTest() {
     @Test
     fun testHellos_successService() {
         val mockResponse = MockResponse().setResponseCode(200)
-                .setBody(Fixture.hellos.JSON)
+                .setBody(readJson("helloWorlds"))
         mockWebServer.enqueue(mockResponse)
 
-        whenever(mockHelloWorldLocalRepository.hellos).thenReturn(null)
+        whenever(mockHelloWorldMemoryRepository.hellos).thenReturn(null)
 
-        val repository = HelloWorldRepository(mockRetrofit, mockHelloWorldCloudRepository, mockHelloWorldLocalRepository)
+        val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
 
         repository.getAllHelloWorld()
                 .subscribe({ hellos ->
@@ -136,11 +135,11 @@ class HelloWorldRepositoryTest : BaseTest() {
 
     @Test
     fun testHellos_successCached() {
-        val mockHellos = listOf(Fixture.helloWorld.makeModel())
+        val mockHellos = listOf(Fixture.helloWorld())
 
-        whenever(mockHelloWorldLocalRepository.hellos).thenReturn(mockHellos)
+        whenever(mockHelloWorldMemoryRepository.hellos).thenReturn(mockHellos)
 
-        val repository = HelloWorldRepository(mockRetrofit, mockHelloWorldCloudRepository, mockHelloWorldLocalRepository)
+        val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
 
         repository.getAllHelloWorld()
                 .subscribe({ hellos ->
@@ -160,12 +159,11 @@ class HelloWorldRepositoryTest : BaseTest() {
     @Test
     fun testHellos_successError() {
         val mockResponse = MockResponse().setResponseCode(0)
-                .setBody(Fixture.error.JSON)
         mockWebServer.enqueue(mockResponse)
 
-        whenever(mockHelloWorldLocalRepository.hellos).thenReturn(null)
+        whenever(mockHelloWorldMemoryRepository.hellos).thenReturn(null)
 
-        val repository = HelloWorldRepository(mockRetrofit, mockHelloWorldCloudRepository, mockHelloWorldLocalRepository)
+        val repository = HelloWorldRepository(mockHelloWorldCloudRepository, mockHelloWorldMemoryRepository)
 
         repository.getAllHelloWorld()
                 .subscribe({

@@ -4,5 +4,5 @@ import ademar.study.template.core.injection.CoreComponent
 import dagger.Component
 
 @LifeCycleScope
-@Component(modules = arrayOf(LifeCycleMockModule::class), dependencies = arrayOf(CoreComponent::class))
+@Component(modules = [(LifeCycleMockModule::class)], dependencies = [(CoreComponent::class)])
 interface LifeCycleMockComponent : LifeCycleComponent

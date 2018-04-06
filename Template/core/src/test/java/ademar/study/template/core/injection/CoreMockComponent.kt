@@ -4,5 +4,5 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(CoreMockModule::class))
+@Component(modules = [(CoreMockModule::class)])
 interface CoreMockComponent : CoreComponent

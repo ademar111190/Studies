@@ -1,6 +1,6 @@
 package ademar.study.template.presenter.home
 
-import ademar.study.template.core.interactor.GetAllHelloWorldUseCase
+import ademar.study.template.core.interactor.GetHelloWorlds
 import ademar.study.template.injection.LifeCycleScope
 import ademar.study.template.mapper.ErrorMapper
 import ademar.study.template.mapper.HelloWorldMapper
@@ -14,7 +14,7 @@ import javax.inject.Inject
 class HomePresenter @Inject constructor(
 
         private val flowController: FlowController,
-        private val getAllHelloWorldUseCase: GetAllHelloWorldUseCase,
+        private val getHelloWorlds: GetHelloWorlds,
         private val helloWorldMapper: HelloWorldMapper,
         private val errorMapper: ErrorMapper
 
@@ -29,7 +29,7 @@ class HomePresenter @Inject constructor(
     private fun loadData() {
         view?.showLoading()
         view?.clearHelloWorlds()
-        subscriptions.add(getAllHelloWorldUseCase.execute()
+        subscriptions.add(getHelloWorlds.execute()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ helloWorld ->

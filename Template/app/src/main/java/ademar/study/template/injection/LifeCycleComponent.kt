@@ -7,7 +7,7 @@ import ademar.study.template.view.home.HomeFragment
 import dagger.Component
 
 @LifeCycleScope
-@Component(modules = arrayOf(LifeCycleModule::class), dependencies = arrayOf(CoreComponent::class))
+@Component(modules = [(LifeCycleModule::class)], dependencies = [(CoreComponent::class)])
 interface LifeCycleComponent {
 
     fun inject(o: StartActivity)

@@ -3,7 +3,7 @@ package ademar.study.template.core.model
 import ademar.study.template.core.injection.ApplicationJsonAdapterFactory
 import ademar.study.template.core.test.BaseTest
 import ademar.study.template.core.test.Fixture
-import ademar.study.template.core.test.JsonAssertions.assertJsonStringValue
+import ademar.study.template.core.test.containsJson
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
@@ -27,14 +27,14 @@ class HelloWorldTest : BaseTest() {
 
     @Test
     fun testParse() {
-        val helloWorld = adapter.fromJson(Fixture.helloWorld.JSON) ?: throw IllegalStateException("Failed to parse")
-        assertThat(helloWorld.message).isEqualTo(Fixture.helloWorld.MESSAGE)
+        val helloWorld = adapter.fromJson(readJson("helloWorld")) ?: throw IllegalStateException("Failed to parse")
+        assertThat(helloWorld.message).isEqualTo(Fixture.MESSAGE)
     }
 
     @Test
     fun testSerialize() {
-        val json = adapter.toJson(Fixture.helloWorld.makeModel())
-        assertJsonStringValue(json, "message", Fixture.helloWorld.MESSAGE)
+        val json = adapter.toJson(Fixture.helloWorld())
+        assertThat(json).containsJson("message", Fixture.MESSAGE)
     }
 
 }

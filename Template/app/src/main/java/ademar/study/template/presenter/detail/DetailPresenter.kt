@@ -1,6 +1,6 @@
 package ademar.study.template.presenter.detail
 
-import ademar.study.template.core.interactor.GetHelloWorldUseCase
+import ademar.study.template.core.interactor.GetHelloWorld
 import ademar.study.template.injection.LifeCycleScope
 import ademar.study.template.mapper.ErrorMapper
 import ademar.study.template.mapper.HelloWorldMapper
@@ -12,7 +12,7 @@ import javax.inject.Inject
 @LifeCycleScope
 class DetailPresenter @Inject constructor(
 
-        private val getHelloWorldUseCase: GetHelloWorldUseCase,
+        private val getHelloWorldUseCase: GetHelloWorld,
         private val helloWorldMapper: HelloWorldMapper,
         private val errorMapper: ErrorMapper
 

@@ -7,7 +7,7 @@ class ErrorViewModelTest : BaseTest() {
 
     @Test
     fun testInstantiate() {
-        ErrorViewModel(1, "Any message")
+        ErrorViewModel("Any message")
     }
 
 }

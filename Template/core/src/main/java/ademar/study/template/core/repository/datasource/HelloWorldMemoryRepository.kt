@@ -5,7 +5,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class HelloWorldLocalRepository @Inject constructor() {
+class HelloWorldMemoryRepository @Inject constructor() {
 
     var helloWorld: HelloWorld? = null
     var hellos: List<HelloWorld>? = null

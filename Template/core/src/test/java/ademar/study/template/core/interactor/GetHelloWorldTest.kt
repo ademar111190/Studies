@@ -10,38 +10,38 @@ import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyNoMoreInteractions
 
-class GetAllHelloWorldUseCaseTest : BaseTest() {
+class GetHelloWorldTest : BaseTest() {
 
     @Mock lateinit var mockHelloWorldRepository: HelloWorldRepository
 
     @Test
     fun testExecute_success() {
-        val useCase = GetAllHelloWorldUseCase(mockHelloWorldRepository)
-        val mockHello = Fixture.helloWorld.makeModel()
+        val useCase = GetHelloWorld(mockHelloWorldRepository)
+        val mockHelloWorld = Fixture.helloWorld()
 
-        whenever(mockHelloWorldRepository.getAllHelloWorld()).thenReturn(Observable.just(listOf(mockHello)))
+        whenever(mockHelloWorldRepository.getHelloWorld()).thenReturn(Observable.just(mockHelloWorld))
 
         useCase.execute()
                 .test()
-                .assertResult(mockHello)
+                .assertResult(mockHelloWorld)
                 .assertNoErrors()
 
-        verify(mockHelloWorldRepository).getAllHelloWorld()
+        verify(mockHelloWorldRepository).getHelloWorld()
         verifyNoMoreInteractions(mockHelloWorldRepository)
     }
 
     @Test
     fun testExecute_error() {
-        val useCase = GetAllHelloWorldUseCase(mockHelloWorldRepository)
-        val mockHelloWorldError = Fixture.error.makeModel().toThrowable()
+        val useCase = GetHelloWorld(mockHelloWorldRepository)
+        val mockHelloWorldError = Fixture.error()
 
-        whenever(mockHelloWorldRepository.getAllHelloWorld()).thenReturn(Observable.error(mockHelloWorldError))
+        whenever(mockHelloWorldRepository.getHelloWorld()).thenReturn(Observable.error(mockHelloWorldError))
 
         useCase.execute()
                 .test()
                 .assertError(mockHelloWorldError)
 
-        verify(mockHelloWorldRepository).getAllHelloWorld()
+        verify(mockHelloWorldRepository).getHelloWorld()
         verifyNoMoreInteractions(mockHelloWorldRepository)
     }
 

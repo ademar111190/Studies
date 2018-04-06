@@ -5,14 +5,12 @@ import ademar.study.template.core.repository.HelloWorldRepository
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetHelloWorldUseCase @Inject constructor(
+class GetHelloWorld @Inject constructor(
 
         private val repository: HelloWorldRepository
 
 ) {
 
-    fun execute(): Observable<HelloWorld> {
-        return repository.getHelloWorld()
-    }
+    fun execute(): Observable<HelloWorld> = repository.getHelloWorld()
 
 }
