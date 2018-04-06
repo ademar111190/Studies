@@ -75,4 +75,10 @@ class HomeFragment : BaseFragment(), HomeView {
         adapter.addItem(viewModel)
     }
 
+    companion object {
+
+        fun newInstance() = HomeFragment()
+
+    }
+
 }

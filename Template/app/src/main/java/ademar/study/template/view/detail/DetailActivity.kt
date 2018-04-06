@@ -12,6 +12,10 @@ class DetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_activity)
         prepareTaskDescription()
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.detail_fragment, DetailFragment.newInstance())
+                .commit()
     }
 
     companion object {

@@ -12,6 +12,10 @@ class HomeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
         prepareTaskDescription()
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.home_fragment, HomeFragment.newInstance())
+                .commit()
     }
 
     companion object {
