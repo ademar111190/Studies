@@ -8,7 +8,7 @@ class DetailViewModelTest : BaseTest() {
 
     @Test
     fun testInstantiate() {
-        DetailViewModel(helloWorldViewModel(), listOf(helloWorldViewModel()))
+        DetailViewModel(1, helloWorldViewModel(), listOf(helloWorldViewModel()))
     }
 
 }

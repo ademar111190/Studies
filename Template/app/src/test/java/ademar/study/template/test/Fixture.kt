@@ -7,6 +7,7 @@ import ademar.study.template.model.HelloWorldViewModel
 
 object Fixture {
 
+    const val INDEX = 1
     const val MESSAGE = "Hello World!"
     const val IMAGE = "An Image"
     const val UNKNOWN = "UNKNOWN"
@@ -21,6 +22,6 @@ object Fixture {
 
     fun helloWorldViewModel() = HelloWorldViewModel(MESSAGE, IMAGE)
 
-    fun detailViewModel() = DetailViewModel(helloWorldViewModel(), listOf(helloWorldViewModel()))
+    fun detailViewModel() = DetailViewModel(INDEX, helloWorldViewModel(), listOf(helloWorldViewModel()))
 
 }

@@ -2,7 +2,8 @@ package ademar.study.template.model
 
 data class DetailViewModel(
 
-        var currentItem: HelloWorldViewModel,
+        var focusedIndex: Int,
+        var focused: HelloWorldViewModel,
         val items: List<HelloWorldViewModel>
 
 )

@@ -11,6 +11,7 @@ class DetailMapper @Inject constructor(
 ) {
 
     fun transform(focused: HelloWorld, others: List<HelloWorld>) = DetailViewModel(
+            others.indexOf(focused),
             helloWorldMapper.transform(focused),
             others.map {
                 helloWorldMapper.transform(it)

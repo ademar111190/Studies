@@ -18,7 +18,7 @@ class DetailMapperTest : BaseTest() {
 
         val mapper = DetailMapper(mockHelloWorldMapper)
         val viewModel = mapper.transform(helloWorld(), listOf(helloWorld()))
-        assertThat(viewModel.currentItem).isEqualTo(helloWorldViewModel())
+        assertThat(viewModel.focused).isEqualTo(helloWorldViewModel())
         assertThat(viewModel.items).isEqualTo(listOf(helloWorldViewModel()))
     }
 

@@ -4,6 +4,7 @@ import ademar.study.template.core.model.HelloWorld
 import ademar.study.template.injection.LifeCycleScope
 import ademar.study.template.mapper.DetailMapper
 import ademar.study.template.mapper.ErrorMapper
+import ademar.study.template.model.HelloWorldViewModel
 import ademar.study.template.presenter.BasePresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,6 +24,10 @@ class DetailPresenter @Inject constructor(
 
     fun onStart() = loadData()
 
+    fun itemFocused(viewModel: HelloWorldViewModel) {
+        view?.bindFocus(viewModel)
+    }
+
     private fun loadData() {
         view?.showLoading()
 
@@ -30,7 +35,9 @@ class DetailPresenter @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    view?.bindDetail(detailMapper.transform(it, others))
+                    val viewModel = detailMapper.transform(it, others)
+                    view?.bindDetail(viewModel)
+                    view?.bindFocus(viewModel.focused)
                     view?.showContent()
                 }, { e ->
                     view?.showError(errorMapper.transform(e))

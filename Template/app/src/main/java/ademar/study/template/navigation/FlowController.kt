@@ -47,5 +47,7 @@ class FlowController @Inject constructor(
 
 }
 
+const val ARG_TITLE = "ARG_TITLE"
+const val ARG_IMAGE = "ARG_IMAGE"
 const val ARG_FOCUSED = "ARG_FOCUSED"
 const val ARG_OTHERS = "ARG_OTHERS"
