@@ -1,45 +1,27 @@
 package ademar.study.test.test
 
-import ademar.study.test.core.model.Error
 import ademar.study.test.core.model.HelloWorld
+import ademar.study.test.model.DetailViewModel
 import ademar.study.test.model.ErrorViewModel
 import ademar.study.test.model.HelloWorldViewModel
 
 object Fixture {
 
-    object error {
+    const val INDEX = 1
+    const val MESSAGE = "Hello World!"
+    const val IMAGE = "An Image"
+    const val UNKNOWN = "UNKNOWN"
+    const val UNAUTHORIZED = "UNAUTHORIZED"
+    const val NO_CONNECTION = "NO_CONNECTION"
 
-        val CODE = 1
-        val MESSAGE = "Some error"
+    fun error() = Error(MESSAGE)
 
-        fun makeModel() = Error(CODE, MESSAGE)
+    fun helloWorld() = HelloWorld(MESSAGE, IMAGE)
 
-    }
+    fun errorViewModel() = ErrorViewModel(MESSAGE)
 
-    object errorViewModel {
+    fun helloWorldViewModel() = HelloWorldViewModel(MESSAGE, IMAGE)
 
-        val CODE = 1
-        val MESSAGE = "Some error"
-
-        fun makeModel() = ErrorViewModel(CODE, MESSAGE)
-
-    }
-
-    object helloWorld {
-
-        val MESSAGE = "Hello World!"
-
-        fun makeModel() = HelloWorld(MESSAGE)
-
-    }
-
-    object helloWorldViewModel {
-
-        val MESSAGE = "Hello World!"
-        val IMAGE = "An Image"
-
-        fun makeModel() = HelloWorldViewModel(MESSAGE, IMAGE)
-
-    }
+    fun detailViewModel() = DetailViewModel(INDEX, helloWorldViewModel(), listOf(helloWorldViewModel()))
 
 }

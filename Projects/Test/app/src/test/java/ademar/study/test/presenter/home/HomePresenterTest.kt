@@ -1,7 +1,6 @@
 package ademar.study.test.presenter.home
 
-import ademar.study.test.core.interactor.GetAllHelloWorldUseCase
-import ademar.study.test.core.model.Error
+import ademar.study.test.core.interactor.GetHelloWorlds
 import ademar.study.test.core.model.HelloWorld
 import ademar.study.test.mapper.ErrorMapper
 import ademar.study.test.mapper.HelloWorldMapper
@@ -10,6 +9,9 @@ import ademar.study.test.model.HelloWorldViewModel
 import ademar.study.test.navigation.FlowController
 import ademar.study.test.test.BaseTest
 import ademar.study.test.test.Fixture
+import ademar.study.test.test.Fixture.errorViewModel
+import ademar.study.test.test.Fixture.helloWorld
+import ademar.study.test.test.Fixture.helloWorldViewModel
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
@@ -23,7 +25,7 @@ import org.mockito.Mockito.verifyNoMoreInteractions
 class HomePresenterTest : BaseTest() {
 
     @Mock lateinit var mockFlowController: FlowController
-    @Mock lateinit var mockGetAllHelloWorldUseCase: GetAllHelloWorldUseCase
+    @Mock lateinit var mockGetHelloWorlds: GetHelloWorlds
     @Mock lateinit var mockHelloWorldMapper: HelloWorldMapper
     @Mock lateinit var mockErrorMapper: ErrorMapper
 
@@ -43,10 +45,10 @@ class HomePresenterTest : BaseTest() {
     override fun setUp() {
         super.setUp()
 
-        mockHelloWorld = Fixture.helloWorld.makeModel()
-        mockError = Fixture.error.makeModel()
-        mockHelloWorldViewModel = Fixture.helloWorldViewModel.makeModel()
-        mockErrorViewModel = Fixture.errorViewModel.makeModel()
+        mockHelloWorld = helloWorld()
+        mockError = Fixture.error()
+        mockHelloWorldViewModel = helloWorldViewModel()
+        mockErrorViewModel = errorViewModel()
 
         whenever(mockHelloWorldMapper.transform(mockHelloWorld)).thenReturn(mockHelloWorldViewModel)
         whenever(mockErrorMapper.transform(any())).thenReturn(mockErrorViewModel)
@@ -62,7 +64,7 @@ class HomePresenterTest : BaseTest() {
     @Test
     fun testOnAttachView() {
         val stubView = object : StubHomeView() {}
-        val presenter = HomePresenter(mockFlowController, mockGetAllHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetHelloWorlds, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
     }
 
@@ -87,14 +89,14 @@ class HomePresenterTest : BaseTest() {
             }
         }
 
-        whenever(mockGetAllHelloWorldUseCase.execute()).thenReturn(Observable.just(mockHelloWorld))
+        whenever(mockGetHelloWorlds.execute()).thenReturn(Observable.just(mockHelloWorld))
 
-        val presenter = HomePresenter(mockFlowController, mockGetAllHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetHelloWorlds, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onStart()
 
-        verify(mockGetAllHelloWorldUseCase).execute()
-        verifyNoMoreInteractions(mockGetAllHelloWorldUseCase)
+        verify(mockGetHelloWorlds).execute()
+        verifyNoMoreInteractions(mockGetHelloWorlds)
         assertThat(showLoadingCount).isEqualTo(1)
         assertThat(clearHelloWorldsCount).isEqualTo(1)
         assertThat(bindHelloWorldCount).isEqualTo(1)
@@ -122,14 +124,14 @@ class HomePresenterTest : BaseTest() {
             }
         }
 
-        whenever(mockGetAllHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError.toThrowable()))
+        whenever(mockGetHelloWorlds.execute()).thenReturn(Observable.error(mockError))
 
-        val presenter = HomePresenter(mockFlowController, mockGetAllHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetHelloWorlds, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onStart()
 
-        verify(mockGetAllHelloWorldUseCase).execute()
-        verifyNoMoreInteractions(mockGetAllHelloWorldUseCase)
+        verify(mockGetHelloWorlds).execute()
+        verifyNoMoreInteractions(mockGetHelloWorlds)
         assertThat(showLoadingCount).isEqualTo(1)
         assertThat(clearHelloWorldsCount).isEqualTo(1)
         assertThat(showErrorCount).isEqualTo(1)
@@ -157,14 +159,14 @@ class HomePresenterTest : BaseTest() {
             }
         }
 
-        whenever(mockGetAllHelloWorldUseCase.execute()).thenReturn(Observable.just(mockHelloWorld))
+        whenever(mockGetHelloWorlds.execute()).thenReturn(Observable.just(mockHelloWorld))
 
-        val presenter = HomePresenter(mockFlowController, mockGetAllHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetHelloWorlds, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onReloadClick()
 
-        verify(mockGetAllHelloWorldUseCase).execute()
-        verifyNoMoreInteractions(mockGetAllHelloWorldUseCase)
+        verify(mockGetHelloWorlds).execute()
+        verifyNoMoreInteractions(mockGetHelloWorlds)
         assertThat(showLoadingCount).isEqualTo(1)
         assertThat(clearHelloWorldsCount).isEqualTo(1)
         assertThat(bindHelloWorldCount).isEqualTo(1)
@@ -192,14 +194,14 @@ class HomePresenterTest : BaseTest() {
             }
         }
 
-        whenever(mockGetAllHelloWorldUseCase.execute()).thenReturn(Observable.error(mockError.toThrowable()))
+        whenever(mockGetHelloWorlds.execute()).thenReturn(Observable.error(mockError))
 
-        val presenter = HomePresenter(mockFlowController, mockGetAllHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetHelloWorlds, mockHelloWorldMapper, mockErrorMapper)
         presenter.onAttachView(stubView)
         presenter.onReloadClick()
 
-        verify(mockGetAllHelloWorldUseCase).execute()
-        verifyNoMoreInteractions(mockGetAllHelloWorldUseCase)
+        verify(mockGetHelloWorlds).execute()
+        verifyNoMoreInteractions(mockGetHelloWorlds)
         assertThat(showLoadingCount).isEqualTo(1)
         assertThat(clearHelloWorldsCount).isEqualTo(1)
         assertThat(showErrorCount).isEqualTo(1)
@@ -208,15 +210,20 @@ class HomePresenterTest : BaseTest() {
 
     @Test
     fun testOnHelloWorldClick() {
-        val presenter = HomePresenter(mockFlowController, mockGetAllHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
-        presenter.onHelloWorldClick()
-        verify(mockFlowController).launchDetail()
+        whenever(mockGetHelloWorlds.execute()).thenReturn(Observable.just(mockHelloWorld))
+
+        val presenter = HomePresenter(mockFlowController, mockGetHelloWorlds, mockHelloWorldMapper, mockErrorMapper)
+
+        presenter.onStart()
+        presenter.onHelloWorldClick(helloWorldViewModel())
+
+        verify(mockFlowController).launchDetail(helloWorld(), listOf(helloWorld()))
         verifyNoMoreInteractions(mockFlowController)
     }
 
     @Test
     fun testOnDetachView() {
-        val presenter = HomePresenter(mockFlowController, mockGetAllHelloWorldUseCase, mockHelloWorldMapper, mockErrorMapper)
+        val presenter = HomePresenter(mockFlowController, mockGetHelloWorlds, mockHelloWorldMapper, mockErrorMapper)
         presenter.onDetachView()
     }
 

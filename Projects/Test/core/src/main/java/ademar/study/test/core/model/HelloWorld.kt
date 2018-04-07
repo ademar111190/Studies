@@ -8,6 +8,7 @@ import se.ansman.kotshi.JsonSerializable
 @Parcelize
 data class HelloWorld(
 
-        val message: String
+        val message: String,
+        val image: String
 
 ) : Parcelable

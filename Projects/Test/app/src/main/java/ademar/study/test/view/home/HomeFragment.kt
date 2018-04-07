@@ -18,9 +18,8 @@ class HomeFragment : BaseFragment(), HomeView {
     @Inject lateinit var presenter: HomePresenter
     @Inject lateinit var adapter: HomeAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.home_fragment, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater
+            .inflate(R.layout.home_fragment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,7 +28,8 @@ class HomeFragment : BaseFragment(), HomeView {
         presenter.onAttachView(this)
 
         reload.setOnClickListener { presenter.onReloadClick() }
-        adapter.listener = { presenter.onHelloWorldClick() }
+        listRefresh.setOnRefreshListener { presenter.onReloadClick() }
+        adapter.listener = presenter::onHelloWorldClick
 
         list.layoutManager = LinearLayoutManager(context)
         list.adapter = adapter
@@ -49,18 +49,21 @@ class HomeFragment : BaseFragment(), HomeView {
         list.visibility = View.GONE
         load.visibility = View.VISIBLE
         reload.visibility = View.GONE
+        listRefresh.isRefreshing = false
     }
 
     override fun showRetry() {
         list.visibility = View.GONE
         load.visibility = View.GONE
         reload.visibility = View.VISIBLE
+        listRefresh.isRefreshing = false
     }
 
     override fun showContent() {
         list.visibility = View.VISIBLE
         load.visibility = View.GONE
         reload.visibility = View.GONE
+        listRefresh.isRefreshing = false
     }
 
     override fun clearHelloWorlds() {

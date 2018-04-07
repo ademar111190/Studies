@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 class HelloWorldMapper @Inject constructor() {
 
-    fun transform(helloWorld: HelloWorld) = HelloWorldViewModel(helloWorld.message, "https://developer.android.com/images/brand/Android_Robot_100.png")
+    fun transform(helloWorld: HelloWorld) = HelloWorldViewModel(helloWorld.message, "https://upload.wikimedia.org/wikipedia/commons/${helloWorld.image}")
 
 }

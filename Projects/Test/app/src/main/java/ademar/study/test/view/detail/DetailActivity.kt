@@ -1,26 +1,21 @@
 package ademar.study.test.view.detail
 
 import ademar.study.test.R
+import ademar.study.test.navigation.FlowController
 import ademar.study.test.view.base.BaseActivity
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import javax.inject.Inject
 
 class DetailActivity : BaseActivity() {
+
+    @Inject lateinit var flowController: FlowController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_activity)
         prepareTaskDescription()
-    }
-
-    companion object {
-
-        fun populateIntent(intent: Intent, context: Context): Intent {
-            intent.setClassName(context, DetailActivity::class.java.name)
-            return intent
-        }
-
+        component.inject(this)
+        flowController.launchDetail(this)
     }
 
 }

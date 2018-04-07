@@ -1,18 +1,25 @@
 package ademar.study.test.view.detail
 
 import ademar.study.test.R
-import ademar.study.test.injection.GlideApp
+import ademar.study.test.ext.addOnPageSelected
+import ademar.study.test.injection.LifeCycleModule
+import ademar.study.test.model.DetailViewModel
 import ademar.study.test.model.HelloWorldViewModel
+import ademar.study.test.navigation.ARG_FOCUSED
+import ademar.study.test.navigation.ARG_IMAGE
+import ademar.study.test.navigation.ARG_OTHERS
+import ademar.study.test.navigation.ARG_TITLE
 import ademar.study.test.presenter.detail.DetailPresenter
 import ademar.study.test.presenter.detail.DetailView
 import ademar.study.test.view.base.BaseFragment
 import android.os.Bundle
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import androidx.core.os.bundleOf
 import kotlinx.android.synthetic.main.detail_fragment.*
 import javax.inject.Inject
 
@@ -30,10 +37,9 @@ class DetailFragment : BaseFragment(), DetailView {
         component.inject(this)
         presenter.onAttachView(this)
 
-        reload.setOnClickListener { presenter.onReloadClick() }
         if (context?.resources?.getBoolean(R.bool.large_screen) != true) {
             toolbar.setNavigationIcon(R.drawable.ic_back)
-            toolbar.setNavigationOnClickListener { getBaseActivity()?.back() }
+            toolbar.setNavigationOnClickListener { getBaseActivity().back() }
         }
     }
 
@@ -47,40 +53,43 @@ class DetailFragment : BaseFragment(), DetailView {
         presenter.onDetachView()
     }
 
+    override fun makeLifeCycleModule() = LifeCycleModule(
+            getBaseActivity(),
+            focused = arguments?.getParcelable(ARG_FOCUSED) ?: throw IllegalStateException("Unable to found the focused at arguments: $arguments"),
+            others = arguments?.getParcelableArrayList(ARG_OTHERS) ?: throw IllegalStateException("Unable to found the others at arguments: $arguments"))
+
     override fun showLoading() {
-        content.visibility = GONE
+        pager.visibility = GONE
         load.visibility = VISIBLE
-        reload.visibility = GONE
     }
 
     override fun showRetry() {
-        content.visibility = GONE
+        pager.visibility = GONE
         load.visibility = GONE
-        reload.visibility = VISIBLE
     }
 
     override fun showContent() {
-        content.visibility = VISIBLE
+        pager.visibility = VISIBLE
         load.visibility = GONE
-        reload.visibility = GONE
     }
 
-    override fun bindHelloWorld(viewModel: HelloWorldViewModel) {
-        text.text = viewModel.message
+    override fun bindDetail(viewModel: DetailViewModel) {
+        pager.adapter = object : FragmentStatePagerAdapter(fragmentManager) {
+            override fun getItem(position: Int) = DetailItemFragment().apply {
+                val itemViewModel = viewModel.items[position]
+                arguments = bundleOf(ARG_TITLE to itemViewModel.message, ARG_IMAGE to itemViewModel.image)
+            }
 
-        GlideApp.with(this)
-                .load(viewModel.image)
-                .centerInside()
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .placeholder(R.drawable.ic_launcher)
-                .error(R.drawable.ic_launcher)
-                .into(image)
+            override fun getCount() = viewModel.items.size
+        }
+        pager.addOnPageSelected {
+            presenter.itemFocused(viewModel.items[it])
+        }
+        pager.currentItem = viewModel.focusedIndex
     }
 
-    companion object {
-
-        fun newInstance() = DetailFragment()
-
+    override fun bindFocus(viewModel: HelloWorldViewModel) {
+        toolbar.title = viewModel.message
     }
 
 }

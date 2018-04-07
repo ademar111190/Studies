@@ -2,8 +2,6 @@ package ademar.study.test.view.home
 
 import ademar.study.test.R
 import ademar.study.test.view.base.BaseActivity
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 
 class HomeActivity : BaseActivity() {
@@ -12,15 +10,10 @@ class HomeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
         prepareTaskDescription()
-    }
 
-    companion object {
-
-        fun populateIntent(intent: Intent, context: Context): Intent {
-            intent.setClassName(context, HomeActivity::class.java.name)
-            return intent
-        }
-
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.home_fragment, HomeFragment())
+                .commit()
     }
 
 }

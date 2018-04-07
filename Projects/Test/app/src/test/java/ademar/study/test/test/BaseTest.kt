@@ -1,13 +1,11 @@
 package ademar.study.test.test
 
-import ademar.study.test.core.R
-import ademar.study.test.core.injection.CoreModule
-import ademar.study.test.core.injection.DaggerCoreComponent
-import ademar.study.test.core.model.Error
-import ademar.study.test.core.model.StandardErrors
-import ademar.study.test.injection.DaggerLifeCycleMockComponent
-import ademar.study.test.injection.LifeCycleMockModule
+import ademar.study.test.R
+import ademar.study.test.test.Fixture.NO_CONNECTION
+import ademar.study.test.test.Fixture.UNAUTHORIZED
+import ademar.study.test.test.Fixture.UNKNOWN
 import android.content.Context
+import android.support.annotation.CallSuper
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
@@ -20,17 +18,12 @@ import org.mockito.MockitoAnnotations
 
 abstract class BaseTest {
 
-    lateinit var lifeCycleMockModule: LifeCycleMockModule
-    lateinit var mockErrorUnknown: Error
-    lateinit var mockErrorUnauthorized: Error
-
     @Mock lateinit var mockContext: Context
-    @Mock lateinit var mockCoreModule: CoreModule
-    @Mock lateinit var mockStandardErrors: StandardErrors
 
     private var rxError: Throwable? = null
 
     @Before
+    @CallSuper
     open fun setUp() {
         MockitoAnnotations.initMocks(this)
         rxError = null
@@ -47,26 +40,13 @@ abstract class BaseTest {
             rxError = error
         }
 
-        lifeCycleMockModule = LifeCycleMockModule()
-        val coreComponent = DaggerCoreComponent.builder()
-                .coreModule(mockCoreModule)
-                .build()
-        DaggerLifeCycleMockComponent.builder()
-                .lifeCycleMockModule(lifeCycleMockModule)
-                .coreComponent(coreComponent)
-                .build()
-
-        mockErrorUnknown = Error(1, "Mock Error Unknown")
-        mockErrorUnauthorized = Error(2, "Mock Error Unauthorized")
-
-        whenever(mockContext.getString(R.string.error_message_unknown)).thenReturn("UNKNOWN")
-        whenever(mockContext.getString(R.string.error_message_unauthorized)).thenReturn("UNAUTHORIZED")
-
-        whenever(mockStandardErrors.UNKNOWN).thenReturn(mockErrorUnknown)
-        whenever(mockStandardErrors.UNAUTHORIZED).thenReturn(mockErrorUnauthorized)
+        whenever(mockContext.getString(R.string.error_message_unknown)).thenReturn(UNKNOWN)
+        whenever(mockContext.getString(R.string.error_message_unauthorized)).thenReturn(UNAUTHORIZED)
+        whenever(mockContext.getString(R.string.error_message_no_connection)).thenReturn(NO_CONNECTION)
     }
 
     @After
+    @CallSuper
     open fun tearDown() {
         if (rxError != null) {
             fail("Error on rx: $rxError")

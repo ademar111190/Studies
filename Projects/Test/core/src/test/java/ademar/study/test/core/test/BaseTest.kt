@@ -1,12 +1,7 @@
 package ademar.study.test.core.test
 
-import ademar.study.test.core.R
-import ademar.study.test.core.injection.CoreMockModule
-import ademar.study.test.core.injection.DaggerCoreMockComponent
-import ademar.study.test.core.model.Error
-import ademar.study.test.core.model.StandardErrors
 import android.content.Context
-import com.nhaarman.mockito_kotlin.whenever
+import android.support.annotation.CallSuper
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
@@ -20,17 +15,13 @@ import org.mockito.MockitoAnnotations
 abstract class BaseTest {
 
     lateinit var mockWebServer: MockWebServer
-    lateinit var coreMockModule: CoreMockModule
-    lateinit var mockErrorUnknown: Error
-    lateinit var mockErrorUnauthorized: Error
-    lateinit var mockErrorNoConnection: Error
 
     @Mock lateinit var mockContext: Context
-    @Mock lateinit var mockStandardErrors: StandardErrors
 
     private var rxError: Throwable? = null
 
     @Before
+    @CallSuper
     open fun setUp() {
         MockitoAnnotations.initMocks(this)
 
@@ -47,25 +38,10 @@ abstract class BaseTest {
         }
 
         mockWebServer = MockWebServer()
-        coreMockModule = CoreMockModule(mockContext, mockWebServer)
-        DaggerCoreMockComponent.builder()
-                .coreMockModule(coreMockModule)
-                .build()
-
-        mockErrorUnknown = Error(1, "Mock Error Unknown")
-        mockErrorUnauthorized = Error(2, "Mock Error Unauthorized")
-        mockErrorNoConnection = Error(3, "Mock Error No Connection")
-
-        whenever(mockContext.getString(R.string.error_message_unknown)).thenReturn("UNKNOWN")
-        whenever(mockContext.getString(R.string.error_message_unauthorized)).thenReturn("UNAUTHORIZED")
-        whenever(mockContext.getString(R.string.error_message_no_connection)).thenReturn("NO_CONNECTION")
-
-        whenever(mockStandardErrors.UNKNOWN).thenReturn(mockErrorUnknown)
-        whenever(mockStandardErrors.UNAUTHORIZED).thenReturn(mockErrorUnauthorized)
-        whenever(mockStandardErrors.NO_CONNECTION).thenReturn(mockErrorNoConnection)
     }
 
     @After
+    @CallSuper
     open fun tearDown() {
         if (rxError != null) {
             Assertions.fail("Error on rx: $rxError")
@@ -73,5 +49,10 @@ abstract class BaseTest {
         RxAndroidPlugins.reset()
         RxJavaPlugins.reset()
     }
+
+    fun readJson(name: String) = javaClass.classLoader
+            .getResourceAsStream("json/$name.json")
+            .bufferedReader()
+            .use { it.readText() }
 
 }

@@ -2,7 +2,7 @@
 
     <!-- Bases -->
 
-    <style name="AbstractTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="AbstractTheme" parent="@style/Theme.AppCompat.Light.NoActionBar"/>
 
     <style name="BaseTheme" parent="AbstractTheme">
         <item name="colorPrimary">@color/primary</item>
@@ -14,7 +14,7 @@
 
     <style name="AppTheme" parent="BaseTheme"/>
 
-    <style name="AppAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert"/>
+    <style name="AppAlertDialog" parent="@style/Theme.AppCompat.Light.Dialog.Alert"/>
 
     <style name="AppAlertDialog.CustomView">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -38,7 +38,7 @@
 
     <style name="AppToolbar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_height">?android:attr/actionBarSize</item>
         <item name="android:background">@color/primary</item>
         <item name="android:elevation">4dp</item>
     </style>

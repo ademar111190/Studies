@@ -1,40 +1,30 @@
 package ademar.study.test.core.repository
 
-import ademar.study.test.core.ext.observeBody
 import ademar.study.test.core.model.HelloWorld
 import ademar.study.test.core.repository.datasource.HelloWorldCloudRepository
-import ademar.study.test.core.repository.datasource.HelloWorldLocalRepository
+import ademar.study.test.core.repository.datasource.HelloWorldMemoryRepository
 import io.reactivex.Observable
-import retrofit2.Retrofit
 import javax.inject.Inject
 
 class HelloWorldRepository @Inject constructor(
 
-        private val retrofit: Retrofit,
         private val cloud: HelloWorldCloudRepository,
-        private val local: HelloWorldLocalRepository
+        private val memory: HelloWorldMemoryRepository
+        // TODO create the persistence repository
 
 ) {
 
-    fun getHelloWorld(): Observable<HelloWorld> {
-        val cached = local.helloWorld
-        return if (cached != null) {
-            Observable.just(cached)
+    fun getAllHelloWorld(): Observable<HelloWorld> {
+        val cached = memory.hellos
+        val fromCloud = cloud.getAllHelloWorld()
+                .doOnNext { memory.hellos = it }
+                .flatMapIterable { it }
+        return if (cached == null) {
+            fromCloud
         } else {
-            cloud.getHelloWorld()
-                    .flatMap { retrofit.observeBody(it) }
-                    .doOnNext { local.helloWorld = it }
-        }
-    }
-
-    fun getAllHelloWorld(): Observable<List<HelloWorld>> {
-        val cached = local.hellos
-        return if (cached != null) {
-            Observable.just(cached)
-        } else {
-            cloud.getAllHelloWorld()
-                    .flatMap { retrofit.observeBody(it) }
-                    .doOnNext { local.hellos = it }
+            Observable.fromIterable(cached).mergeWith(fromCloud
+                    .onErrorResumeNext(Observable.empty())
+                    .filter { !cached.contains(it) })
         }
     }
 

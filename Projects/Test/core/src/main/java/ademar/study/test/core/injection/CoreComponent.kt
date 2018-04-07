@@ -1,8 +1,7 @@
 package ademar.study.test.core.injection
 
-import ademar.study.test.core.model.StandardErrors
 import ademar.study.test.core.repository.datasource.HelloWorldCloudRepository
-import ademar.study.test.core.repository.datasource.HelloWorldLocalRepository
+import ademar.study.test.core.repository.datasource.HelloWorldMemoryRepository
 import android.content.Context
 import dagger.Component
 import okhttp3.OkHttpClient
@@ -11,16 +10,15 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(CoreModule::class))
+@Component(modules = [CoreModule::class])
 interface CoreComponent {
 
     val context: Context
-    val standardErrors: StandardErrors
     val httpLoggingInterceptor: HttpLoggingInterceptor
     val okHttpClient: OkHttpClient
     val retrofit: Retrofit
 
     val helloWorldCloudRepository: HelloWorldCloudRepository
-    val helloWorldLocalRepository: HelloWorldLocalRepository
+    val helloWorldMemoryRepository: HelloWorldMemoryRepository
 
 }
