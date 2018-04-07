@@ -7,7 +7,6 @@ import javax.inject.Singleton
 @Singleton
 class HelloWorldMemoryRepository @Inject constructor() {
 
-    var helloWorld: HelloWorld? = null
     var hellos: List<HelloWorld>? = null
 
 }

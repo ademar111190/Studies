@@ -2,7 +2,10 @@ package ademar.study.template.view.detail
 
 import ademar.study.template.R
 import ademar.study.template.injection.GlideApp
-import ademar.study.template.model.HelloWorldViewModel
+import ademar.study.template.injection.LifeCycleModule
+import ademar.study.template.model.DetailViewModel
+import ademar.study.template.navigation.ARG_FOCUSED
+import ademar.study.template.navigation.ARG_OTHERS
 import ademar.study.template.presenter.detail.DetailPresenter
 import ademar.study.template.presenter.detail.DetailView
 import ademar.study.template.view.base.BaseFragment
@@ -15,7 +18,6 @@ import android.view.ViewGroup
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import kotlinx.android.synthetic.main.detail_fragment.*
 import javax.inject.Inject
-
 
 class DetailFragment : BaseFragment(), DetailView {
 
@@ -31,7 +33,6 @@ class DetailFragment : BaseFragment(), DetailView {
         component.inject(this)
         presenter.onAttachView(this)
 
-        reload.setOnClickListener { presenter.onReloadClick() }
         if (context?.resources?.getBoolean(R.bool.large_screen) != true) {
             toolbar.setNavigationIcon(R.drawable.ic_back)
             toolbar.setNavigationOnClickListener { getBaseActivity()?.back() }
@@ -48,29 +49,31 @@ class DetailFragment : BaseFragment(), DetailView {
         presenter.onDetachView()
     }
 
+    override fun makeLifeCycleModule() = LifeCycleModule(
+            getBaseActivity(),
+            focused = arguments?.getParcelable(ARG_FOCUSED) ?: throw IllegalStateException("Unable to found the focused at arguments: $arguments"),
+            others = arguments?.getParcelableArrayList(ARG_OTHERS) ?: throw IllegalStateException("Unable to found the others at arguments: $arguments"))
+
     override fun showLoading() {
         content.visibility = GONE
         load.visibility = VISIBLE
-        reload.visibility = GONE
     }
 
     override fun showRetry() {
         content.visibility = GONE
         load.visibility = GONE
-        reload.visibility = VISIBLE
     }
 
     override fun showContent() {
         content.visibility = VISIBLE
         load.visibility = GONE
-        reload.visibility = GONE
     }
 
-    override fun bindHelloWorld(viewModel: HelloWorldViewModel) {
-        text.text = viewModel.message
+    override fun bindDetail(viewModel: DetailViewModel) {
+        text.text = viewModel.currentItem.message
 
         GlideApp.with(this)
-                .load(viewModel.image)
+                .load(viewModel.currentItem.image)
                 .centerInside()
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background)
@@ -78,10 +81,5 @@ class DetailFragment : BaseFragment(), DetailView {
                 .into(image)
     }
 
-    companion object {
-
-        fun newInstance() = DetailFragment()
-
-    }
 
 }

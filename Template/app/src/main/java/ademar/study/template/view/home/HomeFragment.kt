@@ -28,8 +28,8 @@ class HomeFragment : BaseFragment(), HomeView {
         presenter.onAttachView(this)
 
         reload.setOnClickListener { presenter.onReloadClick() }
-        adapter.listener = { presenter.onHelloWorldClick() }
         listRefresh.setOnRefreshListener { presenter.onReloadClick() }
+        adapter.listener = presenter::onHelloWorldClick
 
         list.layoutManager = LinearLayoutManager(context)
         list.adapter = adapter
@@ -72,12 +72,6 @@ class HomeFragment : BaseFragment(), HomeView {
 
     override fun bindHelloWorld(viewModel: HelloWorldViewModel) {
         adapter.addItem(viewModel)
-    }
-
-    companion object {
-
-        fun newInstance() = HomeFragment()
-
     }
 
 }

@@ -1,10 +1,13 @@
 package ademar.study.template.navigation
 
 import ademar.study.template.R
+import ademar.study.template.core.model.HelloWorld
 import ademar.study.template.view.base.BaseActivity
 import ademar.study.template.view.detail.DetailActivity
 import ademar.study.template.view.detail.DetailFragment
 import ademar.study.template.view.home.HomeActivity
+import android.os.Bundle
+import androidx.core.os.bundleOf
 import javax.inject.Inject
 
 class FlowController @Inject constructor(
@@ -14,22 +17,35 @@ class FlowController @Inject constructor(
 
 ) {
 
-    fun launchHome() {
-        var intent = intentFactory.makeIntent()
-        intent = HomeActivity.populateIntent(intent, context)
-        context.startActivity(intent)
+    fun launchHome() = context.startActivity(intentFactory.makeIntent().apply {
+        setClassName(context, HomeActivity::class.java.name)
+    })
+
+    fun launchDetail(detailActivity: DetailActivity) {
+        launchDetailFragment(detailActivity.intent.extras)
     }
 
-    fun launchDetail() {
+    fun launchDetail(focused: HelloWorld, others: List<HelloWorld>) {
+        val bundle = bundleOf(ARG_FOCUSED to focused, ARG_OTHERS to others)
         if (context.resources.getBoolean(R.bool.large_screen)) {
-            context.supportFragmentManager.beginTransaction()
-                    .replace(R.id.detail_fragment, DetailFragment.newInstance())
-                    .commit()
+            launchDetailFragment(bundle)
         } else {
-            var intent = intentFactory.makeIntent()
-            intent = DetailActivity.populateIntent(intent, context)
-            context.startActivity(intent)
+            context.startActivity(intentFactory.makeIntent().apply {
+                setClassName(context, DetailActivity::class.java.name)
+                putExtras(bundle)
+            })
         }
     }
 
+    private fun launchDetailFragment(bundle: Bundle) {
+        context.supportFragmentManager.beginTransaction()
+                .replace(R.id.detail_fragment, DetailFragment().apply {
+                    arguments = bundle
+                })
+                .commit()
+    }
+
 }
+
+const val ARG_FOCUSED = "ARG_FOCUSED"
+const val ARG_OTHERS = "ARG_OTHERS"

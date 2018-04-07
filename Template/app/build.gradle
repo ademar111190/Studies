@@ -63,6 +63,10 @@ android {
         exclude "META-INF/core_debug.kotlin_module"
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
 }
 
 dependencies {

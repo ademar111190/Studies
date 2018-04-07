@@ -14,19 +14,6 @@ class HelloWorldRepository @Inject constructor(
 
 ) {
 
-    fun getHelloWorld(): Observable<HelloWorld> {
-        val cached = memory.helloWorld
-        val fromCloud = cloud.getHelloWorld()
-                .doOnNext { memory.helloWorld = it }
-        return if (cached == null) {
-            fromCloud
-        } else {
-            Observable.fromIterable(listOf(cached)).mergeWith(fromCloud
-                    .onErrorResumeNext(Observable.empty())
-                    .filter { cached != it })
-        }
-    }
-
     fun getAllHelloWorld(): Observable<HelloWorld> {
         val cached = memory.hellos
         val fromCloud = cloud.getAllHelloWorld()

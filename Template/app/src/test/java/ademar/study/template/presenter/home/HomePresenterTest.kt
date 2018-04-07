@@ -9,6 +9,9 @@ import ademar.study.template.model.HelloWorldViewModel
 import ademar.study.template.navigation.FlowController
 import ademar.study.template.test.BaseTest
 import ademar.study.template.test.Fixture
+import ademar.study.template.test.Fixture.errorViewModel
+import ademar.study.template.test.Fixture.helloWorld
+import ademar.study.template.test.Fixture.helloWorldViewModel
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
@@ -42,10 +45,10 @@ class HomePresenterTest : BaseTest() {
     override fun setUp() {
         super.setUp()
 
-        mockHelloWorld = Fixture.helloWorld()
+        mockHelloWorld = helloWorld()
         mockError = Fixture.error()
-        mockHelloWorldViewModel = Fixture.helloWorldViewModel()
-        mockErrorViewModel = Fixture.errorViewModel()
+        mockHelloWorldViewModel = helloWorldViewModel()
+        mockErrorViewModel = errorViewModel()
 
         whenever(mockHelloWorldMapper.transform(mockHelloWorld)).thenReturn(mockHelloWorldViewModel)
         whenever(mockErrorMapper.transform(any())).thenReturn(mockErrorViewModel)
@@ -207,9 +210,14 @@ class HomePresenterTest : BaseTest() {
 
     @Test
     fun testOnHelloWorldClick() {
+        whenever(mockGetHelloWorlds.execute()).thenReturn(Observable.just(mockHelloWorld))
+
         val presenter = HomePresenter(mockFlowController, mockGetHelloWorlds, mockHelloWorldMapper, mockErrorMapper)
-        presenter.onHelloWorldClick()
-        verify(mockFlowController).launchDetail()
+
+        presenter.onStart()
+        presenter.onHelloWorldClick(helloWorldViewModel())
+
+        verify(mockFlowController).launchDetail(helloWorld(), listOf(helloWorld()))
         verifyNoMoreInteractions(mockFlowController)
     }
 

@@ -1,6 +1,7 @@
 package ademar.study.template.test
 
 import ademar.study.template.core.model.HelloWorld
+import ademar.study.template.model.DetailViewModel
 import ademar.study.template.model.ErrorViewModel
 import ademar.study.template.model.HelloWorldViewModel
 
@@ -14,10 +15,12 @@ object Fixture {
 
     fun error() = Error(MESSAGE)
 
-    fun helloWorld() = HelloWorld(MESSAGE)
+    fun helloWorld() = HelloWorld(MESSAGE, IMAGE)
 
     fun errorViewModel() = ErrorViewModel(MESSAGE)
 
     fun helloWorldViewModel() = HelloWorldViewModel(MESSAGE, IMAGE)
+
+    fun detailViewModel() = DetailViewModel(helloWorldViewModel(), listOf(helloWorldViewModel()))
 
 }
