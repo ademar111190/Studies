@@ -1,5 +1,6 @@
-package ademar.study.template
+package ademar.study.template.view
 
+import ademar.study.template.R
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*

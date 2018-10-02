@@ -56,7 +56,7 @@ android {
             buildConfigField "String", "API_URL", "\"https://qa.url/\""
         }
         production {
-            buildConfigField "String", "API_URL", "\"https://prod.url/\""
+            buildConfigField "String", "API_URL", "\"http://private-0b59d-template210.apiary-mock.com/\""
         }
     }
 
