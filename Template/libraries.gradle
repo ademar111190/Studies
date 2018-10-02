@@ -4,7 +4,7 @@ ext {
     appId = "ademar.study.template"
 
     buildTools = "28.0.3" // https://developer.android.com/studio/releases/build-tools
-    gradlePlugin = "3.3.0-alpha12" // https://dl.google.com/dl/android/maven2/index.html
+    gradlePlugin = "3.3.0-alpha13" // https://dl.google.com/dl/android/maven2/index.html
 
     // https://source.android.com/setup/start/build-numbers
     compileSdk = 28

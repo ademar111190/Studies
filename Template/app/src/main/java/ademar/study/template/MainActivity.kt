@@ -18,6 +18,14 @@ class MainActivity : AppCompatActivity() {
                 else -> null
             } != null
         }
+        navigation.selectedItemId = savedInstanceState?.getInt(ITEM_ID) ?: R.id.navigation_dashboard
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putInt(ITEM_ID, navigation.selectedItemId)
     }
 
 }
+
+private const val ITEM_ID = "ITEM_ID"
