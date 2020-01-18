@@ -2,7 +2,7 @@ package study.template
 
 import study.template.mpc.platformName
 
-class AppData {
+object AppData {
 
     fun name() = "Study template for ${platformName()}"
 
