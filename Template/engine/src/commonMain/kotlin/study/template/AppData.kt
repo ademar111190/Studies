@@ -4,8 +4,11 @@ import study.template.mpc.platformName
 
 object AppData {
 
-    fun name() = "Study template for ${platformName()}"
+    fun name() = AppDataName("Study template for ${platformName()}")
 
-    fun version() = "1.0.0"
+    fun version() = AppDataVersion("1.0.0")
 
 }
+
+inline class AppDataName(val value: String)
+inline class AppDataVersion(val value: String)

@@ -1,3 +1,3 @@
 package study.template.mpc
 
-actual fun platformName() = "Android"
+actual fun platformName() = PlatformName("Android")
