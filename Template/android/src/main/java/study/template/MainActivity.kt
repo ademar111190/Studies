@@ -2,14 +2,17 @@ package study.template
 
 import android.app.Activity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.ui.core.setContent
+import study.template.composable.AppInfo
+import study.template.composable.AppInfoData
 
 class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        textView.text = "${AppData.name()}\nVersion${AppData.version()}"
+        setContent {
+            AppInfo(AppInfoData("${AppData.name()}\nVersion${AppData.version()}"))
+        }
     }
 
 }
