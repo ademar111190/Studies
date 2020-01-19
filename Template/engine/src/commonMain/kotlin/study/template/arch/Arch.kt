@@ -44,7 +44,7 @@ interface Arch {
     interface Result
 
     /**
-     * Should be implemented by a function
+     * Should be implemented by a class
      */
     interface Reducer
 
