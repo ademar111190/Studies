@@ -1,0 +1,9 @@
+# https://github.com/jetbrains/kotlin
+# https://kotlinlang.org/api/latest/kotlin.test/index.html
+# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-test-common/1.3.61
+
+prebuilt_jar(
+    name = 'kotlin-test-common',
+    binary_jar = 'kotlin-test-common-1.3.61.jar',
+    visibility = [ 'PUBLIC' ]
+)

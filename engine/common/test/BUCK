@@ -1,0 +1,13 @@
+kotlin_test(
+    name = 'engine-common-test',
+    srcs = glob(['**/*.kt']),
+    deps = [
+        '//engine/common/main:engine-common',
+
+        '//libs/hamcrest:hamcrest',
+        '//libs/junit:junit',
+
+        '//libs/kotlin/test/common:kotlin-test-common',
+        '//libs/kotlin/test/jvm:kotlin-test-jvm'
+    ]
+)

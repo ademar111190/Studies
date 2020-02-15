@@ -1,0 +1,7 @@
+kotlin_library(
+    name = 'engine-common',
+    srcs = glob(['**/*.kt']),
+    visibility = [
+        '//engine/common/test:engine-common-test'
+    ]
+)

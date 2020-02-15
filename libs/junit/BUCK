@@ -1,0 +1,9 @@
+# https://github.com/junit-team/junit4
+# https://junit.org/junit4/
+# https://mvnrepository.com/artifact/junit/junit/4.13
+
+prebuilt_jar(
+    name = 'junit',
+    binary_jar = 'junit-4.13.jar',
+    visibility = [ 'PUBLIC' ]
+)

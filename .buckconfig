@@ -1,0 +1,9 @@
+[alias]
+    hamcrest = //libs/hamcrest:hamcrest
+    junit = //libs/junit:junit
+
+    kotlin_test_common = //libs/kotlin/test/common:kotlin-test-common
+    kotlin_test_jvm = //libs/kotlin/test/jvm:kotlin-test-jvm
+
+    engine_common = //engine/common/main:engine-common
+    engine_common_test = //engine/common/test:engine-common-test
