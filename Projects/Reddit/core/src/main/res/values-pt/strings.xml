@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="error_message_unknown">Ocorreu um erro inesperado.</string>
-    <string name="error_message_unauthorized">Usuário não autorizado</string>
-
-</resources>
