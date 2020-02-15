@@ -2,37 +2,24 @@
 
 Just a personal study repository, nothing special and nothing more
 
-## How to
+## Objectives
 
-The script `create.py` receives an argument `name` and create an android project with this name coping the Template project into Projects folder, for example:
+- SOLID
+  - Single responsibility principle: A class should only have a single responsibility, that is, only changes to one part of the software's specification should be able to affect the specification of the class.
+  - Open–closed principle: "Software entities ... should be open for extension, but closed for modification."
+  - Liskov substitution principle: "Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program." See also design by contract.
+  - Interface segregation principle: "Many client-specific interfaces are better than one general-purpose interface."
+  - Dependency inversion principle: One should "depend upon abstractions, not concretions."
+- Fast build
+- Testable
+- Multiplatform
+- Semantically matters 
+- Aesthetically matters
 
-```
-$ ./create.py Test
-```
+## Promises
 
-will generate the android project `Projects/Test`, after it you just need to import the project on android studio and make wherever you want. 
-You also can run the tests with:
-
-```
-[Projects/Test] $ ./gradlew clean \
-core:testDebugUnitTest \
-app:testDevelopmentDebugUnitTest
-```
-
-To create a signed build do as follow:
-
-```
-[Projects/Test] $ KEY_ALIAS=anAlias \
-KEY_PASSWORD=aKeyPass \
-STORE_PASSWORD=aPass6 \
-./gradlew assembleProductionRelease && \
-ls -alh app/build/outputs/apk/
-```
-
-## Some points
-
-- The project is write with clean architecture in mind, but it does not means that all clean rules are follow so do not use it as a clean guide.
-- All code except the android views and extensions of android components are tested, it includes the presenters.
-- The project is divided into two parts, `app` and `core`, you can think it like a `front-end` and a `back-end` because all code from `app` is about views and UI/UX in other hand all `core` code is about business rules and data
-- The project is write with kotlin
-- Fell free to use the script, fell free to make pull requests, but remember this repository is just a playground so do not take it too seriously :)
+- No reflaction
+- No annotation pocessor
+- No downloadable dependencies
+- No base class
+- Testable code only
