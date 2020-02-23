@@ -1,9 +1,16 @@
 [alias]
+    # test
     hamcrest = //libs/hamcrest:hamcrest
     junit = //libs/junit:junit
 
+    # kotlin
+    kotlin_stdlib = //libs/kotlin/stdlib:kotlin-stdlib
     kotlin_test_common = //libs/kotlin/test/common:kotlin-test-common
     kotlin_test_jvm = //libs/kotlin/test/jvm:kotlin-test-jvm
 
+    # libs
+    ktor_server_netty = //libs/ktor/server-netty:ktor-server-netty
+
+    # modules
     engine_common = //engine/common/main:engine-common
     engine_common_test = //engine/common/test:engine-common-test
