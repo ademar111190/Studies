@@ -1,9 +1,9 @@
 # https://github.com/jetbrains/kotlin
 # https://kotlinlang.org/api/latest/jvm/stdlib/index.html
-# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.3.61
+# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib/1.3.61
 
 prebuilt_jar(
     name = 'kotlin-stdlib',
-    binary_jar = 'kotlin-stdlib-jdk8-1.3.61.jar',
+    binary_jar = 'kotlin-stdlib-1.3.61.jar',
     visibility = [ 'PUBLIC' ]
 )
