@@ -14,3 +14,9 @@
     # modules
     engine_common = //engine/common/main:engine-common
     engine_common_test = //engine/common/test:engine-common-test
+    bff_app = //bff/main:bff-app
+    bff_lib = //bff/main:bff-lib
+
+[java]
+    source_level = 8
+    target_level = 8
