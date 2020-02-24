@@ -5,5 +5,7 @@
 prebuilt_jar(
     name = 'hamcrest',
     binary_jar = 'hamcrest-all-1.3.jar',
-    visibility = [ 'PUBLIC' ]
+    visibility = [
+        '//engine/common/test:engine-common-test'
+    ]
 )

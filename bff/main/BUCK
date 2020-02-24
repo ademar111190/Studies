@@ -13,7 +13,6 @@ java_binary(
     name = 'bff-app',
     main_class = 'study.template.BffKt',
     deps = [
-        '//bff/main:bff-lib',
-        '//libs/kotlin/stdlib:kotlin-stdlib'
+        '//bff/main:bff-lib'
     ]
 )

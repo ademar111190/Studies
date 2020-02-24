@@ -5,5 +5,7 @@
 prebuilt_jar(
     name = 'junit',
     binary_jar = 'junit-4.13.jar',
-    visibility = [ 'PUBLIC' ]
+    visibility = [
+        '//engine/common/test:engine-common-test'
+    ]
 )

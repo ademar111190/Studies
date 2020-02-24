@@ -5,5 +5,5 @@
 prebuilt_jar(
     name = 'ktor-server-netty',
     binary_jar = 'ktor-server-netty-1.3.0.jar',
-    visibility = [ 'PUBLIC' ]
+    visibility = []
 )
