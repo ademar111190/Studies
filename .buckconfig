@@ -16,8 +16,9 @@
     ktor_server_netty = //libs/ktor/server-netty:ktor-server-netty
     ktor_server_host_common = //libs/ktor/server-host-common:ktor-server-host-common
 
-    # other
-    slf4j = //libs/slf4j:slf4j
+    # slf4j
+    slf4j_api = //libs/slf4j/api:slf4j-api
+    slf4j_simple = //libs/slf4j/simple:slf4j-simple
 
     # modules
     engine_common = //engine/common/main:engine-common
