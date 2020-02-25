@@ -1,0 +1,11 @@
+# https://github.com/qos-ch/slf4j
+# http://www.slf4j.org/
+# https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/
+
+prebuilt_jar(
+    name = 'slf4j',
+    binary_jar = 'slf4j-api-1.7.30.jar',
+    visibility = [
+        '//bff/main:bff-app'
+    ]
+)

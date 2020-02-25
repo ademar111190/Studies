@@ -19,6 +19,7 @@ java_binary(
     main_class = 'study.template.BffKt',
     deps = [
         '//bff/main:bff-lib',
-        '//libs/kotlin/coroutines/core:kotlinx-coroutines-core'
+        '//libs/kotlin/coroutines/core:kotlinx-coroutines-core',
+        '//libs/slf4j:slf4j'
     ]
 )
