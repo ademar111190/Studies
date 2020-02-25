@@ -1,0 +1,11 @@
+# https://github.com/ktorio/ktor
+# https://ktor.io
+# https://bintray.com/kotlin/ktor/ktor/1.3.1#files/io%2Fktor%2Fktor-utils-jvm%2F1.3.1
+
+prebuilt_jar(
+    name = 'ktor-utils-jvm',
+    binary_jar = 'ktor-utils-jvm-1.3.1.jar',
+    visibility = [
+      '//bff/main:bff-lib'
+    ]
+)

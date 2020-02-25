@@ -9,6 +9,9 @@
     kotlin_test_jvm = //libs/kotlin/test/jvm:kotlin-test-jvm
 
     # ktor
+    ktor_http_jvm = //libs/ktor/http-jvm:ktor-http-jvm
+    ktor_utils_jvm = //libs/ktor/utils-jvm:ktor-utils-jvm
+    ktor_server_core = //libs/ktor/server-core:ktor-server-core
     ktor_server_netty = //libs/ktor/server-netty:ktor-server-netty
     ktor_server_host_common = //libs/ktor/server-host-common:ktor-server-host-common
 

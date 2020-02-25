@@ -3,8 +3,11 @@ kotlin_library(
     srcs = glob(['**/*.kt']),
     deps = [
         '//libs/kotlin/stdlib:kotlin-stdlib',
+        '//libs/ktor/http-jvm:ktor-http-jvm',
+        '//libs/ktor/server-core:ktor-server-core',
         '//libs/ktor/server-host-common:ktor-server-host-common',
-        '//libs/ktor/server-netty:ktor-server-netty'
+        '//libs/ktor/server-netty:ktor-server-netty',
+        '//libs/ktor/utils-jvm:ktor-utils-jvm'
     ],
     visibility = [
         '//bff/main:bff-app'
