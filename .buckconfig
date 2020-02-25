@@ -8,8 +8,9 @@
     kotlin_test_common = //libs/kotlin/test/common:kotlin-test-common
     kotlin_test_jvm = //libs/kotlin/test/jvm:kotlin-test-jvm
 
-    # libs
+    # ktor
     ktor_server_netty = //libs/ktor/server-netty:ktor-server-netty
+    ktor_server_host_common = //libs/ktor/server-host-common:ktor-server-host-common
 
     # modules
     engine_common = //engine/common/main:engine-common
