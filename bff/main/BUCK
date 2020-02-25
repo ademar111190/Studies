@@ -20,6 +20,7 @@ java_binary(
     deps = [
         '//bff/main:bff-lib',
         '//libs/kotlin/coroutines/core:kotlinx-coroutines-core',
+        '//libs/ktor/io-jvm:ktor-io-jvm',
         '//libs/slf4j/api:slf4j-api',
         '//libs/slf4j/simple:slf4j-simple'
     ]
