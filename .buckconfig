@@ -4,6 +4,7 @@
     junit = //libs/junit:junit
 
     # kotlin
+    kotlin_coroutines_core = //libs/kotlin/coroutines/core:kotlinx-coroutines-core
     kotlin_stdlib = //libs/kotlin/stdlib:kotlin-stdlib
     kotlin_test_common = //libs/kotlin/test/common:kotlin-test-common
     kotlin_test_jvm = //libs/kotlin/test/jvm:kotlin-test-jvm

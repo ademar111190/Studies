@@ -18,6 +18,7 @@ java_binary(
     name = 'bff-app',
     main_class = 'study.template.BffKt',
     deps = [
-        '//bff/main:bff-lib'
+        '//bff/main:bff-lib',
+        '//libs/kotlin/coroutines/core:kotlinx-coroutines-core'
     ]
 )
