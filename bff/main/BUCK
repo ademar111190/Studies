@@ -2,7 +2,9 @@ kotlin_library(
     name = 'bff-lib',
     srcs = glob(['**/*.kt']),
     deps = [
-        '//libs/kotlin/stdlib:kotlin-stdlib'
+        '//libs/kotlin/stdlib:kotlin-stdlib',
+        '//libs/ktor/server-host-common:ktor-server-host-common',
+        '//libs/ktor/server-netty:ktor-server-netty'
     ],
     visibility = [
         '//bff/main:bff-app'
