@@ -21,6 +21,10 @@ java_binary(
         '//bff/main:bff-lib',
         '//libs/kotlin/coroutines/core:kotlinx-coroutines-core',
         '//libs/ktor/io-jvm:ktor-io-jvm',
+        '//libs/netty/common:netty-common',
+        '//libs/netty/epoll:netty-epoll',
+        '//libs/netty/kqueue:netty-kqueue',
+        '//libs/netty/transport:netty-transport',
         '//libs/slf4j/api:slf4j-api',
         '//libs/slf4j/simple:slf4j-simple'
     ]

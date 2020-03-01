@@ -1,0 +1,11 @@
+# https://github.com/netty/netty
+# https://netty.io/index.html
+# https://dl.bintray.com/netty/downloads/netty-4.1.46.Final.tar.bz2
+
+prebuilt_jar(
+    name = 'netty-kqueue',
+    binary_jar = 'netty-transport-native-kqueue-4.1.46.Final-osx-x86_64.jar',
+    visibility = [
+        '//bff/main:bff-app'
+    ]
+)

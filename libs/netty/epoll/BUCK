@@ -1,0 +1,11 @@
+# https://github.com/netty/netty
+# https://netty.io/index.html
+# https://dl.bintray.com/netty/downloads/netty-4.1.46.Final.tar.bz2
+
+prebuilt_jar(
+    name = 'netty-epoll',
+    binary_jar = 'netty-transport-native-epoll-4.1.46.Final-linux-x86_64.jar',
+    visibility = [
+        '//bff/main:bff-app'
+    ]
+)

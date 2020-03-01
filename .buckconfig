@@ -17,6 +17,12 @@
     ktor_server_netty = //libs/ktor/server-netty:ktor-server-netty
     ktor_server_host_common = //libs/ktor/server-host-common:ktor-server-host-common
 
+    # netty
+    netty_common = //libs/netty/common:netty-common
+    netty_epoll  = //libs/netty/epoll:netty-epoll
+    netty_kqueue  = //libs/netty/kqueue:netty-kqueue
+    netty_transport = //libs/netty/transport:netty-transport
+
     # slf4j
     slf4j_api = //libs/slf4j/api:slf4j-api
     slf4j_simple = //libs/slf4j/simple:slf4j-simple
